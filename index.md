@@ -34,14 +34,9 @@ In the present section, we will introduce the concept of optical flow starting f
 
 ### The concept of optical flow
 
-The concept of optical flow draws its origin in the field of
-experimental psychology , that is, in a framework significantly
-different from that of the technical-engineering applications we are
-referring to in this book. It was a result of the research of J.J.
-Gibson which was appointed, during World War II, the task of
-understanding how pilots fly according to what they see. While studying
-the perception of moving objects, he introduced the concept of *optical
-flow* as :
+The concept of optical flow draws its origin in the field of experimental psychology, that is, in a framework significantly different from that of the technical-engineering applications we are referring to. It was a result of the research of J.J. Gibson which was appointed, during World War II, the task of understanding how pilots fly according to what they see. While studying the perception of moving objects, he introduced the concept of *optical flow* as :
+
+> Optical flow is the distribution of apparent velocities of movement of brightness patterns in an image. Optical flow can arise from the relative motion of objects and the viewer.
 
 To illustrate the concept of optical flow, it is convenient to exploit
 the same, although dated, three images used by Gibson.  
