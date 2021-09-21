@@ -1,7 +1,7 @@
 # Optical flow with OpenCV and CUDA
 
 <p align="center">
-  <img src="chapter04image.jpg" width="400">
+  <img src="opticalFlowChapter.jpg" width="400">
 </p>
 
 Processing a static image of a scene has application in different fields of technology and a concrete example has been provided at [Face recognition using OpenCV and CUDA](https://vitalitylearning2021.github.io/faceRecognitionOpenCVCUDA/) with face recognition.  
