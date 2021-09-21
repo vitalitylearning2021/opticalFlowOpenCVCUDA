@@ -1,87 +1,36 @@
 # Optical flow with OpenCV and CUDA
 
-Processing a static image of a scene has application in different fields
-of technology and a concrete example has been provided in the foregoing
-Chapter with face recognition.  
-In the case when a sequence of consecutive images of the same scene are
-available, acquired by a single or many fixed or moving cameras, it is
-possible to extract information on the motion of the objects of
-interest. Indeed, the information contained in the motion covers a role
-of primary importance in many computer vision problems like the tracking
-of moving targets, the temporal prediction of the arrangement of the
-surrounding environment, the recovery of the three-dimensional velocity
-field of image points or the segmentation of the image in parts
-corresponding to moving targets. Moreover, motion information is an
-indispensable prerequisite for tasks finalized to the movement of
+<p align="center">
+  <img src="chapter04image.jpg" width="400">
+</p>
+
+Processing a static image of a scene has application in different fields of technology and a concrete example has been provided at [Face recognition using OpenCV and CUDA](https://vitalitylearning2021.github.io/faceRecognitionOpenCVCUDA/) with face recognition.  
+In the case when a sequence of consecutive images of the same scene are available, acquired by a single or many fixed or moving cameras, it is possible to extract information on the motion of the objects of interest. Indeed, the information contained in the motion covers a role of primary importance in many computer vision problems like the tracking
+of moving targets, the temporal prediction of the arrangement of the surrounding environment, the recovery of the three-dimensional velocity field of image points or the segmentation of the image in parts corresponding to moving targets. Moreover, motion information is an indispensable prerequisite for tasks finalized to the movement of
 autonomous robots and to their interaction with the environment.  
-In this chapter, we will deal with *optical flow* techniques, namely,
-with schemes estimating a velocity field from the only intensity of
-image sequences. However, since the images acquired by a camera convey
-two-dimensional information, then, by optical flow, it is not possible
-to reconstruct the full three-dimensional velocity field, but we have to
-settle for its projection, precisely, on a two-dimensional space.
-Nonetheless, even a two-dimensional projection of the three-dimensional
-velocity field brings valuable information in many applications. For the
-sake of simplicity, we will limit ourselves to the case of a single,
-still camera.  
-More in detail, we will consider four robust, reliable and fast
-approaches for the accurate estimation of both dense and sparse optical
-flow: the Farnebäck method, the Brox *et al.* scheme, the
-Total-Variation-L1 (TV-L1) regularization and the Lucas-Kanade approach.
-While, in the foregoing chapter, we used CUDA-accelerated OpenCV
-routines to set up face recognition along with the help of cuSOLVER, in
-this chapter we will discover how the mentioned techniques are actually
-already implemented in OpenCV. Nevertheless, although off-the-shelf, the
-rationale of the dealt with algorithms will be recalled since a
-conscious use of what is inside any library is always much better than
-an usage of the same routines as black-boxes. A conscious use of the
-libraries indeed enables a consistent definition of the input parameters
-and a knowledge of the algorithm limitations.  
-In the present chapter, we will deal with:
+In this project, we will deal with *optical flow* techniques, namely, with schemes estimating a velocity field from the only intensity of image sequences. However, since the images acquired by a camera convey two-dimensional information, then, by optical flow, it is not possible to reconstruct the full three-dimensional velocity field, but we have to settle for its projection, precisely, on a two-dimensional space. Nonetheless, even a two-dimensional projection of the three-dimensional velocity field brings valuable information in many applications. For the sake of simplicity, we will limit ourselves to the case of a single, still camera.  
+More in detail, we will consider four robust, reliable and fast approaches for the accurate estimation of both dense and sparse optical flow: the Farnebäck method, the Brox *et al.* scheme, the Total-Variation-L1 (TV-L1) regularization and the Lucas-Kanade approach. While, in [Face recognition using OpenCV and CUDA](https://vitalitylearning2021.github.io/faceRecognitionOpenCVCUDA/), we used CUDA-accelerated OpenCV routines to set up face recognition along with the help of cuSOLVER, in
+this project we will discover how the mentioned techniques are actually already implemented in OpenCV. Nevertheless, although off-the-shelf, the rationale of the dealt with algorithms will be recalled since a conscious use of what is inside any library is always much better than an usage of the same routines as black-boxes. A conscious use of the
+libraries indeed enables a consistent definition of the input parameters and a knowledge of the algorithm limitations.  
+In the present project, we will deal with:
 
   - Dense and sparse optical flow;
-
   - Farnebäck optical flow;
-
   - Brox *et al.* optical flow;
-
   - Total-Variation-L1 regularized optical flow;
-
   - Lucas-Kanade optical flow;
-
-  - Color coding and streamlines drawing for optical flow
-    representation;
-
+  - Color coding and streamlines drawing for optical flow representation;
   - Optical flow with CUDA-accelerated OpenCV.
 
 ## Getting started
 
-In the present chapter, the key elements of optical flow techniques
-needed for a conscious use of CUDA-accelerated OpenCV routines will be
-given. No particular prerequisite is necessary.  
-The GitHub link for all the code files is as below:
-<https://github.com/CIuliusC/CUDA_Book/tree/master/Chapter%2004>.  
-In the next section, we introduce the concepts of optical flow and
-motion fields.  
-The optical flow concept will be qualitatively illustrated starting from
-its introduction in the field of experimental psychology. Later on, the
-motion field concept will be quantitatively described as the projection
-of the three-dimensional velocity field in the image plane. Finally, the
-relation between optical flow and motion fields will be discussed by
-highlighting how quantitatively optical flow is an approximation of
-motion fields
+In the present project, the key elements of optical flow techniques needed for a conscious use of CUDA-accelerated OpenCV routines will be given. No particular prerequisite is necessary.  
+In the next section, we introduce the concepts of optical flow and motion fields.  
+The optical flow concept will be qualitatively illustrated starting from its introduction in the field of experimental psychology. Later on, the motion field concept will be quantitatively described as the projection of the three-dimensional velocity field in the image plane. Finally, the relation between optical flow and motion fields will be discussed by highlighting how quantitatively optical flow is an approximation of motion fields
 
 ## Optical flow and motion fields
 
-In the present section, we will introduce the concept of optical flow
-starting from its very origins in the field of applied psychology. The
-motivation for its introduction provides a valuable example to
-understand the usefulness of optical flow. Later on, we will more
-formally describe the concept of motion fields and highlight how
-quantitatively optical flow is able to provide, in general, only an
-approximation thereof. We will also point out how, in some remarkable
-cases, optical flow can lead to misleading conclusions about motion
-fields.
+In the present section, we will introduce the concept of optical flow starting from its very origins in the field of applied psychology. The motivation for its introduction provides a valuable example to understand the usefulness of optical flow. Later on, we will more formally describe the concept of motion fields and highlight how quantitatively optical flow is able to provide, in general, only an approximation thereof. We will also point out how, in some remarkable cases, optical flow can lead to misleading conclusions about motion fields.
 
 ### The concept of optical flow
 
