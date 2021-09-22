@@ -57,7 +57,7 @@ Next figure [2](#landing) displays a landing.
 </p>
 
 Now, the arrows point from a position inside the landing area. When a pilot is landing, the point of the landing area towards which he is moving appears standing still in his field of view. Opposite to that, the other points of the surrounding visual environment move away from such a point.  
-Finally, figure [1.3](#flybyLeft) below represents a flyby to the left.
+Finally, figure [3](#flybyLeft) below represents a flyby to the left.
 
 <p align="center">
   <img src="flybyLeft.png" width="400" id="flybyLeft">
