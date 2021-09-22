@@ -38,73 +38,59 @@ The concept of optical flow draws its origin in the field of experimental psycho
 
 > Optical flow is the distribution of apparent velocities of movement of brightness patterns in an image. Optical flow can arise from the relative motion of objects and the viewer.
 
-To illustrate the concept of optical flow, it is convenient to exploit
-the same, although dated, three images used by Gibson.  
-Figure [1.1](#flyby) below illustrates the optical flow associated to a
-flight over a landing field. The arrows describe the motion of the scene
-points as they appear to the pilot according to the definition above. In
-particular, the arrows represent the motion direction, through their
-pointing directions, and the speed, through their lengths, of some scene
-points.
+To illustrate the concept of optical flow, it is convenient to exploit the same, although dated, three images used by Gibson.  
+Figure [1](#flyby) below illustrates the optical flow associated to a flight over a landing field. The arrows describe the motion of the scene points as they appear to the pilot according to the definition above. In particular, the arrows represent the motion direction, through their pointing directions, and the speed, through their lengths, of some scene points.
 
-![Flyby optical flow image  
-([https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlh6IEpnhqwcSz0FhwQs-WIWCl7vQ0VbubOtcigUFdurBG4TX\&s](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlh6IEpnhqwcSz0FhwQs-WIWCl7vQ0Vb_ubOtcigUFdurBG4TX&s)).](/Chapter04/flyby.png)
+<p align="center">
+  <img src="flyby.png" width="400" id="flyby">
+  <br>
+     <em>Figure 1. Flyby optical flow image.</em>
+</p>
 
-Figure [1.1](#flyby) actually illustrates a flyby: the aircraft is
-passing over the airfield, but it is not landing. We deduce this from
-the fact that all the arrows point from a position on the horizon and
-not from the landing area.  
-Next figure [1.2](#landing) displays a landing.
+Figure [1](#flyby) actually illustrates a flyby: the aircraft is passing over the airfield, but it is not landing. We deduce this from the fact that all the arrows point from a position on the horizon and not from the landing area.  
+Next figure [2](#landing) displays a landing.
 
-![Landing optical flow image  
-([https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlh6IEpnhqwcSz0FhwQs-WIWCl7vQ0VbubOtcigUFdurBG4TX\&s](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlh6IEpnhqwcSz0FhwQs-WIWCl7vQ0Vb_ubOtcigUFdurBG4TX&s)).](/Chapter04/landing.png)
+<p align="center">
+  <img src="landing.png" width="400" id="landing">
+  <br>
+     <em>Figure 2. Landing optical flow image.</em>
+</p>
 
-Now, the arrows point from a position inside the landing area. When a
-pilot is landing, the point of the landing area towards which he is
-moving appears standing still in his field of view. Opposite to that,
-the other points of the surrounding visual environment move away from
-such a point.  
+Now, the arrows point from a position inside the landing area. When a pilot is landing, the point of the landing area towards which he is moving appears standing still in his field of view. Opposite to that, the other points of the surrounding visual environment move away from such a point.  
 Finally, figure [1.3](#flybyLeft) below represents a flyby to the left.
 
-![Flyby to the left  
-([https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlh6IEpnhqwcSz0FhwQs-WIWCl7vQ0VbubOtcigUFdurBG4TX\&s](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlh6IEpnhqwcSz0FhwQs-WIWCl7vQ0Vb_ubOtcigUFdurBG4TX&s)).](/Chapter04/flybyLeft.png)
+<p align="center">
+  <img src="flybyLeft.png" width="400" id="flybyLeft">
+  <br>
+     <em>Figure 3. Flyby to the left.</em>
+</p>
 
-It reproduces a scenario in which the pilot is looking to the side and,
-in particular, over the right shoulder as the plane flies to the left.  
-In all the three cases, the vector fields express the optical flow.
-Notice that the shown images do not mean to faithfully reproduce the
-*motion field*, i.e., the projections of the velocity vectors of the
-three-dimensional space into the image plane (a two-dimensional space).
-Nevertheless, they provide the impression of how movement is
-occurring.  
-According to Gibson, an approximation of the motion field provides the
-pilot of non-ambiguous information concerning his speed, altitude and
-direction, namely, a sufficient information to determine the movement of
-the observer with respect to the surrounding environment.  
+It reproduces a scenario in which the pilot is looking to the side and, in particular, over the right shoulder as the plane flies to the left.  
+In all the three cases, the vector fields express the optical flow. Notice that the shown images do not mean to faithfully reproduce the *motion field*, i.e., the projections of the velocity vectors of the three-dimensional space into the image plane (a two-dimensional space). Nevertheless, they provide the impression of how movement is occurring.  
+According to Gibson, an approximation of the motion field provides the pilot of non-ambiguous information concerning his speed, altitude and direction, namely, a sufficient information to determine the movement of the observer with respect to the surrounding environment.  
 In next subsection, we turn to discussing two-dimensional motion fields.
 
 ### Two-dimensional motion fields
 
-The two-dimensional motion field problem is illustrated in figure
-[1.4](#apertureProblem):
+The two-dimensional motion field problem is illustrated in figure [4](#apertureProblem):
 
-![Illustrating the two-dimensional motion
-fields.](/Chapter04/apertureProblem.png)
+<p align="center">
+  <img src="apertureProblem.png" width="400" id="apertureProblem">
+  <br>
+     <em>Figure 4. Illustrating the two-dimensional motion fields.</em>
+</p>
 
-The above figure illustrates a point \(\underline{P}=(X, Y, Z)\) that
-moves over a certain trajectory \(T\) with speed
-\(\underline{V}=(V_x,V_y,V_z)\). The motion of \(\underline{P}\) is
-observed by a point-like camera located at \(O\), forming an image of
-the scene over the plane \(S\). Point \(\underline{P}\) must be thought
-of as one of the many points forming an object moving behind \(S\) and
-of which we isolate \(\underline{P}\) to illustrate the concept of
-two-dimensional motion fields. For the sake of simplicity, the camera is
-further assumed to be still, although, in principle, it could be also
-dealt with as a moving camera. The plane \(S\) represents the focal
-plane of the camera and, again for simplicity and without losses of
-generality, it is assumed to coincide with the plane \(Z=1\). The point
-\(\underline{P}\) appears to the camera as being “projected” over \(S\)
-at a point \(\underline{p}=(x,y,1)\), where
+The above figure illustrates a point <img src="https://render.githubusercontent.com/render/math?math=\mathbf{P}=(X, Y, Z)"> that moves over a certain trajectory <img src="https://render.githubusercontent.com/render/math?math=T"> with speed <img src="https://render.githubusercontent.com/render/math?math=\mathbf{V}=(V_x,V_y,V_z)">. The motion of <img src="https://render.githubusercontent.com/render/math?math=\mathbf{P}"> is observed by a point-like camera located at <img src="https://render.githubusercontent.com/render/math?math=O">, forming an image of the scene over the plane <img src="https://render.githubusercontent.com/render/math?math=S">. Point <img src="https://render.githubusercontent.com/render/math?math=\mathbf{P}"> must be thought of as one of the many points forming an object moving behind <img src="https://render.githubusercontent.com/render/math?math=S"> and of which we isolate <img src="https://render.githubusercontent.com/render/math?math=\mathbf{P}"> to illustrate the concept of two-dimensional motion fields. For the sake of simplicity, the camera is further assumed to be still, although, in principle, it could be also
+dealt with as a moving camera. The plane <img src="https://render.githubusercontent.com/render/math?math=S"> represents the focal plane of the camera and, again for simplicity and without losses of generality, it is assumed to coincide with the plane <img src="https://render.githubusercontent.com/render/math?math=Z=1">. The point <img src="https://render.githubusercontent.com/render/math?math=\mathbf{P}"> appears to the camera as being “projected” over <img src="https://render.githubusercontent.com/render/math?math=S"> at a point <img src="https://render.githubusercontent.com/render/math?math=\mathbf{p}=(x,y,1)">, where
+
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=\left\{
+                \begin{array}{ll}
+                  x=\frac{X}{Z}\\
+                  y=\frac{Y}{Z}
+                \end{array}
+              \right.." id="xxx"> [1]
+</p>
 
 \[\left\{
                 \begin{array}{ll}
