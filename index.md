@@ -92,36 +92,23 @@ dealt with as a moving camera. The plane <img src="https://render.githubusercont
               \right.." id="xxx"> [1]
 </p>
 
-\[\left\{
-                \begin{array}{ll}
-                  x=\frac{X}{Z}\\
-                  y=\frac{Y}{Z}
-                \end{array}
-              \right..\]
+Point <img src="https://render.githubusercontent.com/render/math?math=\mathbf{p}"> will move, due to the motion of <img src="https://render.githubusercontent.com/render/math?math=\mathbf{p}">, with a certain speed <img src="https://render.githubusercontent.com/render/math?math=\mathbf{v}=(v_x,v_y,0)">. Of course, the <img src="https://render.githubusercontent.com/render/math?math=z">-component of <img src="https://render.githubusercontent.com/render/math?math=\mathbf{v}"> vanishes since
+<img src="https://render.githubusercontent.com/render/math?math=\mathbf{p}"> is constrained to move on <img src="https://render.githubusercontent.com/render/math?math=Z=1">.  
+As for <img src="https://render.githubusercontent.com/render/math?math=\mathbf{p}">, there will be many other points on the <img src="https://render.githubusercontent.com/render/math?math=Z=1"> plane that will be the images of bodies moving behind <img src="https://render.githubusercontent.com/render/math?math=S"> and having a certain velocity <img src="https://render.githubusercontent.com/render/math?math=\mathbf{v}">. Of course, <img src="https://render.githubusercontent.com/render/math?math=\mathbf{v}"> will be different from point to point. The collection of all point velocities <img src="https://render.githubusercontent.com/render/math?math=\mathbf{v}"> is a *two-dimensional motion field*.  
+It should be noticed that all the up to now considered quantities <img src="https://render.githubusercontent.com/render/math?math=\mathbf{P}">, <img src="https://render.githubusercontent.com/render/math?math=\mathbf{p}">, <img src="https://render.githubusercontent.com/render/math?math=\mathbf{V}"> and
+<img src="https://render.githubusercontent.com/render/math?math=\mathbf{v}"> are time-dependent.  
+To determine the relation between <img src="https://render.githubusercontent.com/render/math?math=\mathbf{V}"> and
+<img src="https://render.githubusercontent.com/render/math?math=\mathbf{v}">, let us first observe that
 
-Point \(\underline{p}\) will move, due to the motion of
-\(\underline{P}\), with a certain speed \(\underline{v}=(v_x,v_y,0)\).
-Of course, the \(z\)-component of \(\underline{v}\) vanishes since
-\(\underline{p}\) is constrained to move on \(Z=1\).  
-As for \(\underline{p}\), there will be many other points on the \(Z=1\)
-plane that will be the images of bodies moving behind \(S\) and having a
-certain velocity \(\underline{v}\). Of course, \(\underline{v}\) will be
-different from point to point. The collection of all point velocities
-\(\underline{v}\) is a *two-dimensional motion field*.  
-It should be noticed that all the up to now considered quantities
-\(\underline{P}\), \(\underline{p}\), \(\underline{V}\) and
-\(\underline{v}\) are time-dependent.  
-To determine the relation between \(\underline{V}\) and
-\(\underline{v}\), let us first observe that
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=\mathbf{P}=Z\mathbf{p}." id="relationPp"> [2]
+</p>
 
-\[\label{relationPp}
-    \underline{P}=Z\underline{p}.\]
+On taking the time derivative of [\[2\]](#relationPp), we have
 
-On taking the time derivative of ([\[relationPp\]](#relationPp)), we
-have
-
-\[\label{relationVv}
-    \underline{V}=V_z\underline{p}+Z\underline{v}.\]
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=\mathbf{V}=V_z\mathbf{p}+Z\mathbf{v}." id="relationVv"> [3]
+</p>
 
 For discussion purposes, eq. ([\[relationVv\]](#relationVv)) should be
 regarded as an equation in which \(\underline{V}\) represents the
