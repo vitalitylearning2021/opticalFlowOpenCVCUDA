@@ -110,109 +110,63 @@ On taking the time derivative of [\[2\]](#relationPp), we have
   <img src="https://render.githubusercontent.com/render/math?math=\mathbf{V}=V_z\mathbf{p}+Z\mathbf{v}." id="relationVv"> [3]
 </p>
 
-For discussion purposes, eq. ([\[relationVv\]](#relationVv)) should be
-regarded as an equation in which \(\underline{V}\) represents the
-unknown. In other words, we want to determine the velocity field of the
-points moving behind \(S\). The known quantities in eq.
-([\[relationVv\]](#relationVv)) are available at the right-hand side,
-since we assume to have \(\underline{v}\) available in some way.
-Unfortunately, eq. ([\[relationVv\]](#relationVv)) has only two useful
-components since the projection of both sides on \(z\) is the identity
-\(V_z=V_z\). As a consequence, eq. ([\[relationVv\]](#relationVv)) tells
-us that, even following an estimate of \(\underline{v}\), we could not
-be able to estimate the velocities of the points \(\underline{P}\).
-Therefore, we can conclude that, following the observation of a moving
-object from a still camera, it is not possible to extract the motion of
-the scene points. Our only hope is to estimate the velocity field
-\(\underline{v}\) to have a rough, although incomplete, idea of the
-motion of the points behind \(S\).  
-Reinforcing the issue that, from two-dimensional motion field, the
-actual motion of bodies behind \(S\) cannot be deduced, it should be
-also remarked that an approximation to \(\underline{v}\) is typically
-provided by what we have defined as optical flow. In next subsection, we
-underline how the very estimate of motion fields from optical flows can
-lead to erroneous conclusions in a certain number of canonical cases.
+For discussion purposes, eq. [\[3\]](#relationVv) should be regarded as an equation in which <img src="https://render.githubusercontent.com/render/math?math=\mathbf{V}"> represents the unknown. In other words, we want to determine the velocity field of the points moving behind <img src="https://render.githubusercontent.com/render/math?math=S">. The known quantities in eq. [\[3\]](#relationVv) are available at the right-hand side, since we assume to have <img src="https://render.githubusercontent.com/render/math?math=\mathbf{v}"> available in some way. Unfortunately, eq. [\[3\]](#relationVv) has only two useful components since the projection of both sides on <img src="https://render.githubusercontent.com/render/math?math=z"> is the identity <img src="https://render.githubusercontent.com/render/math?math=V_z=V_z">. As a consequence, eq. [\[3\]](#relationVv) tells us that, even following an estimate of <img src="https://render.githubusercontent.com/render/math?math=\mathbf{v}">, we could not be able to estimate the velocities of the points <img src="https://render.githubusercontent.com/render/math?math=\mathbf{P}">. Therefore, we can conclude that, following the observation of a moving object from a still camera, it is not possible to extract the motion of the scene points. Our only hope is to estimate the velocity field <img src="https://render.githubusercontent.com/render/math?math=\mathbf{v}"> to have a rough, although incomplete, idea of the motion of the points behind <img src="https://render.githubusercontent.com/render/math?math=S">.  
+Reinforcing the issue that, from two-dimensional motion field, the actual motion of bodies behind <img src="https://render.githubusercontent.com/render/math?math=S"> cannot be deduced, it should be also remarked that an approximation to <img src="https://render.githubusercontent.com/render/math?math=\mathbf{v}"> is typically provided by what we have defined as optical flow. In next subsection, we underline how the very estimate of motion fields from optical flows can lead to erroneous conclusions in a certain number of canonical cases.
 
 ### The slippery relation between optical flows and motion fields
 
-From what illustrated in figures [1.1](#flyby), [1.2](#landing) and
-[1.3](#flybyLeft), the optical flow can be quantitatively defined as the
-motion of the brightness pattern of an image. Unfortunately, following
-such a definition, optical flows do not necessarily coincide with motion
-fields. In this subsection, we present three classical examples to
+From what illustrated in figures [1](#flyby), [2](#landing) and [3](#flybyLeft), the optical flow can be quantitatively defined as the motion of the brightness pattern of an image. Unfortunately, following such a definition, optical flows do not necessarily coincide with motion fields. In this subsection, we present three classical examples to
 convince ourselves of this fact:
 
 1.  the case of a sphere rotating about itself with fixed illumination;
-
 2.  the case of a still sphere illuminated by a moving source;
-
 3.  the Barber’s shop pole.
 
-These three cases should be used as disclaimers on the possibility of
-consistently using optical flows to estimate motion fields. However, our
-underlining assumption is that, in many cases and apart from the
-degenerate ones we will shortly present, we reasonably expect for the
-sequel that the optical field is close to the motion field.  
+These three cases should be used as disclaimers on the possibility of consistently using optical flows to estimate motion fields. However, our underlining assumption is that, in many cases and apart from the degenerate ones we will shortly present, we reasonably expect for the sequel that the optical field is close to the motion field.  
 Let us now show the first degenerate case.
 
 #### A sphere rotating about itself with fixed illumination
 
 The following figure shows a sphere illuminated by a static source.
 
-![Sphere rotating about itself with fixed illumination
-(<https://commons.wikimedia.org/wiki/File:Sphere-with-blender.png>,
-<https://it.wikipedia.org/wiki/File:Sun.gif>).](Pictures/Chapter04/rotatingSphere.png)
+<p align="center">
+  <img src="rotatingSphere.png" width="400" id="rotatingSphere">
+  <br>
+     <em>Figure 5. Sphere rotating about itself with fixed illumination.</em>
+</p>
 
-The source in figure [1.5](#rotatingSphere) generates a certain light
-intensity distribution over the sphere. If the sphere rotates about
-itself, thanks to its symmetry, such shading pattern will not change. As
-long as the sphere rotates about itself, then, the brightness pattern of
-its image remains unchanged. Since the optical flow evaluates, as
-mentioned, the motion of the brightness pattern, then each point will
-appear still. The optical flow would lead then to the wrong conclusion
-that the sphere is motionless.  
+The source in figure [5](#rotatingSphere) generates a certain light intensity distribution over the sphere. If the sphere rotates about itself, thanks to its symmetry, such shading pattern will not change. As long as the sphere rotates about itself, then, the brightness pattern of its image remains unchanged. Since the optical flow evaluates, as
+mentioned, the motion of the brightness pattern, then each point will appear still. The optical flow would lead then to the wrong conclusion that the sphere is motionless.  
 It is now the turn of the second degenerate case.
 
 #### A still sphere illuminated by a moving source
 
-Figure [1.6](#rotatingSource) below shows a sphere this time still, but
-with a moving source.
+Figure [6](#rotatingSource) below shows a sphere this time still, but with a moving source.
 
-![Still sphere illuminated by a moving source
-(<https://commons.wikimedia.org/wiki/File:Sphere-with-blender.png>,
-<https://it.wikipedia.org/wiki/File:Sun.gif>).](Pictures/Chapter04/rotatingSource.png)
+<p align="center">
+  <img src="rotatingSource.png" width="400" id="rotatingSource">
+  <br>
+     <em>Figure 6. Still sphere illuminated by a moving source.</em>
+</p>
 
-As long as the source moves, the lighting source changes so that the
-shading pattern changes and, accordingly, in this case, the optical flow
-is not zero when the motion field is vanishing. Accordingly, one would
-erroneously conclude that the sphere is moving while it is not.  
+As long as the source moves, the lighting source changes so that the shading pattern changes and, accordingly, in this case, the optical flow is not zero when the motion field is vanishing. Accordingly, one would erroneously conclude that the sphere is moving while it is not.  
 Finally, let us present the last degenerate case.
 
 #### The Barber’s shop pole
 
-The rotating Barber’s pole is the last example in which we show how the
-optical flow can be a totally erroneous approximation of motion fields.
-The following figure illustrates the rotating Barber’s shop pole
-problem.
+The rotating Barber’s pole is the last example in which we show how the optical flow can be a totally erroneous approximation of motion fields. The following figure illustrates the rotating Barber’s shop pole problem.
 
-![Rotating Barber’s pole
-(<https://freesvg.org/barbers-pole-vector-graphics>). Left: the pole.
-Center: actual motion. Right: optical
-flow.](Pictures/Chapter04/barbersPole.png)
+<p align="center">
+  <img src="barbersPole.png" width="400" id="barbersPole">
+  <br>
+     <em>Figure 7. Rotating Barber’s pole.</em>
+</p>
 
-The left side of figure [1.7](#barbersPole) illustrates the pole: while
-rotating, the pole’s strips move right. The central side of figure
-[1.7](#barbersPole) shows the actual strips motion: the arrows point to
-the right. However, as it can be understood from the right side of
-figure [1.7](#barbersPole), the strips appear moving upwards from one
-frame to the next, so that the optical flow represents a totally
-erroneous estimate of motion field again.  
+The left side of figure [7](#barbersPole) illustrates the pole: while rotating, the pole’s strips move right. The central side of figure [7](#barbersPole) shows the actual strips motion: the arrows point to the right. However, as it can be understood from the right side of figure [7](#barbersPole), the strips appear moving upwards from one
+frame to the next, so that the optical flow represents a totally erroneous estimate of motion field again.  
   
-In the just shown examples, we have assumed to be able to compute the
-optical flow. Even by assuming a full knowledge of the optical flow, we
-have seen how erroneous conclusions can be reached.  
-In the next section, we aim at pointing out the difficulties in the
-computation of the optical flow.
+In the just shown examples, we have assumed to be able to compute the optical flow. Even by assuming a full knowledge of the optical flow, we have seen how erroneous conclusions can be reached.  
+In the next section, we aim at pointing out the difficulties in the computation of the optical flow.
 
 ## The optical flow constraint equation and the aperture problem
 
