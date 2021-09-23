@@ -170,25 +170,10 @@ In the next section, we aim at pointing out the difficulties in the computation 
 
 ## The optical flow constraint equation and the aperture problem
 
-The time has become for beginning the discussion on the computation of
-the optical flow by introducing the *optical flow constraint equation*.
-We will underline, by illustrating the *aperture problem*, how, strictly
-speaking, estimating both the components of the velocities of the points
-in an image is not possible and the consequences of this.  
-Let us start with the introduction of the optical flow constraint
-equation. To this end, let us regard a sequence of images changing in
-time as they were a movie, by watching at the points altogether. In
-other words, we adopt what in fluid mechanics is called a *Lagrangian
-approach*. In this case, the image intensity \(I\) depends on both the
-above introduced space coordinates \((x,y)\) and on time \(t\). In other
-words, \(I=I(x,y,t)\).  
-Let us now change point of view. Let us consider a specific point and
-follow it through the scene, by getting unconcerned about all the other
-points. In other words, let us follow the motion \((x(t),y(t))\) by
-adopting what, in fluid mechanics, is called *Eulerian approach*. In
-this case, we regard the intensity as \(I=I(x(t),y(t),t)=I(t)\). Saying
-it differently, we regard the intensity as a function of time since we
-are following a point moving along the \((x(t),y(t))\) trajectory. Now,
+The time has become for beginning the discussion on the computation of the optical flow by introducing the *optical flow constraint equation*. We will underline, by illustrating the *aperture problem*, how, strictly speaking, estimating both the components of the velocities of the points in an image is not possible and the consequences of this.  
+Let us start with the introduction of the optical flow constraint equation. To this end, let us regard a sequence of images changing in time as they were a movie, by watching at the points altogether. In other words, we adopt what in fluid mechanics is called a *Lagrangian approach*. In this case, the image intensity <img src="https://render.githubusercontent.com/render/math?math=I"> depends on both the above introduced space coordinates <img src="https://render.githubusercontent.com/render/math?math=(x,y)"> and on time <img src="https://render.githubusercontent.com/render/math?math=t">. In other words, <img src="https://render.githubusercontent.com/render/math?math=I=I(x,y,t)">.  
+Let us now change point of view. Let us consider a specific point and follow it through the scene, by getting unconcerned about all the other points. In other words, let us follow the motion <img src="https://render.githubusercontent.com/render/math?math=(x(t),y(t)"> by adopting what, in fluid mechanics, is called *Eulerian approach*. In
+this case, we regard the intensity as <img src="https://render.githubusercontent.com/render/math?math=I=I(x(t),y(t),t)=I(t)">. Saying it differently, we regard the intensity as a function of time since we are following a point moving along the <img src="https://render.githubusercontent.com/render/math?math=(x(t),y(t))"> trajectory. Now,
 if the time increases from \(t\) to \(t+dt\), the point that we are
 following moves from \((x(t),y(t))\) to \((x(t)+v_x dt,y(t)+v_y dt)\)
 due to its velocity. In principle, also the intensity of the followed
