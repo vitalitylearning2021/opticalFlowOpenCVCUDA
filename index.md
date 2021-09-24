@@ -186,7 +186,7 @@ On using the chain rule, equation [\[4\]](#constantBrightness) implies that
   <img src="https://render.githubusercontent.com/render/math?math=\frac{dI}{dt}=\frac{\partial I}{\partial x}v_x %2B \frac{\partial I}{\partial y}v_y %2B \frac{\partial I}{\partial t}=0." id="constantBrightnessExpanded"> [5]
 </p>
 
-Equation [\[4\]](#constantBrightnessExpanded) expresses the so called *optical flow constraint* equation. In such an equation, the partial temporal derivative of <img src="https://render.githubusercontent.com/render/math?math=I"> must be considered as a datum since we know the temporal evolution of the images. Analogously,
+Equation [\[5\]](#constantBrightnessExpanded) expresses the so called *optical flow constraint* equation. In such an equation, the partial temporal derivative of <img src="https://render.githubusercontent.com/render/math?math=I"> must be considered as a datum since we know the temporal evolution of the images. Analogously,
 the partial derivatives of <img src="https://render.githubusercontent.com/render/math?math=I"> with respect to <img src="https://render.githubusercontent.com/render/math?math=x"> and <img src="https://render.githubusercontent.com/render/math?math=y"> must be assumed to be known since we know the individual images. Opposite to that, the components along <img src="https://render.githubusercontent.com/render/math?math=x"> and <img src="https://render.githubusercontent.com/render/math?math=y"> of <img src="https://render.githubusercontent.com/render/math?math=\mathbf{v}"> must be considered to be unknown. The question thus arises on whether the optical flow can be estimated under the constant brightness assumption.  
 To investigate on whether this is possible, we illustrate the so called *aperture problem* and note that equation [\[5\]](#constantBrightnessExpanded) is a single equation in two unknowns, so that it is under-determined. If we rewrite equation [\[5\]](#constantBrightnessExpanded) as
 
@@ -214,7 +214,7 @@ Figure [8](#actualMotion) illustrates the actual motion. Actually, due to the ap
 lines.</em>
 </p>
 
-As it can be seen from the above figure and also from figure [8](#actualMotion), the blue lines are the iso-intensity lines and the perceived motion is orthogonal to such lines as predicted by equation [\[normalFlow\]](#normalFlow).  
+As it can be seen from the above figure and also from figure [8](#actualMotion), the blue lines are the iso-intensity lines and the perceived motion is orthogonal to such lines as predicted by equation [\[6\]](#normalFlow).  
 Up to now, we have seen how the motion of the points behind the image plane of a camera can be represented by the motion fields, within certain limits. Moreover, we have underlined how the motion field can be approximated by the optical flow, again within certain limits. Finally, we have pointed out what are the difficulties in the calculation of the optical flow.  
 The under-determinacy of the optical flow constraint equation has pushed the literature towards the development of several methods to solve this problem. Some of them will be dealt with in this chapter and will be subject of implementation in OpenCV accelerated with CUDA.  
 Before proceeding further with the description of the implemented methods for the optical flow estimate, let us organize the optical flow estimation methods into *dense* and *sparse* methods.
