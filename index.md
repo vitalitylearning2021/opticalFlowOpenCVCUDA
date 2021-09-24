@@ -173,88 +173,51 @@ In the next section, we aim at pointing out the difficulties in the computation 
 The time has become for beginning the discussion on the computation of the optical flow by introducing the *optical flow constraint equation*. We will underline, by illustrating the *aperture problem*, how, strictly speaking, estimating both the components of the velocities of the points in an image is not possible and the consequences of this.  
 Let us start with the introduction of the optical flow constraint equation. To this end, let us regard a sequence of images changing in time as they were a movie, by watching at the points altogether. In other words, we adopt what in fluid mechanics is called a *Lagrangian approach*. In this case, the image intensity <img src="https://render.githubusercontent.com/render/math?math=I"> depends on both the above introduced space coordinates <img src="https://render.githubusercontent.com/render/math?math=(x,y)"> and on time <img src="https://render.githubusercontent.com/render/math?math=t">. In other words, <img src="https://render.githubusercontent.com/render/math?math=I=I(x,y,t)">.  
 Let us now change point of view. Let us consider a specific point and follow it through the scene, by getting unconcerned about all the other points. In other words, let us follow the motion <img src="https://render.githubusercontent.com/render/math?math=(x(t),y(t)"> by adopting what, in fluid mechanics, is called *Eulerian approach*. In
-this case, we regard the intensity as <img src="https://render.githubusercontent.com/render/math?math=I=I(x(t),y(t),t)=I(t)">. Saying it differently, we regard the intensity as a function of time since we are following a point moving along the <img src="https://render.githubusercontent.com/render/math?math=(x(t),y(t))"> trajectory. Now,
-if the time increases from \(t\) to \(t+dt\), the point that we are
-following moves from \((x(t),y(t))\) to \((x(t)+v_x dt,y(t)+v_y dt)\)
-due to its velocity. In principle, also the intensity of the followed
-point might change from \(I(t)\) to \(I(t)+\frac{dI}{dt}(t)dt\). If we
-assume that the intensity of the followed point does not change, namely,
-we adopt the *constant brightness assumption*, then we have
+this case, we regard the intensity as <img src="https://render.githubusercontent.com/render/math?math=I=I(x(t),y(t),t)=I(t)">. Saying it differently, we regard the intensity as a function of time since we are following a point moving along the <img src="https://render.githubusercontent.com/render/math?math=(x(t),y(t))"> trajectory. Now, if the time increases from <img src="https://render.githubusercontent.com/render/math?math=t"> to <img src="https://render.githubusercontent.com/render/math?math=t+dt">, the point that we are following moves from <img src="https://render.githubusercontent.com/render/math?math=(x(t),y(t))"> to <img src="https://render.githubusercontent.com/render/math?math=(x(t)+v_x dt,y(t)+v_y dt)"> due to its velocity. In principle, also the intensity of the followed point might change from <img src="https://render.githubusercontent.com/render/math?math=I(t)"> to <img src="https://render.githubusercontent.com/render/math?math=I(t)+\frac{dI}{dt}(t)dt">. If we
+assume that the intensity of the followed point does not change, namely, we adopt the *constant brightness assumption*, then we have
 
-\[\label{constantBrightness}
-\frac{dI}{dt}=0.\]
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=\frac{dI}{dt}=0." id="constantBrightness"> [4]
+</p>
 
-On using the chain rule, equation
-([\[constantBrightness\]](#constantBrightness)) implies that
+On using the chain rule, equation [\[constantBrightness\]](#constantBrightness) implies that
 
-\[\label{constantBrightnessExpanded}
-\frac{dI}{dt}=\frac{\partial I}{\partial x}v_x+\frac{\partial I}{\partial y}v_y+\frac{\partial I}{\partial t}=0.\]
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=\frac{dI}{dt}=\frac{\partial I}{\partial x}v_x+\frac{\partial I}{\partial y}v_y+\frac{\partial I}{\partial t}=0." id="constantBrightnessExpanded"> [5]
+</p>
 
-Equation ([\[constantBrightnessExpanded\]](#constantBrightnessExpanded))
-expresses the so called *optical flow constraint* equation. In such an
-equation, the partial temporal derivative of \(I\) must be considered as
-a datum since we know the temporal evolution of the images. Analogously,
-the partial derivatives of \(I\) with respect to \(x\) and \(y\) must be
-assumed to be known since we know the individual images. Opposite to
-that, the components along \(x\) and \(y\) of \(\underline{v}\) must be
-considered to be unknown. The question thus arises on whether the
-optical flow can be estimated under the constant brightness
-assumption.  
-To investigate on whether this is possible, we illustrate the so called
-*aperture problem* and note that equation
-([\[constantBrightnessExpanded\]](#constantBrightnessExpanded)) is a
-single equation in two unknowns, so that it is under-determined. If we
-rewrite equation
-([\[constantBrightnessExpanded\]](#constantBrightnessExpanded)) as
+Equation [\[constantBrightnessExpanded\]](#constantBrightnessExpanded) expresses the so called *optical flow constraint* equation. In such an equation, the partial temporal derivative of <img src="https://render.githubusercontent.com/render/math?math=I"> must be considered as a datum since we know the temporal evolution of the images. Analogously,
+the partial derivatives of <img src="https://render.githubusercontent.com/render/math?math=I"> with respect to <img src="https://render.githubusercontent.com/render/math?math=x"> and <img src="https://render.githubusercontent.com/render/math?math=y"> must be assumed to be known since we know the individual images. Opposite to that, the components along <img src="https://render.githubusercontent.com/render/math?math=x"> and <img src="https://render.githubusercontent.com/render/math?math=y"> of <img src="https://render.githubusercontent.com/render/math?math=\mathbf{v}"> must be considered to be unknown. The question thus arises on whether the optical flow can be estimated under the constant brightness assumption.  
+To investigate on whether this is possible, we illustrate the so called *aperture problem* and note that equation [\[constantBrightnessExpanded\]](#constantBrightnessExpanded) is a single equation in two unknowns, so that it is under-determined. If we rewrite equation [\[constantBrightnessExpanded\]](#constantBrightnessExpanded) as
 
-\[\label{normalFlow}
-\underline{\nabla}\cdot \underline{v}+\frac{\partial I}{\partial t}=0,\]
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=\mathbf{\nabla}\cdot \mathbf{v}+\frac{\partial I}{\partial t}=0," id="normalFlow"> [6]
+</p>
 
-then we deduce that it is possible to recover only the component of
-\(\underline{v}\) along the direction of the gradient
-\(\underline{\nabla}I\) which, as mentioned, is known. In other words,
-from equation ([\[normalFlow\]](#normalFlow)), we can only determine the
-so called *normal flow*, i.e., the flow along the direction of the image
-gradient, but we cannot determine the flow along the tangent direction
-of the iso-intensity contour, i.e., along the direction perpendicular to
-the image gradient. This expresses the so called *aperture problem*.  
-The aperture problem is illustrated in figures [1.8](#actualMotion) and
-[1.9](#perceivedMotion). In particular, in figure [1.8](#actualMotion)
-below, a circular aperture and two blue lines moving in a certain
-direction are illustrated.
+then we deduce that it is possible to recover only the component of <img src="https://render.githubusercontent.com/render/math?math=\mathbf{v}"> along the direction of the gradient <img src="https://render.githubusercontent.com/render/math?math=\mathbf{\nabla}I"> which, as mentioned, is known. In other words, from equation [\[normalFlow\]](#normalFlow), we can only determine the so called *normal flow*, i.e., the flow along the direction of the image gradient, but we cannot determine the flow along the tangent direction of the iso-intensity contour, i.e., along the direction perpendicular to the image gradient. This expresses the so called *aperture problem*.  
+The aperture problem is illustrated in figures [8](#actualMotion) and [9](#perceivedMotion). In particular, in figure [8](#actualMotion) below, a circular aperture and two blue lines moving in a certain direction are illustrated.
 
-![Aperture problem: actual motion of two
-lines.](Pictures/Chapter04/actualMotion.png)
+<p align="center">
+  <img src="actualMotion.png" width="400" id="actualMotion">
+  <br>
+     <em>Figure 8. Aperture problem: actual motion of two
+lines.</em>
+</p>
 
-The circular aperture represents all that is visible in the scene. It
-should be noticed that, in figure [1.8](#actualMotion), the blue lines
-are depicted also outside the circle, but it should be understood that
-the only observable thing is the portion of the lines within the
-circle.  
-Figure [1.8](#actualMotion) illustrates the actual motion. Actually, due
-to the aperture problem, the perceived motion is different and
-illustrated in figure [1.9](#perceivedMotion) below.
+The circular aperture represents all that is visible in the scene. It should be noticed that, in figure [8](#actualMotion), the blue lines are depicted also outside the circle, but it should be understood that the only observable thing is the portion of the lines within the circle.  
+Figure [8](#actualMotion) illustrates the actual motion. Actually, due to the aperture problem, the perceived motion is different and illustrated in figure [9](#perceivedMotion) below.
 
-![Aperture problem: perceived motion of two
-lines.](Pictures/Chapter04/perceivedMotion.png)
+<p align="center">
+  <img src="perceivedMotion.png" width="400" id="perceivedMotion">
+  <br>
+     <em>Figure 9. Aperture problem: perceived motion of two
+lines.</em>
+</p>
 
-As it can be seen from the above figure and also from figure
-[1.8](#actualMotion), the blue lines are the iso-intensity lines and the
-perceived motion is orthogonal to such lines as predicted by equation
-([\[normalFlow\]](#normalFlow)).  
-Up to now, we have seen how the motion of the points behind the image
-plane of a camera can be represented by the motion fields, within
-certain limits. Moreover, we have underlined how the motion field can be
-approximated by the optical flow, again within certain limits. Finally,
-we have pointed out what are the difficulties in the calculation of the
-optical flow.  
-The under-determinacy of the optical flow constraint equation has pushed
-the literature towards the development of several methods to solve this
-problem. Some of them will be dealt with in this chapter and will be
-subject of implementation in OpenCV accelerated with CUDA.  
-Before proceeding further with the description of the implemented
-methods for the optical flow estimate, let us organize the optical flow
-estimation methods into *dense* and *sparse* methods.
+As it can be seen from the above figure and also from figure [8](#actualMotion), the blue lines are the iso-intensity lines and the perceived motion is orthogonal to such lines as predicted by equation [\[normalFlow\]](#normalFlow).  
+Up to now, we have seen how the motion of the points behind the image plane of a camera can be represented by the motion fields, within certain limits. Moreover, we have underlined how the motion field can be approximated by the optical flow, again within certain limits. Finally, we have pointed out what are the difficulties in the calculation of the optical flow.  
+The under-determinacy of the optical flow constraint equation has pushed the literature towards the development of several methods to solve this problem. Some of them will be dealt with in this chapter and will be subject of implementation in OpenCV accelerated with CUDA.  
+Before proceeding further with the description of the implemented methods for the optical flow estimate, let us organize the optical flow estimation methods into *dense* and *sparse* methods.
 
 ## Dense and sparse optical flow methods
 
