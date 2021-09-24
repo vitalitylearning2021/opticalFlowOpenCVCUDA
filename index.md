@@ -180,21 +180,21 @@ assume that the intensity of the followed point does not change, namely, we adop
   <img src="https://render.githubusercontent.com/render/math?math=\frac{dI}{dt}=0." id="constantBrightness"> [4]
 </p>
 
-On using the chain rule, equation [\[constantBrightness\]](#constantBrightness) implies that
+On using the chain rule, equation [\[4\]](#constantBrightness) implies that
 
 <p align="center">
   <img src="https://render.githubusercontent.com/render/math?math=\frac{dI}{dt}=\frac{\partial I}{\partial x}v_x %2B \frac{\partial I}{\partial y}v_y %2B \frac{\partial I}{\partial t}=0." id="constantBrightnessExpanded"> [5]
 </p>
 
-Equation [\[constantBrightnessExpanded\]](#constantBrightnessExpanded) expresses the so called *optical flow constraint* equation. In such an equation, the partial temporal derivative of <img src="https://render.githubusercontent.com/render/math?math=I"> must be considered as a datum since we know the temporal evolution of the images. Analogously,
+Equation [\[4\]](#constantBrightnessExpanded) expresses the so called *optical flow constraint* equation. In such an equation, the partial temporal derivative of <img src="https://render.githubusercontent.com/render/math?math=I"> must be considered as a datum since we know the temporal evolution of the images. Analogously,
 the partial derivatives of <img src="https://render.githubusercontent.com/render/math?math=I"> with respect to <img src="https://render.githubusercontent.com/render/math?math=x"> and <img src="https://render.githubusercontent.com/render/math?math=y"> must be assumed to be known since we know the individual images. Opposite to that, the components along <img src="https://render.githubusercontent.com/render/math?math=x"> and <img src="https://render.githubusercontent.com/render/math?math=y"> of <img src="https://render.githubusercontent.com/render/math?math=\mathbf{v}"> must be considered to be unknown. The question thus arises on whether the optical flow can be estimated under the constant brightness assumption.  
-To investigate on whether this is possible, we illustrate the so called *aperture problem* and note that equation [\[constantBrightnessExpanded\]](#constantBrightnessExpanded) is a single equation in two unknowns, so that it is under-determined. If we rewrite equation [\[constantBrightnessExpanded\]](#constantBrightnessExpanded) as
+To investigate on whether this is possible, we illustrate the so called *aperture problem* and note that equation [\[5\]](#constantBrightnessExpanded) is a single equation in two unknowns, so that it is under-determined. If we rewrite equation [\[5\]](#constantBrightnessExpanded) as
 
 <p align="center">
   <img src="https://render.githubusercontent.com/render/math?math=\mathbf{\nabla}\cdot \mathbf{v} %2B \frac{\partial I}{\partial t}=0," id="normalFlow"> [6]
 </p>
 
-then we deduce that it is possible to recover only the component of <img src="https://render.githubusercontent.com/render/math?math=\mathbf{v}"> along the direction of the gradient <img src="https://render.githubusercontent.com/render/math?math=\mathbf{\nabla}I"> which, as mentioned, is known. In other words, from equation [\[normalFlow\]](#normalFlow), we can only determine the so called *normal flow*, i.e., the flow along the direction of the image gradient, but we cannot determine the flow along the tangent direction of the iso-intensity contour, i.e., along the direction perpendicular to the image gradient. This expresses the so called *aperture problem*.  
+then we deduce that it is possible to recover only the component of <img src="https://render.githubusercontent.com/render/math?math=\mathbf{v}"> along the direction of the gradient <img src="https://render.githubusercontent.com/render/math?math=\mathbf{\nabla}I"> which, as mentioned, is known. In other words, from equation [\[6\]](#normalFlow), we can only determine the so called *normal flow*, i.e., the flow along the direction of the image gradient, but we cannot determine the flow along the tangent direction of the iso-intensity contour, i.e., along the direction perpendicular to the image gradient. This expresses the so called *aperture problem*.  
 The aperture problem is illustrated in figures [8](#actualMotion) and [9](#perceivedMotion). In particular, in figure [8](#actualMotion) below, a circular aperture and two blue lines moving in a certain direction are illustrated.
 
 <p align="center">
