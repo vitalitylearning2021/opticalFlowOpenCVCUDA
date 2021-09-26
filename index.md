@@ -252,13 +252,13 @@ In the case when the neighborhood of the pixel <img src="https://render.githubus
 By taking into account relation [\[9\]](#relationHG) as well as expansions [\[7\]](#farnebackApproximation) and [\[8\]](#farnebackApproximationH), then we have the following links
 
 <p align="center">
-  <img src="equation_10.png" width="300" id="linksHG">     [10]
+  <img src="equation_10.png" width="200" id="linksHG">     [10]
 </p>
 
 We skip the details for obtaining [\[10\]](#linksHG). It should be anyway noted that the second equation of [\[10\]](#linksHG) provides the following relation
 
 <p align="center">
-  <img src="equation_11.png" width="200" id="equationInD">     [11]
+  <img src="equation_11.png" width="100" id="equationInD">     [11]
 </p>
 
 where <img src="https://render.githubusercontent.com/render/math?math=\Delta \mathbf{b}=-0.5(\mathbf{b}_2-\mathbf{b}_1)">. Solving such an equation will provide the translation <img src="https://render.githubusercontent.com/render/math?math=\mathbf{d}"> but is possible provided that <img src="https://render.githubusercontent.com/render/math?math=\mathbf{A}_1"> is invertible.  
