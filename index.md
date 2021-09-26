@@ -262,46 +262,22 @@ We skip the details for obtaining [\[10\]](#linksHG). It should be anyway noted 
 </p>
 
 where <img src="https://render.githubusercontent.com/render/math?math=\Delta \mathbf{b}=-0.5(\mathbf{b}_2-\mathbf{b}_1)">. Solving such an equation will provide the translation <img src="https://render.githubusercontent.com/render/math?math=\mathbf{d}"> but is possible provided that <img src="https://render.githubusercontent.com/render/math?math=\mathbf{A}_1"> is invertible.  
-However, it should be taken into account that the translation of the
-neighborhood of the pixel \((m,n)\) from \(G\) to \(H\) is not
-necessarily ideal and that, accordingly, the links
-([\[linksHG\]](#linksHG)) are not necessarily met. In this case, we can
-only say, for example, that
-\(\underline{\underline{A}}_2\simeq \underline{\underline{A}}_1\). For
-this reason, Farneb<span>ä</span>ck rewrites equation
-([\[equationInD\]](#equationInD)) by the average of the two matrices,
-namely as
+However, it should be taken into account that the translation of the neighborhood of the pixel <img src="https://render.githubusercontent.com/render/math?math=(m,n)"> from <img src="https://render.githubusercontent.com/render/math?math=G"> to <img src="https://render.githubusercontent.com/render/math?math=H"> is not necessarily ideal and that, accordingly, the links [\[10\]](#linksHG) are not necessarily met. In this case, we can only say, for example, that <img src="https://render.githubusercontent.com/render/math?math=\mathbf{A}_2\simeq \mathbf{A}_1">. For this reason, Farneb<span>ä</span>ck rewrites equation [\[11\]](#equationInD) by the average of the two matrices, namely as
 
-\[\label{equationInDRewritten}
-\Delta \underline{\underline{A}} \; \underline{d}=\Delta \underline{b},\]
+<p align="center">
+  <img src="equation_12.png" width="100" id="equationInDRewritten">     [12]
+</p>
 
-where
-\(\Delta \underline{\underline{A}}=0.5(\underline{\underline{A}}_1+\underline{\underline{A}}_2)\).  
-As above underlined, matrices \(\underline{\underline{A}}_1\) and
-\(\underline{\underline{A}}_2\) as well as the vectors
-\(\underline{b}_1\) and \(\underline{b}_2\) depend on the point
-\((m,n)\). For this reason, equation
-([\[equationInDRewritten\]](#equationInDRewritten)) should be solved
-pointwise thus obtaining \(\underline{d}(m,n)\).  
-In order to prevent noisy solutions and to provide a smoothing effect,
-Farneb<span>ä</span>ck reformulates the search for the solution in
-\(\underline{d}\) of equation
-([\[equationInDRewritten\]](#equationInDRewritten)) as a least-square
-problem by integrating it over a neighborhood of each pixel.
-Accordingly, the displacement \(\underline{d}\) is searched for as the
-minimum of the functional
+where <img src="https://render.githubusercontent.com/render/math?math=\Delta \mathbf{A}=0.5(\mathbf{A}_1+\mathbf{A}_2)">. As above underlined, matrices <img src="https://render.githubusercontent.com/render/math?math=\mathbf{A}_1"> and <img src="https://render.githubusercontent.com/render/math?math=\mathbf{A}_2">
+as well as the vectors <img src="https://render.githubusercontent.com/render/math?math=\mathbf{b}_1"> and <img src="https://render.githubusercontent.com/render/math?math=\mathbf{b}_2"> depend on the point <img src="https://render.githubusercontent.com/render/math?math=(m,n)">. For this reason, equation [\[12\]](#equationInDRewritten) should be solved pointwise thus obtaining <img src="https://render.githubusercontent.com/render/math?math=\mathbf{d}(m,n)">.  
+In order to prevent noisy solutions and to provide a smoothing effect, Farneb<span>ä</span>ck reformulates the search for the solution in <img src="https://render.githubusercontent.com/render/math?math=\mathbf{d}"> of equation [\[12\]](#equationInDRewritten) as a least-square problem by integrating it over a neighborhood of each pixel. Accordingly, the displacement <img src="https://render.githubusercontent.com/render/math?math=\mathbf{d}"> is searched for as the minimum of the functional
 
-\[\label{functionalFarneback}
-\sum_{(m^\prime,n^\prime)\in {\mathcal I}(m,n)}w(m^\prime,n^\prime)\|\Delta \underline{\underline{A}}(m^\prime,n^\prime) \; \underline{d}(m,n)-\Delta \underline{b}(m^\prime,n^\prime) \|^2,\]
+<p align="center">
+  <img src="equation_13.png" width="100" id="functionalFarneback">     [13]
+</p>
 
-where \({\mathcal I}(m,n)\) defines a neighborhood of the pixel
-\((m,n)\) and \(w\) is a properly chosen window function. In
-([\[functionalFarneback\]](#functionalFarneback)), the dependence of
-\(\Delta \underline{\underline{A}}\) and \(\Delta \underline{b}\) from
-\((m^\prime,n^\prime)\), namely, the pixels of the neighborhood of
-\((m,n)\) has been explicitly indicated. For what already said, the
-minimization of ([\[functionalFarneback\]](#functionalFarneback)) must
-be repeated pixel-by-pixel.  
+where <img src="https://render.githubusercontent.com/render/math?math={\mathcal I}(m,n)"> defines a neighborhood of the pixel <img src="https://render.githubusercontent.com/render/math?math=(m,n)"> and <img src="https://render.githubusercontent.com/render/math?math=w"> is a properly chosen window function. In [\[13\]](#functionalFarneback), the dependence of <img src="https://render.githubusercontent.com/render/math?math=\Delta \mathbf{A}"> and <img src="https://render.githubusercontent.com/render/math?math=\Delta \mathbf{b}"> from <img src="https://render.githubusercontent.com/render/math?math=(m^\prime,n^\prime)">, namely, the pixels of the neighborhood of <img src="https://render.githubusercontent.com/render/math?math=(m,n)"> has been explicitly indicated. For what already said, the
+minimization of [\[functionalFarneback\]](#functionalFarneback) must be repeated pixel-by-pixel.  
 In next section, we lead the discussion of the Brox *et al.*’s approach.
 
 ## Theory: Dense optical flow using Brox *et al.*’s approach
