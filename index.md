@@ -242,7 +242,7 @@ On denoting by <img src="https://render.githubusercontent.com/render/math?math=H
   <img src="equation_8.png" width="300" id="farnebackApproximationH">     [8]
 </p>
 
-where <img src="https://render.githubusercontent.com/render/math?math=\mathbf{A}_2">, <img src="https://render.githubusercontent.com/render/math?math=\mathbf{b}_2"> and <img src="https://render.githubusercontent.com/render/math?math=c_2"> have the same meaning of <img src="https://render.githubusercontent.com/render/math?math=\mathbf{A}_1">, <img src="https://render.githubusercontent.com/render/math?math=\mathbf{b}_1"> and <img src="https://render.githubusercontent.com/render/math?math=c_1"> in equation [\[farnebackApproximation\]](#farnebackApproximation).  
+where <img src="https://render.githubusercontent.com/render/math?math=\mathbf{A}_2">, <img src="https://render.githubusercontent.com/render/math?math=\mathbf{b}_2"> and <img src="https://render.githubusercontent.com/render/math?math=c_2"> have the same meaning of <img src="https://render.githubusercontent.com/render/math?math=\mathbf{A}_1">, <img src="https://render.githubusercontent.com/render/math?math=\mathbf{b}_1"> and <img src="https://render.githubusercontent.com/render/math?math=c_1"> in equation [\[7\]](#farnebackApproximation).  
 In the case when the neighborhood of the pixel <img src="https://render.githubusercontent.com/render/math?math=(m,n)"> of <img src="https://render.githubusercontent.com/render/math?math=G"> moves rigidly of a quantity <img src="https://render.githubusercontent.com/render/math?math=\mathbf{d}=(d_m,d_n)"> to image <img src="https://render.githubusercontent.com/render/math?math=H">, then
 
 <p align="center">
@@ -252,7 +252,7 @@ In the case when the neighborhood of the pixel <img src="https://render.githubus
 By taking into account relation [\[9\]](#relationHG) as well as expansions [\[7\]](#farnebackApproximation) and [\[8\]](#farnebackApproximationH), then we have the following links
 
 <p align="center">
-  <img src="equation_10.png" width="200" id="linksHG">     [10]
+  <img src="equation_10.png" width="300" id="linksHG">     [10]
 </p>
 
 We skip the details for obtaining [\[10\]](#linksHG). It should be anyway noted that the second equation of [\[10\]](#linksHG) provides the following relation
