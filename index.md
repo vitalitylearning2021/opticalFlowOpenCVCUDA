@@ -239,7 +239,7 @@ In eq. [\[7\]](#farnebackApproximation), <img src="https://render.githubusercont
 On denoting by <img src="https://render.githubusercontent.com/render/math?math=H"> the image acquired immediately after <img src="https://render.githubusercontent.com/render/math?math=G"> and by following the same approach of the quadratic expansion around <img src="https://render.githubusercontent.com/render/math?math=(m,n)">, we have
 
 <p align="center">
-  <img src="equation_8.png" width="200" id="farnebackApproximationH">     [8]
+  <img src="equation_8.png" width="300" id="farnebackApproximationH">     [8]
 </p>
 
 where <img src="https://render.githubusercontent.com/render/math?math=\mathbf{A}_2">, <img src="https://render.githubusercontent.com/render/math?math=\mathbf{b}_2"> and <img src="https://render.githubusercontent.com/render/math?math=c_2"> have the same meaning of <img src="https://render.githubusercontent.com/render/math?math=\mathbf{A}_1">, <img src="https://render.githubusercontent.com/render/math?math=\mathbf{b}_1"> and <img src="https://render.githubusercontent.com/render/math?math=c_1"> in equation [\[farnebackApproximation\]](#farnebackApproximation).  
