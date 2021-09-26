@@ -246,7 +246,7 @@ where <img src="https://render.githubusercontent.com/render/math?math=\mathbf{A}
 In the case when the neighborhood of the pixel <img src="https://render.githubusercontent.com/render/math?math=(m,n)"> of <img src="https://render.githubusercontent.com/render/math?math=G"> moves rigidly of a quantity <img src="https://render.githubusercontent.com/render/math?math=\mathbf{d}=(d_m,d_n)"> to image <img src="https://render.githubusercontent.com/render/math?math=H">, then
 
 <p align="center">
-  <img src="equation_9.png" width="300" id="relationHG">     [9]
+  <img src="equation_9.png" width="400" id="relationHG">     [9]
 </p>
 
 By taking into account relation [\[9\]](#relationHG) as well as expansions [\[7\]](#farnebackApproximation) and [\[8\]](#farnebackApproximationH), then we have the following links
