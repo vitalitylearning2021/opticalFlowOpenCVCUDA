@@ -221,88 +221,47 @@ Before proceeding further with the description of the implemented methods for th
 
 ## Dense and sparse optical flow methods
 
-Dense methods process all the pixels of an image, while, in sparse
-methods, only some pixels are subject of processing. In this case, we
-only consider the motion of image features like corners, ridges, edges
-and blobs. As we will see in the following, optical flow methods exploit
-local pixel information, so that many of them can be used both for dense
-and sparse optical flow.  
-Below, as dense methods, we will consider the Farneb<span>ä</span>ck’s
-approach, the Brox *et al.* method, the dense iterative Lucas-Kanade
-method with pyramids and the Zach, Pock and Bischof Dual TV-L1 Optical
-Flow method . Furthermore, as sparse method, we will consider the
-implementation for a sparse feature set of the iterative Lucas-Kanade
+Dense methods process all the pixels of an image, while, in sparse methods, only some pixels are subject of processing. In this case, we only consider the motion of image features like corners, ridges, edges and blobs. As we will see in the following, optical flow methods exploit local pixel information, so that many of them can be used both for dense and sparse optical flow.  
+Below, as dense methods, we will consider the Farneb<span>ä</span>ck’s approach, the Brox *et al.* method, the dense iterative Lucas-Kanade method with pyramids and the Zach, Pock and Bischof Dual TV-L1 Optical Flow method . Furthermore, as sparse method, we will consider the implementation for a sparse feature set of the iterative Lucas-Kanade
 scheme with pyramids.  
-In next section, we start recalling dense optical using
-Farneb<span>ä</span>ck’s approach.
+In next section, we start recalling dense optical using Farneb<span>ä</span>ck’s approach.
 
 ## Theory: Dense optical flow using Farneb<span>ä</span>ck’s approach
 
-The idea behind Farneb<span>ä</span>ck’s approach  is to approximate an
-image in a neighborhood of each pixel having indices \((m,n)\) with a
-quadratic polynomial. In other words,
+The idea behind Farneb<span>ä</span>ck’s approach  is to approximate an image in a neighborhood of each pixel having indices <img src="https://render.githubusercontent.com/render/math?math=(m,n)"> with a quadratic polynomial. In other words,
 
-\[\label{farnebackApproximation}
-G(m+\Delta m,n+\Delta n)  \simeq \underline{I}^t\; \underline{\underline{A}}_1 \; \underline{I}+\underline{b}_1^t\; \underline{I}+c_1,\]
+<p align="center">
+  <img src="equation_7.png" width="200" id="farnebackApproximation">     [7]
+</p>
+    
+where <img src="https://render.githubusercontent.com/render/math?math=G"> is the image, <img src="https://render.githubusercontent.com/render/math?math=(\Delta m,\Delta n)"> represents the offset with respect to the <img src="https://render.githubusercontent.com/render/math?math=(m,n)"> reference pixel, <img src="https://render.githubusercontent.com/render/math?math=\mathbf{I}^t=[\Delta m \;\Delta n]">, <img src="https://render.githubusercontent.com/render/math?math=\mathbf{A}_1"> is a <img src="https://render.githubusercontent.com/render/math?math=2\times 2"> symmetric matrix, <img src="https://render.githubusercontent.com/render/math?math=\mathbf{b}_1"> is a vector and <img src="https://render.githubusercontent.com/render/math?math=c_1"> is a scalar. We stress that <img src="https://render.githubusercontent.com/render/math?math=(\Delta m,\Delta n)"> does not represent a movement, but only serves to describe a neighborhood of the <img src="https://render.githubusercontent.com/render/math?math=(m,n)"> pixel in the *same* image <img src="https://render.githubusercontent.com/render/math?math=G">.  
+In eq. [\[7\]](#farnebackApproximation), <img src="https://render.githubusercontent.com/render/math?math=\mathbf{A}_1">, <img src="https://render.githubusercontent.com/render/math?math=\mathbf{b}_1"> and <img src="https://render.githubusercontent.com/render/math?math=c_1"> can be estimated using a weighted least squares approach. Obviously, <img src="https://render.githubusercontent.com/render/math?math=\mathbf{A}_1">, <img src="https://render.githubusercontent.com/render/math?math=\mathbf{b}_1"> and <img src="https://render.githubusercontent.com/render/math?math=c_1"> are functions of <img src="https://render.githubusercontent.com/render/math?math=(m,n)"> since the image could show a different expansion around different pixels. In order to keep notation simple, in the first part of this section, we dismiss the explicit dependence of such quantities on <img src="https://render.githubusercontent.com/render/math?math=(m,n)">.  
+On denoting by <img src="https://render.githubusercontent.com/render/math?math=H"> the image acquired immediately after <img src="https://render.githubusercontent.com/render/math?math=G"> and by following the same approach of the quadratic expansion around <img src="https://render.githubusercontent.com/render/math?math=(m,n)">, we have
 
-where \(G\) is the image, \((\Delta m,\Delta n)\) represents the offset
-with respect to the \((m,n)\) reference pixel,
-\(\underline{I}^t=[\Delta m \;\Delta n]\),
-\(\underline{\underline{A}}_1\) is a \(2\times 2\) symmetric matrix,
-\(\underline{b}_1\) is a vector and \(c_1\) is a scalar. We stress that
-\((\Delta m,\Delta n)\) does not represent a movement, but only serves
-to describe a neighborhood of the \((m,n)\) pixel in the *same* image
-\(G\).  
-In eq. ([\[farnebackApproximation\]](#farnebackApproximation)),
-\(\underline{\underline{A}}_1\), \(\underline{b}_1\) and \(c_1\) can be
-estimated using a weighted least squares approach. Obviously,
-\(\underline{\underline{A}}_1\), \(\underline{b}_1\) and \(c_1\) are
-functions of \((m,n)\) since the image could show a different expansion
-around different pixels. In order to keep notation simple, in the first
-part of this section, we dismiss the explicit dependence of such
-quantities on \((m,n)\).  
-On denoting by \(H\) the image acquired immediately after \(G\) and by
-following the same approach of the quadratic expansion around \((m,n)\),
-we have
+<p align="center">
+  <img src="equation_8.png" width="200" id="farnebackApproximationH">     [8]
+</p>
 
-\[\label{farnebackApproximationH}
-H(m+\Delta m,n+\Delta n)  \simeq \underline{I}^t\; \underline{\underline{A}}_2 \; \underline{I}+\underline{b}_2^t\; \underline{I}+c_2,\]
+where <img src="https://render.githubusercontent.com/render/math?math=\mathbf{A}_2">, <img src="https://render.githubusercontent.com/render/math?math=\mathbf{b}_2"> and <img src="https://render.githubusercontent.com/render/math?math=c_2"> have the same meaning of <img src="https://render.githubusercontent.com/render/math?math=\mathbf{A}_1">, <img src="https://render.githubusercontent.com/render/math?math=\mathbf{b}_1"> and <img src="https://render.githubusercontent.com/render/math?math=c_1"> in equation [\[farnebackApproximation\]](#farnebackApproximation).  
+In the case when the neighborhood of the pixel <img src="https://render.githubusercontent.com/render/math?math=(m,n)"> of <img src="https://render.githubusercontent.com/render/math?math=G"> moves rigidly of a quantity <img src="https://render.githubusercontent.com/render/math?math=\mathbf{d}=(d_m,d_n)"> to image <img src="https://render.githubusercontent.com/render/math?math=H">, then
 
-where \(\underline{\underline{A}}_2\), \(\underline{b}_2\) and \(c_2\)
-have the same meaning of \(\underline{\underline{A}}_1\),
-\(\underline{b}_1\) and \(c_1\) in equation
-([\[farnebackApproximation\]](#farnebackApproximation)).  
-In the case when the neighborhood of the pixel \((m,n)\) of \(G\) moves
-rigidly of a quantity \(\underline{d}=(d_m,d_n)\) to image \(H\), then
+<p align="center">
+  <img src="equation_9.png" width="200" id="relationHG">     [9]
+</p>
 
-\[\label{relationHG}
-H(m+\Delta m,n+\Delta n)=G(m+\Delta m-d_m,n+\Delta n-d_n).\]
+By taking into account relation [\[9\]](#relationHG) as well as expansions [\[7\]](#farnebackApproximation) and [\[8\]](#farnebackApproximationH), then we have the following links
 
-By taking into account relation ([\[relationHG\]](#relationHG)) as well
-as expansions ([\[farnebackApproximation\]](#farnebackApproximation))
-and ([\[farnebackApproximationH\]](#farnebackApproximationH)), then we
-have the following links
+<p align="center">
+  <img src="equation_10.png" width="200" id="linksHG">     [10]
+</p>
 
-\[\label{linksHG}
-    \left\{
-                \begin{array}{ll}
-                  \underline{\underline{A}}_2 & = \underline{\underline{A}}_1\\
-                  \underline{b}_2 & = \underline{b}_1-2 \underline{\underline{A}}_1 \; \underline{d}\\
-                  c_2 & = \underline{d}^t \; \underline{\underline{A}}_1 \; \underline{d}-\underline{b}_1^t\; \underline{d} +c_1
-                \end{array}
-              \right..\]
+We skip the details for obtaining [\[10\]](#linksHG). It should be anyway noted that the second equation of [\[10\]](#linksHG) provides the following relation
 
-We skip the details for obtaining ([\[linksHG\]](#linksHG)) and we quote
- for further information. It should be anyway noted that the second
-equation of ([\[linksHG\]](#linksHG)) provides the following relation
+<p align="center">
+  <img src="equation_11.png" width="200" id="equationInD">     [11]
+</p>
 
-\[\label{equationInD}
-\underline{\underline{A}}_1 \; \underline{d}=\Delta \underline{b},\]
-
-where \(\Delta \underline{b}=-0.5(\underline{b}_2-\underline{b}_1)\).
-Solving such an equation will provide the translation \(\underline{d}\)
-but is possible provided that \(\underline{\underline{A}}_1\) is
-invertible and .  
+where <img src="https://render.githubusercontent.com/render/math?math=\Delta \mathbf{b}=-0.5(\mathbf{b}_2-\mathbf{b}_1)">. Solving such an equation will provide the translation <img src="https://render.githubusercontent.com/render/math?math=\mathbf{d}"> but is possible provided that <img src="https://render.githubusercontent.com/render/math?math=\mathbf{A}_1"> is invertible.  
 However, it should be taken into account that the translation of the
 neighborhood of the pixel \((m,n)\) from \(G\) to \(H\) is not
 necessarily ideal and that, accordingly, the links
