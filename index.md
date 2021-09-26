@@ -231,7 +231,7 @@ In next section, we start recalling dense optical using Farneb<span>ä</span>ck�
 The idea behind Farneb<span>ä</span>ck’s approach  is to approximate an image in a neighborhood of each pixel having indices <img src="https://render.githubusercontent.com/render/math?math=(m,n)"> with a quadratic polynomial. In other words,
 
 <p align="center">
-  <img src="equation_7.png" width="200" id="farnebackApproximation">     [7]
+  <img src="equation_7.png" width="300" id="farnebackApproximation">     [7]
 </p>
     
 where <img src="https://render.githubusercontent.com/render/math?math=G"> is the image, <img src="https://render.githubusercontent.com/render/math?math=(\Delta m,\Delta n)"> represents the offset with respect to the <img src="https://render.githubusercontent.com/render/math?math=(m,n)"> reference pixel, <img src="https://render.githubusercontent.com/render/math?math=\mathbf{I}^t=[\Delta m \;\Delta n]">, <img src="https://render.githubusercontent.com/render/math?math=\mathbf{A}_1"> is a <img src="https://render.githubusercontent.com/render/math?math=2\times 2"> symmetric matrix, <img src="https://render.githubusercontent.com/render/math?math=\mathbf{b}_1"> is a vector and <img src="https://render.githubusercontent.com/render/math?math=c_1"> is a scalar. We stress that <img src="https://render.githubusercontent.com/render/math?math=(\Delta m,\Delta n)"> does not represent a movement, but only serves to describe a neighborhood of the <img src="https://render.githubusercontent.com/render/math?math=(m,n)"> pixel in the *same* image <img src="https://render.githubusercontent.com/render/math?math=G">.  
