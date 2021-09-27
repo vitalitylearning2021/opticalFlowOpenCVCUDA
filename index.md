@@ -273,7 +273,7 @@ as well as the vectors <img src="https://render.githubusercontent.com/render/mat
 In order to prevent noisy solutions and to provide a smoothing effect, Farneb<span>ä</span>ck reformulates the search for the solution in <img src="https://render.githubusercontent.com/render/math?math=\mathbf{d}"> of equation [\[12\]](#equationInDRewritten) as a least-square problem by integrating it over a neighborhood of each pixel. Accordingly, the displacement <img src="https://render.githubusercontent.com/render/math?math=\mathbf{d}"> is searched for as the minimum of the functional
 
 <p align="center">
-  <img src="equation_13.png" width="200" id="functionalFarneback">     [13]
+  <img src="equation_13.png" width="300" id="functionalFarneback">     [13]
 </p>
 
 where <img src="https://render.githubusercontent.com/render/math?math={\mathcal I}(m,n)"> defines a neighborhood of the pixel <img src="https://render.githubusercontent.com/render/math?math=(m,n)"> and <img src="https://render.githubusercontent.com/render/math?math=w"> is a properly chosen window function. In [\[13\]](#functionalFarneback), the dependence of <img src="https://render.githubusercontent.com/render/math?math=\Delta \mathbf{A}"> and <img src="https://render.githubusercontent.com/render/math?math=\Delta \mathbf{b}"> from <img src="https://render.githubusercontent.com/render/math?math=(m^\prime,n^\prime)">, namely, the pixels of the neighborhood of <img src="https://render.githubusercontent.com/render/math?math=(m,n)"> has been explicitly indicated. For what already said, the
@@ -282,40 +282,27 @@ In next section, we lead the discussion of the Brox *et al.*’s approach.
 
 ## Theory: Dense optical flow using Brox *et al.*’s approach
 
-Brox *et al.*’s approach  originates from the observation that the grey
-value consistency assumption behind equation
-([\[normalFlow\]](#normalFlow)) is not always met and that, as long as
-the points move, their respective brightness is susceptible, in natural
-scenes, to slight changes. Accordingly, the invariance understood in
-equation ([\[constantBrightness\]](#constantBrightness)) is placed side
-by side to a further invariance criterion. In particular, the gradient
-of the image grey value is assumed not to vary along the displacement.
-In other words,
+Brox *et al.*’s approach  originates from the observation that the grey value consistency assumption behind equation [\[6\]](#normalFlow) is not always met and that, as long as
+the points move, their respective brightness is susceptible, in natural scenes, to slight changes. Accordingly, the invariance understood in equation [\[4\]](#constantBrightness) is placed side by side to a further invariance criterion. In particular, the gradient of the image grey value is assumed not to vary along the displacement. In other words,
 
-\[\underline{\nabla}I(x,y,t)=\underline{\nabla}I(x+d_x,y+d_y,t+1),\]
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=\mathbf{\nabla}I(x,y,t)=\mathbf{\nabla}I(x+d_x,y+d_y,t+1)," id="xxx">       [14]
+</p>
 
-where we have assumed that time increases of \(1\) unit from frame to
-frame and that \(\underline{d}(x,y)=(d_x(x,y),d_y(x,y))\) is the
-displacement of point \((x,y)\).  
-The idea of Brox *et al.* consists of searching for
-\(\underline{d}(x,y)\) by a least-square minimization. One possibility
-would be to minimize the functional
+where we have assumed that time increases of <img src="https://render.githubusercontent.com/render/math?math=1"> unit from frame to frame and that <img src="https://render.githubusercontent.com/render/math?math=\mathbf{d}(x,y)=(d_x(x,y),d_y(x,y))"> is the displacement of point <img src="https://render.githubusercontent.com/render/math?math=(x,y)">.  
+The idea of Brox *et al.* consists of searching for <img src="https://render.githubusercontent.com/render/math?math=\mathbf{d}(x,y)"> by a least-square minimization. One possibility would be to minimize the functional
 
-\[E_{data}(d_x,d_y)=\iint_{\Omega(x,y)}\left(|I(x+d_x,y+d_y,t+1)-I(x,y,t)|^2\right.+\ldots\]
-\[\label{broxFunctional0}
-\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\left.+\gamma|\underline{\nabla}I(x+d_x,y+d_y,t+1)-\underline{\nabla}I(x,y,t)|^2\right)d\Omega,\]
+<p align="center">
+  <img src="equation_15.png" width="300" id="broxFunctional0">     [15]
+</p>
 
-where \(\Omega(x,y)\) represents a neighborhood of point \((x,y)\) and
-\(\gamma\) relatively weights both the assumptions and establishes the
-trade off between the two enforced invariance conditions. As for the
-Farneb<span>ä</span>ck’s approach, the minimization of functional
-([\[broxFunctional0\]](#broxFunctional0)) must be performed pointwise.  
-In order to reduce the influence of outliers pixels, an increasing
-concave function \(\Psi(s)\) is applied leading to
+where <img src="https://render.githubusercontent.com/render/math?math=\Omega(x,y)"> represents a neighborhood of point <img src="https://render.githubusercontent.com/render/math?math=(x,y)"> and <img src="https://render.githubusercontent.com/render/math?math=\gamma"> relatively weights both the assumptions and establishes the trade off between the two enforced invariance conditions. As for the Farneb<span>ä</span>ck’s approach, the minimization of functional
+[\[15\]](#broxFunctional0) must be performed pointwise.  
+In order to reduce the influence of outliers pixels, an increasing concave function <img src="https://render.githubusercontent.com/render/math?math=\Psi(s)"> is applied leading to
 
-\[E_{data}(d_x,d_y)=\iint_{\Omega(x,y)}\Psi\left(|I(x+d_x,y+d_y,t+1)-I(x,y,t)|^2+\ldots\]
-\[\label{broxFunctional1}
-\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\gamma|\underline{\nabla}I(x+d_x,y+d_y,t+1)-\underline{\nabla}I(x,y,t)|^2\right)d\Omega.\]
+<p align="center">
+  <img src="equation_16.png" width="300" id="broxFunctional1">     [16]
+</p>
 
 A possible choice for \(\Psi(s)\) is \(\Psi(s)=\sqrt{s^2+\epsilon^2}\),
 where \(\epsilon\) is a small constant, for example,
