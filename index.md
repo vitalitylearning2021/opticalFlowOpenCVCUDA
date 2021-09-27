@@ -273,7 +273,7 @@ as well as the vectors <img src="https://render.githubusercontent.com/render/mat
 In order to prevent noisy solutions and to provide a smoothing effect, Farneb<span>ä</span>ck reformulates the search for the solution in <img src="https://render.githubusercontent.com/render/math?math=\mathbf{d}"> of equation [\[12\]](#equationInDRewritten) as a least-square problem by integrating it over a neighborhood of each pixel. Accordingly, the displacement <img src="https://render.githubusercontent.com/render/math?math=\mathbf{d}"> is searched for as the minimum of the functional
 
 <p align="center">
-  <img src="equation_13.png" width="300" id="functionalFarneback">     [13]
+  <img src="equation_13.png" width="400" id="functionalFarneback">     [13]
 </p>
 
 where <img src="https://render.githubusercontent.com/render/math?math={\mathcal I}(m,n)"> defines a neighborhood of the pixel <img src="https://render.githubusercontent.com/render/math?math=(m,n)"> and <img src="https://render.githubusercontent.com/render/math?math=w"> is a properly chosen window function. In [\[13\]](#functionalFarneback), the dependence of <img src="https://render.githubusercontent.com/render/math?math=\Delta \mathbf{A}"> and <img src="https://render.githubusercontent.com/render/math?math=\Delta \mathbf{b}"> from <img src="https://render.githubusercontent.com/render/math?math=(m^\prime,n^\prime)">, namely, the pixels of the neighborhood of <img src="https://render.githubusercontent.com/render/math?math=(m,n)"> has been explicitly indicated. For what already said, the
@@ -293,7 +293,7 @@ where we have assumed that time increases of <img src="https://render.githubuser
 The idea of Brox *et al.* consists of searching for <img src="https://render.githubusercontent.com/render/math?math=\mathbf{d}(x,y)"> by a least-square minimization. One possibility would be to minimize the functional
 
 <p align="center">
-  <img src="equation_15.png" width="300" id="broxFunctional0">     [15]
+  <img src="equation_15.png" width="400" id="broxFunctional0">     [15]
 </p>
 
 where <img src="https://render.githubusercontent.com/render/math?math=\Omega(x,y)"> represents a neighborhood of point <img src="https://render.githubusercontent.com/render/math?math=(x,y)"> and <img src="https://render.githubusercontent.com/render/math?math=\gamma"> relatively weights both the assumptions and establishes the trade off between the two enforced invariance conditions. As for the Farneb<span>ä</span>ck’s approach, the minimization of functional
@@ -301,7 +301,7 @@ where <img src="https://render.githubusercontent.com/render/math?math=\Omega(x,y
 In order to reduce the influence of outliers pixels, an increasing concave function <img src="https://render.githubusercontent.com/render/math?math=\Psi(s)"> is applied leading to
 
 <p align="center">
-  <img src="equation_16.png" width="300" id="broxFunctional1">     [16]
+  <img src="equation_16.png" width="400" id="broxFunctional1">     [16]
 </p>
 
 A possible choice for \(\Psi(s)\) is \(\Psi(s)=\sqrt{s^2+\epsilon^2}\),
