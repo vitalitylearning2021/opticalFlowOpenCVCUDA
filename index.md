@@ -293,7 +293,7 @@ where we have assumed that time increases of <img src="https://render.githubuser
 The idea of Brox *et al.* consists of searching for <img src="https://render.githubusercontent.com/render/math?math=\mathbf{d}(x,y)"> by a least-square minimization. One possibility would be to minimize the functional
 
 <p align="center">
-  <img src="equation_15.png" width="400" id="broxFunctional0">     [15]
+  <img src="equation_15.png" width="500" id="broxFunctional0">     [15]
 </p>
 
 where <img src="https://render.githubusercontent.com/render/math?math=\Omega(x,y)"> represents a neighborhood of point <img src="https://render.githubusercontent.com/render/math?math=(x,y)"> and <img src="https://render.githubusercontent.com/render/math?math=\gamma"> relatively weights both the assumptions and establishes the trade off between the two enforced invariance conditions. As for the Farneb<span>ä</span>ck’s approach, the minimization of functional
@@ -301,7 +301,7 @@ where <img src="https://render.githubusercontent.com/render/math?math=\Omega(x,y
 In order to reduce the influence of outliers pixels, an increasing concave function <img src="https://render.githubusercontent.com/render/math?math=\Psi(s)"> is applied leading to
 
 <p align="center">
-  <img src="equation_16.png" width="400" id="broxFunctional1">     [16]
+  <img src="equation_16.png" width="500" id="broxFunctional1">     [16]
 </p>
 
 A possible choice for \(\Psi(s)\) is \(\Psi(s)=\sqrt{s^2+\epsilon^2}\),
