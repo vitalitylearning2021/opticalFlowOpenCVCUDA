@@ -273,11 +273,11 @@ as well as the vectors <img src="https://render.githubusercontent.com/render/mat
 In order to prevent noisy solutions and to provide a smoothing effect, Farneb<span>ä</span>ck reformulates the search for the solution in <img src="https://render.githubusercontent.com/render/math?math=\mathbf{d}"> of equation [\[12\]](#equationInDRewritten) as a least-square problem by integrating it over a neighborhood of each pixel. Accordingly, the displacement <img src="https://render.githubusercontent.com/render/math?math=\mathbf{d}"> is searched for as the minimum of the functional
 
 <p align="center">
-  <img src="equation_13.png" width="100" id="functionalFarneback">     [13]
+  <img src="equation_13.png" width="200" id="functionalFarneback">     [13]
 </p>
 
 where <img src="https://render.githubusercontent.com/render/math?math={\mathcal I}(m,n)"> defines a neighborhood of the pixel <img src="https://render.githubusercontent.com/render/math?math=(m,n)"> and <img src="https://render.githubusercontent.com/render/math?math=w"> is a properly chosen window function. In [\[13\]](#functionalFarneback), the dependence of <img src="https://render.githubusercontent.com/render/math?math=\Delta \mathbf{A}"> and <img src="https://render.githubusercontent.com/render/math?math=\Delta \mathbf{b}"> from <img src="https://render.githubusercontent.com/render/math?math=(m^\prime,n^\prime)">, namely, the pixels of the neighborhood of <img src="https://render.githubusercontent.com/render/math?math=(m,n)"> has been explicitly indicated. For what already said, the
-minimization of [\[functionalFarneback\]](#functionalFarneback) must be repeated pixel-by-pixel.  
+minimization of [\[13\]](#functionalFarneback) must be repeated pixel-by-pixel.  
 In next section, we lead the discussion of the Brox *et al.*’s approach.
 
 ## Theory: Dense optical flow using Brox *et al.*’s approach
