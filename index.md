@@ -304,9 +304,7 @@ In order to reduce the influence of outliers pixels, an increasing concave funct
   <img src="equation_16.png" width="700" id="broxFunctional1">     [16]
 </p>
 
-A possible choice for \(\Psi(s)\) is \(\Psi(s)=\sqrt{s^2+\epsilon^2}\),
-where \(\epsilon\) is a small constant, for example,
-\(\epsilon=0.01\).  
+A possible choice for <img src="https://render.githubusercontent.com/render/math?math=\Psi(s)"> is <img src="https://render.githubusercontent.com/render/math?math=\Psi(s)=\sqrt{s^2+\epsilon^2}">, where <img src="https://render.githubusercontent.com/render/math?math=\epsilon"> is a small constant, for example, <img src="https://render.githubusercontent.com/render/math?math=\epsilon=0.01">.  
 A smoothness condition to account for a piecewise smooth flow field is
 also enforced by adding the following smoothing penalizer
 
