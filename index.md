@@ -305,51 +305,38 @@ In order to reduce the influence of outliers pixels, an increasing concave funct
 </p>
 
 A possible choice for <img src="https://render.githubusercontent.com/render/math?math=\Psi(s)"> is <img src="https://render.githubusercontent.com/render/math?math=\Psi(s)=\sqrt{s^2+\epsilon^2}">, where <img src="https://render.githubusercontent.com/render/math?math=\epsilon"> is a small constant, for example, <img src="https://render.githubusercontent.com/render/math?math=\epsilon=0.01">.  
-A smoothness condition to account for a piecewise smooth flow field is
-also enforced by adding the following smoothing penalizer
+A smoothness condition to account for a piecewise smooth flow field is also enforced by adding the following smoothing penalizer
 
-\[E_{smooth}(d_x,d_y)=\iint_{\Omega(x,y)}\Psi\left(|\underline{\nabla}_3d_x|^2+|\underline{\nabla}_3d_y|^2\right)d\Omega,\]
+<p align="center">
+  <img src="equation_17.png" width="700" id="xxx">     [17]
+</p>
 
-where
-\(\underline{\nabla}_3=(\partial/\partial x, \partial/\partial y, \partial/\partial t)^t\)
+where <img src="https://render.githubusercontent.com/render/math?math=\mathbf{\nabla}_3=(\partial/\partial x, \partial/\partial y, \partial/\partial t)^t">
 is a spatio-temporal gradient.  
 Overall, the following functional is minimized:
 
-\[\label{broxTwoTerms}
-E(d_x,d_y)=E_{data}(d_x,d_y)+\alpha E_{smooth}(d_x,d_y),\]
+<p align="center">
+  <img src="equation_18.png" width="700" id="broxTwoTerms">     [18]
+</p>
 
-where \(\alpha\) is a *regularization parameter*. Larger values of
-\(\alpha\) will lead to smoother solutions.  
-The minimizer of ([\[L1Functional3\]](#L1Functional3)) must satisfy the
-following Euler-Lagrange equations 
+where <img src="https://render.githubusercontent.com/render/math?math=\alpha"> is a *regularization parameter*. Larger values of <img src="https://render.githubusercontent.com/render/math?math=\alpha"> will lead to smoother solutions.  
+The minimizer of [\[18\]](#L1Functional3) must satisfy the following Euler-Lagrange equations 
 
-\[\label{eulerLagrange}
-\left\{
-    \begin{array}{ll}
-      \Psi^\prime\left(\Delta I^2+\gamma\left(\Delta I_x^2+\Delta I_y^2\right)\right)\cdot \left(I_x\Delta I+\gamma\left(I_{xx}\Delta I_x+I_{xy}\Delta I_y\right)\right)-\alpha \underline{\nabla} \cdot \left(\Psi^\prime\left(|\underline{\nabla}_3 d_x|^2+|\underline{\nabla}_3 d_y|^2\right)\underline{\nabla}_3d_x\right)=0\\
-      \Psi^\prime\left(\Delta I^2+\gamma\left(\Delta I_x^2+\Delta I_y^2\right)\right)\cdot \left(I_y\Delta I+\gamma\left(I_{yy}\Delta I_y+I_{xy}\Delta I_x\right)\right)-\alpha \underline{\nabla} \cdot \left(\Psi^\prime\left(|\underline{\nabla}_3 d_x|^2+|\underline{\nabla}_3 d_y|^2\right)\underline{\nabla}_3d_y\right)=0
-       \end{array}
-       \right.\]
+<p align="center">
+  <img src="equation_19.png" width="700" id="eulerLagrange">     [19]
+</p>
 
 with reflecting boundary conditions, where
 
-\[\left\{
-    \begin{array}{ll}
-        I_x=\frac{\partial I}{\partial x}(x+d_x,y+d_y) & I_y=\frac{\partial I}{\partial y}(x+d_x,y+d_y)\\
-        I_{xx}=\frac{\partial ^2I}{\partial x^2}(x+d_x,y+d_y) & I_{yy}=\frac{\partial ^2I}{\partial y^2}(x+d_x,y+d_y)\\
-        \Delta I=I(x+d_x,y+d_y)-I(x,y) & I_{xy}=\frac{\partial ^2 I}{\partial x\partial y}(x+d_x,y+d_y) \\
-        \Delta I_x=\frac{\partial I}{\partial x}(x+d_x,y+d_y)-\frac{\partial I}{\partial x}(x,y) & \Delta I_y=\frac{\partial I}{\partial y}(x+d_x,y+d_y)-\frac{\partial I}{\partial y}(x,y)
-                \end{array}
-              \right..\]
+<p align="center">
+  <img src="equation_20.png" width="700" id="xxx">     [20]
+</p>
 
-Equations ([\[eulerLagrange\]](#eulerLagrange)) are highly non-linear
-and can be solved by fixed point iterations. In other words, letting
-\((d_x^k,d_y^k)\) the unknown value at the \(k\)-th iterations, the
-first equation of ([\[eulerLagrange\]](#eulerLagrange)) is rewritten as
+Equations ([\[19\]](#eulerLagrange)) are highly non-linear and can be solved by fixed point iterations. In other words, letting <img src="https://render.githubusercontent.com/render/math?math=(d_x^k,d_y^k)"> the unknown value at the <img src="https://render.githubusercontent.com/render/math?math=k">-th iterations, the first equation of [\[eulerLagrange\]](#eulerLagrange) is rewritten as
 
-\[0=A^k\cdot\left(I_x^k\left(\Delta I^k+I_x^kdu^k+I_y^kdv^k\right) \right)+\gamma A^k\left(I_{xx}^k\left(\Delta I_x^k+I_{xx}^kdu^k+I_{xy}^kdv^k\right)+\right.\]
-\[\label{fixedPoint}
-\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\left.I_{xy}^k\left(\Delta I_y^k+I_{xy}^kdu^k+I_{yy}^kdv^k\right)\right)-\alpha \underline{\nabla}\cdot\left(B^k\underline{\nabla}_3\left(d_x^k+du^k\right)\right),\]
+<p align="center">
+  <img src="equation_21.png" width="700" id="fixedPoint">     [21]
+</p>
 
 where
 
