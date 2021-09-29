@@ -268,7 +268,7 @@ However, it should be taken into account that the translation of the neighborhoo
   <img src="equation_12.png" width="100" id="equationInDRewritten">     [12]
 </p>
 
-where <img src="https://render.githubusercontent.com/render/math?math=\Delta \mathbf{A}=0.5(\mathbf{A}_1+\mathbf{A}_2)">. As above underlined, matrices <img src="https://render.githubusercontent.com/render/math?math=\mathbf{A}_1"> and <img src="https://render.githubusercontent.com/render/math?math=\mathbf{A}_2">
+where <img src="https://render.githubusercontent.com/render/math?math=\Delta \mathbf{A}=0.5(\mathbf{A}_1 %2B \mathbf{A}_2)">. As above underlined, matrices <img src="https://render.githubusercontent.com/render/math?math=\mathbf{A}_1"> and <img src="https://render.githubusercontent.com/render/math?math=\mathbf{A}_2">
 as well as the vectors <img src="https://render.githubusercontent.com/render/math?math=\mathbf{b}_1"> and <img src="https://render.githubusercontent.com/render/math?math=\mathbf{b}_2"> depend on the point <img src="https://render.githubusercontent.com/render/math?math=(m,n)">. For this reason, equation [\[12\]](#equationInDRewritten) should be solved pointwise thus obtaining <img src="https://render.githubusercontent.com/render/math?math=\mathbf{d}(m,n)">.  
 In order to prevent noisy solutions and to provide a smoothing effect, Farneb<span>ä</span>ck reformulates the search for the solution in <img src="https://render.githubusercontent.com/render/math?math=\mathbf{d}"> of equation [\[12\]](#equationInDRewritten) as a least-square problem by integrating it over a neighborhood of each pixel. Accordingly, the displacement <img src="https://render.githubusercontent.com/render/math?math=\mathbf{d}"> is searched for as the minimum of the functional
 
@@ -286,7 +286,7 @@ Brox *et al.*’s approach  originates from the observation that the grey value 
 the points move, their respective brightness is susceptible, in natural scenes, to slight changes. Accordingly, the invariance understood in equation [\[4\]](#constantBrightness) is placed side by side to a further invariance criterion. In particular, the gradient of the image grey value is assumed not to vary along the displacement. In other words,
 
 <p align="center">
-  <img src="https://render.githubusercontent.com/render/math?math=\mathbf{\nabla}I(x,y,t)=\mathbf{\nabla}I(x+d_x,y+d_y,t+1)," id="xxx">       [14]
+  <img src="https://render.githubusercontent.com/render/math?math=\mathbf{\nabla}I(x,y,t)=\mathbf{\nabla}I(x %2B d_x,y %2B d_y,t %2B 1)," id="xxx">       [14]
 </p>
 
 where we have assumed that time increases of <img src="https://render.githubusercontent.com/render/math?math=1"> unit from frame to frame and that <img src="https://render.githubusercontent.com/render/math?math=\mathbf{d}(x,y)=(d_x(x,y),d_y(x,y))"> is the displacement of point <img src="https://render.githubusercontent.com/render/math?math=(x,y)">.  
@@ -304,11 +304,11 @@ In order to reduce the influence of outliers pixels, an increasing concave funct
   <img src="equation_16.png" width="700" id="broxFunctional1">     [16]
 </p>
 
-A possible choice for <img src="https://render.githubusercontent.com/render/math?math=\Psi(s)"> is <img src="https://render.githubusercontent.com/render/math?math=\Psi(s)=\sqrt{s^2+\epsilon^2}">, where <img src="https://render.githubusercontent.com/render/math?math=\epsilon"> is a small constant, for example, <img src="https://render.githubusercontent.com/render/math?math=\epsilon=0.01">.  
+A possible choice for <img src="https://render.githubusercontent.com/render/math?math=\Psi(s)"> is <img src="https://render.githubusercontent.com/render/math?math=\Psi(s)=\sqrt{s^2 %2B \epsilon^2}">, where <img src="https://render.githubusercontent.com/render/math?math=\epsilon"> is a small constant, for example, <img src="https://render.githubusercontent.com/render/math?math=\epsilon=0.01">.  
 A smoothness condition to account for a piecewise smooth flow field is also enforced by adding the following smoothing penalizer
 
 <p align="center">
-  <img src="equation_17.png" width="700" id="xxx">     [17]
+  <img src="equation_17.png" width="300" id="xxx">     [17]
 </p>
 
 where <img src="https://render.githubusercontent.com/render/math?math=\mathbf{\nabla}_3=(\partial/\partial x, \partial/\partial y, \partial/\partial t)^t">
@@ -316,7 +316,7 @@ is a spatio-temporal gradient.
 Overall, the following functional is minimized:
 
 <p align="center">
-  <img src="equation_18.png" width="700" id="broxTwoTerms">     [18]
+  <img src="equation_18.png" width="300" id="broxTwoTerms">     [18]
 </p>
 
 where <img src="https://render.githubusercontent.com/render/math?math=\alpha"> is a *regularization parameter*. Larger values of <img src="https://render.githubusercontent.com/render/math?math=\alpha"> will lead to smoother solutions.  
@@ -335,65 +335,47 @@ with reflecting boundary conditions, where
 Equations ([\[19\]](#eulerLagrange)) are highly non-linear and can be solved by fixed point iterations. In other words, letting <img src="https://render.githubusercontent.com/render/math?math=(d_x^k,d_y^k)"> the unknown value at the <img src="https://render.githubusercontent.com/render/math?math=k">-th iterations, the first equation of [\[eulerLagrange\]](#eulerLagrange) is rewritten as
 
 <p align="center">
-  <img src="equation_21.png" width="700" id="fixedPoint">     [21]
+  <img src="equation_21.png" width="900" id="xxx">     [21]
 </p>
 
 where
 
-\[A^k=\Psi^\prime\left(\left(\Delta I^k+I_x^kdu^k+I_y^kdv^k\right)^2+\gamma\left(\left(\Delta I_x^k+I_{xx}^kdu^k+I_{xy}^kdv^k\right)^2+\left(\Delta I_y^k+I_{xy}^kdu^k+I_{yy}^kdv^k\right)^2\right)\right),\]
+<p align="center">
+  <img src="equation_22.png" width="300" id="xxx">     [22]
+</p>
 
-\[B^k=\Psi^\prime\left(|\underline{\nabla}_3\left(d_x^k+du^k\right)|^2+|\underline{\nabla}_3\left(d_y^k+dv^k\right)|^2\right)\]
-
-and \(du^k\) and \(dv^k\) are the updates for \(d_x^k\) and \(d_y^k\),
-respectively. The second equation of
-([\[eulerLagrange\]](#eulerLagrange)) can be written similarly.  
-Unfortunately, equation ([\[fixedPoint\]](#fixedPoint)) is still
-non-linear in \(du^k\) and \(dv^k\) since such variables are contained
-also in \(A^k\) and \(B^k\). In order to remove the remaining
-non-linearity, a second, inner, fixed point iteration is operated. In
-particular, on denoting by \(A^{k,l}\), \(B^{k,l}\), \(du^{k,l}\) and
-\(dv^{k,l}\) the values of the corresponding variables at the \(l\)-th
-inner iteration, then equation ([\[fixedPoint\]](#fixedPoint)) is
+and <img src="https://render.githubusercontent.com/render/math?math=du^k"> and <img src="https://render.githubusercontent.com/render/math?math=dv^k"> are the updates for <img src="https://render.githubusercontent.com/render/math?math=d_x^k"> and <img src="https://render.githubusercontent.com/render/math?math=d_y^k", respectively. The second equation of [\[19\]](#eulerLagrange) can be written similarly.  
+Unfortunately, equation [\[21\]](#fixedPoint) is still non-linear in <img src="https://render.githubusercontent.com/render/math?math=du^k"> and <img src="https://render.githubusercontent.com/render/math?math=dv^k"> since such variables are contained also in <img src="https://render.githubusercontent.com/render/math?math=A^k"> and <img src="https://render.githubusercontent.com/render/math?math=B^k">. In order to remove the remaining non-linearity, a second, inner, fixed point iteration is operated. In particular, on denoting by <img src="https://render.githubusercontent.com/render/math?math=A^{k,l}">, <img src="https://render.githubusercontent.com/render/math?math=B^{k,l}">, <img src="https://render.githubusercontent.com/render/math?math=du^{k,l}"> and <img src="https://render.githubusercontent.com/render/math?math=dv^{k,l}"> the values of the corresponding variables at the <img src="https://render.githubusercontent.com/render/math?math=l">-th inner iteration, then equation [\[21\]](#fixedPoint) is
 rewritten as:
 
-\[0=A^{k,l}\cdot\left(I_x^k\left(\Delta I^k+I_x^kdu^{k,l+1}+I_y^kdv^{k,l+1}\right) \right)+\gamma A^{k,l}\left(I_{xx}^k\left(\Delta I_x^k+I_{xx}^kdu^{k,l+1}+I_{xy}^kdv^{k,l+1}\right)+\right.\]
-\[\label{fixedPoint2}
-\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\left.I_{xy}^k\left(\Delta I_y^k+I_{xy}^kdu^{k,l+1}+I_{yy}^kdv^{k,l+1}\right)\right)-\alpha \underline{\nabla}\cdot\left(B^{k,l}\underline{\nabla}_3\left(d_x^k+du^{k,l+1}\right)\right),\]
+<p align="center">
+  <img src="equation_24.png" width="300" id="fixedPoint2">     [24]
+</p>
 
-so that, keeping \(A^{k,l}\) and \(B^{k,l}\) fixed at the \(l\)-th inner
-iteration, the equation is now linear in \(du^{k,l+1}\) and
-\(dv^{k,l+1}\). Equation ([\[fixedPoint2\]](#fixedPoint2)), along with
-its non-written companion, form a linear system of equations in
-\(du^{k,l+1}\) and \(dv^{k,l+1}\) which can be solved by a standard
-iterative method.
+so that, keeping <img src="https://render.githubusercontent.com/render/math?math=A^{k,l}"> and <img src="https://render.githubusercontent.com/render/math?math=B^{k,l}"> fixed at the <img src="https://render.githubusercontent.com/render/math?math=l">-th inner iteration, the equation is now linear in <img src="https://render.githubusercontent.com/render/math?math=du^{k,l+1}"> and <img src="https://render.githubusercontent.com/render/math?math=dv^{k,l+1}">. Equation [\[24\]](#fixedPoint2), along with its non-written companion, form a linear system of equations in <img src="https://render.githubusercontent.com/render/math?math=du^{k,l+1}"> and <img src="https://render.githubusercontent.com/render/math?math=dv^{k,l+1}"> which can be solved by a standard iterative method.
 
 ## Theory: Dense optical flow using TV-L1 regularization
 
-We have already underlined that equation ([\[normalFlow\]](#normalFlow))
-is under-determined, being a single equation in two unknowns. In order
-to solve it, the approach by Horn and Schunck , which has been much
-popular for a while, consists of placing a smoothness condition
-enforcing the displacement \(\underline{d}(x,y)\) to be regular side by
-side to equation ([\[normalFlow\]](#normalFlow)). In particular, the
-Horn and Schunck’s approach determined \(\underline{d}(x,y)\) by the
-minimization of the following functional:
+We have already underlined that equation [\[6\]](#normalFlow) is under-determined, being a single equation in two unknowns. In order to solve it, the approach by Horn and Schunck , which has been much popular for a while, consists of placing a smoothness condition enforcing the displacement <img src="https://render.githubusercontent.com/render/math?math=\mathbf{d}(x,y)"> to be regular side by side to equation [\[normalFlow\]](#normalFlow). In particular, the
+Horn and Schunck’s approach determined <img src="https://render.githubusercontent.com/render/math?math=\mathbf{d}(x,y)"> by the minimization of the following functional:
 
-\[\label{L1Functional1}
-E_{HS}(d_x,d_y)=\iint_{\Omega(x,y)}\left(\left(\underline{\nabla}I\cdot \underline{d}+\frac{\partial I}{\partial t}\right)^2+\alpha\left(|\underline{\nabla}d_x(x,y)|^2+|\underline{\nabla}d_y(x,y)|^2\right)^2\right)d\Omega,\]
+<p align="center">
+  <img src="equation_25.png" width="300" id="L1Functional1">     [25]
+</p>
 
-where \(\Omega(x,y)\) represents again a neighborhood of \((x,y)\) and
-\(\alpha\), like \(\gamma\) for the Brox *et al.*’s approach, weights
-both the assumptions.  
-If we replace the first term of ([\[L1Functional1\]](#L1Functional1))
-with \(I(x+d_x(x,y),y+d_y(x,t),t+1)-I(x,y,t)\), we have the following
-modified version of the functional to be minimized :
+where <img src="https://render.githubusercontent.com/render/math?math=\Omega(x,y)"> represents again a neighborhood of <img src="https://render.githubusercontent.com/render/math?math=(x,y)"> and <img src="https://render.githubusercontent.com/render/math?math=\alpha">, like <img src="https://render.githubusercontent.com/render/math?math=\gamma"> for the Brox *et al.*’s approach, weights both the assumptions.  
+If we replace the first term of [\[L1Functional1\]](#L1Functional1) with <img src="https://render.githubusercontent.com/render/math?math=I(x %2B d_x(x,y),y %2B d_y(x,t),t %2B 1)-I(x,y,t)">, we have the following modified version of the functional to be minimized:
 
-\[\label{L1Functional2}
-  E_{HS}(d_x,d_y)=\left(\iint_{\Omega(x,y)}\left(\rho(x,y,d_x,d_y)\right)^2+\alpha\left(|\underline{\nabla}d_x(x,y)|^2+|\underline{\nabla}d_y(x,y)|^2\right)\right)d\Omega,\]
+<p align="center">
+  <img src="equation_26.png" width="300" id="L1Functional2">     [26]
+</p>
 
 with
 
-\[\rho(x,y,d_x,d_y)=I(x+d_x(x,y),y+d_y(x,y),t+1)-I(x,y,t).\]
+<p align="center">
+  <img src="equation_27.png" width="300" id="xxx">     [27]
+</p>
+
 
 The term \(I(x+d_x(x,y),y+d_y(x,y),t+1)\) is non-linear in \((d_x,d_y)\)
 and is typically linearized using Taylor expansion leading to
