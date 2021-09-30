@@ -349,7 +349,7 @@ Unfortunately, equation [\[21\]](#fixedPoint) is still non-linear in <img src="h
 rewritten as:
 
 <p align="center">
-  <img src="equation_24.png" width="500" id="fixedPoint2">     [24]
+  <img src="equation_24.png" width="800" id="fixedPoint2">     [24]
 </p>
 
 so that, keeping <img src="https://render.githubusercontent.com/render/math?math=A^{k,l}"> and <img src="https://render.githubusercontent.com/render/math?math=B^{k,l}"> fixed at the <img src="https://render.githubusercontent.com/render/math?math=l">-th inner iteration, the equation is now linear in <img src="https://render.githubusercontent.com/render/math?math=du^{k,l+1}"> and <img src="https://render.githubusercontent.com/render/math?math=dv^{k,l+1}">. Equation [\[24\]](#fixedPoint2), along with its non-written companion, form a linear system of equations in <img src="https://render.githubusercontent.com/render/math?math=du^{k,l+1}"> and <img src="https://render.githubusercontent.com/render/math?math=dv^{k,l+1}"> which can be solved by a standard iterative method.
@@ -377,56 +377,52 @@ with
 </p>
 
 
-The term \(I(x+d_x(x,y),y+d_y(x,y),t+1)\) is non-linear in \((d_x,d_y)\)
-and is typically linearized using Taylor expansion leading to
+The term <img src="https://render.githubusercontent.com/render/math?math=I(x %2B d_x(x,y),y %2B d_y(x,y),t %2B 1)"> is non-linear in <img src="https://render.githubusercontent.com/render/math?math=(d_x,d_y)"> and is typically linearized using Taylor expansion leading to
 
-\[\rho(x,y,d_x,d_y)=\underline{\nabla}I(x+d_x^0(x,y),y+d_y^0(x,y),t+1)\cdot \left(\left(d_x(x,y),d_y(x,y)\right)\right)-\left(d_x^0(x,y),d_y^0(x,y)\right)\right)+\ldots\]
-\[\label{rhoFunctionTVL1}
-\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;+I(x+d_x^0(x,y),y+d_y^0(x,y),t+1)-I(x,y,t),\]
+<p align="center">
+  <img src="equation_28.png" width="500" id="rhoFunctionTVL1">     [28]
+</p>
 
-where \((d_x^0(x,y),d_y^0(x,y))\) is an approximation to
-\((d_x(x,y),d_y(x,y))\).  
-Nevertheless, to allow discontinuities in the flow field, references 
-propose to minimize the following functional:
+where <img src="https://render.githubusercontent.com/render/math?math=(d_x^0(x,y),d_y^0(x,y))"> is an approximation to <img src="https://render.githubusercontent.com/render/math?math=(d_x(x,y),d_y(x,y))">.  
+Nevertheless, to allow discontinuities in the flow field, references propose to minimize the following functional:
 
-\[\label{L1Functional3}
-  E(d_x,d_y)=\iint_{\Omega(x,y)}\left(\lambda|\rho(x,y,d_x,d_y)|+\left(|\underline{\nabla}d_x(x,y)|+|\underline{\nabla}d_y(x,y)|\right)\right)d\Omega.\]
+<p align="center">
+  <img src="equation_29.png" width="500" id="L1Functional3">     [29]
+</p>
 
-As it can be seen, the new functional does not contain squares and, as a
-matter of fact, contains a \(L^1\) data penalty term. A penalization
-like this is known as *total variation regularization*. Further details
-on total variation regularization can be found in .  
-A way to minimize functional ([\[L1Functional3\]](#L1Functional3)) is to
-introduce the following convex relaxation problem
+As it can be seen, the new functional does not contain squares and, as a matter of fact, contains a <img src="https://render.githubusercontent.com/render/math?math=L^1"> data penalty term. A penalizationlike this is known as *total variation regularization*. 
+A way to minimize functional [\[29\]](#L1Functional3) is to introduce the following convex relaxation problem
 
-\[\label{L1FunctionalRelaxation}
-  E_\theta(d_x,d_y)=\iint_{\Omega(x,y)}\lambda|\rho(x,y,v_x,v_y)|+\left(|\underline{\nabla}d_x(x,y)|+|\underline{\nabla}d_y(x,y)|\right)+\frac{1}{2\theta}|(d_x,d_y)-(v_x,v_y)|^2d\Omega.\]
+<p align="center">
+  <img src="equation_30.png" width="500" id="L1FunctionalRelaxation">     [30]
+</p>
 
-Such functional can be optimized by performing alternate minimizations
-against \((d_x,d_y)\) for a fixed \((v_x,v_y)\) and against
-\((v_x,v_y)\) for a fixed \((d_x,d_y)\). In other words,
+Such functional can be optimized by performing alternate minimizations against <img src="https://render.githubusercontent.com/render/math?math=(d_x,d_y)"> for a fixed <img src="https://render.githubusercontent.com/render/math?math=(v_x,v_y)"> and against <img src="https://render.githubusercontent.com/render/math?math=(v_x,v_y)"> for a fixed <img src="https://render.githubusercontent.com/render/math?math=(d_x,d_y)">. In other words,
 
-1.  for fixed \((v_x,v_y)\), \[\label{func1TVL1}
-          \iint_{\Omega(x,y)}\left(|\underline{\nabla}d_x(x,y)|+|\underline{\nabla}d_y(x,y)|\right)+\frac{1}{2\theta}|(d_x,d_y)-(v_x,v_y)|^2d\Omega;\]
+  - for fixed <img src="https://render.githubusercontent.com/render/math?math=(v_x,v_y)">, 
+    <p align="center">
+        <img src="equation_31.png" width="500" id="func1TVL1">     [31]
+    </p>
     is minimized;
 
-2.  for fixed \((d_x,d_y)\), \[\label{func1TVL2}
-          \iint_{\Omega(x,y)}\frac{1}{2\theta}|(d_x,d_y)-(v_x,v_y)|^2+\lambda|\rho(x,y,v_x,v_y)|d\Omega.\]
+  - for fixed <img src="https://render.githubusercontent.com/render/math?math=(d_x,d_y)">, 
+    <p align="center">
+        <img src="equation_32.png" width="500" id="func1TVL2">     [32]
+    </p>
     is minimized.
 
-Concerning the minimization of functionals ([\[func1TVL1\]](#func1TVL1))
-and ([\[func1TVL2\]](#func1TVL2)):
+Concerning the minimization of functionals [\[31\]](#func1TVL1) and [\[32\]](#func1TVL2):
 
-1.  functional ([\[func1TVL1\]](#func1TVL1)) is minimized by using the
-    following iterations
+  - functional [\[31\]](#func1TVL1) is minimized by using the following iterations
+    <p align="center">
+        <img src="equation_33.png" width="500" id="timeStepTVL1">     [33]
+    </p>
     
-    \[\label{timeStepTVL1}
-    \underline{p}_s^{k+1}=\frac{\underline{p}_s^{k}+(\tau/\theta)\underline{\nabla}(v_s^{k+1}+\theta\underline{\nabla}\cdot \underline{p}_s^k)}{1+(\tau/\theta)|\underline{\nabla}(v_s^{k+1}+\theta \underline{\nabla}\cdot \underline{p}_s^k)|},\;\;\;\; s=x,y,\]
-    
-    where \(\tau\) is the time step , and performing the unknown update
+    where <img src="https://render.githubusercontent.com/render/math?math=\tau"> is the time step, and performing the unknown update
     as
-    
-    \[d_s^{k+1}=v_s^{k+1}+\theta \underline{\nabla}\cdot \underline{p}_s^k, \;\;\;\; s=x,y;\]
+    <p align="center">
+        <img src="equation_34.png" width="500" id="xxx">     [34]
+    </p>
 
 2.  functional ([\[func1TVL2\]](#func1TVL2)) is minimized using the
     following iterations
