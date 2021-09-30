@@ -332,16 +332,16 @@ with reflecting boundary conditions, where
   <img src="equation_20.png" width="700" id="xxx">     [20]
 </p>
 
-Equations ([\[19\]](#eulerLagrange)) are highly non-linear and can be solved by fixed point iterations. In other words, letting <img src="https://render.githubusercontent.com/render/math?math=(d_x^k,d_y^k)"> the unknown value at the <img src="https://render.githubusercontent.com/render/math?math=k">-th iterations, the first equation of [\[eulerLagrange\]](#eulerLagrange) is rewritten as
+Equations [\[19\]](#eulerLagrange) are highly non-linear and can be solved by fixed point iterations. In other words, letting <img src="https://render.githubusercontent.com/render/math?math=(d_x^k,d_y^k)"> the unknown value at the <img src="https://render.githubusercontent.com/render/math?math=k">-th iterations, the first equation of [\[19\]](#eulerLagrange) is rewritten as
 
 <p align="center">
-  <img src="equation_21.png" width="900" id="xxx">     [21]
+  <img src="equation_21.png" width="900" id="fixedPoint">     [21]
 </p>
 
 where
 
 <p align="center">
-  <img src="equation_22.png" width="300" id="xxx">     [22]
+  <img src="equation_22.png" width="500" id="xxx">     [22]
 </p>
 
 and <img src="https://render.githubusercontent.com/render/math?math=du^k"> and <img src="https://render.githubusercontent.com/render/math?math=dv^k"> are the updates for <img src="https://render.githubusercontent.com/render/math?math=d_x^k"> and <img src="https://render.githubusercontent.com/render/math?math=d_y^k", respectively. The second equation of [\[19\]](#eulerLagrange) can be written similarly.  
@@ -349,31 +349,31 @@ Unfortunately, equation [\[21\]](#fixedPoint) is still non-linear in <img src="h
 rewritten as:
 
 <p align="center">
-  <img src="equation_24.png" width="300" id="fixedPoint2">     [24]
+  <img src="equation_24.png" width="500" id="fixedPoint2">     [24]
 </p>
 
 so that, keeping <img src="https://render.githubusercontent.com/render/math?math=A^{k,l}"> and <img src="https://render.githubusercontent.com/render/math?math=B^{k,l}"> fixed at the <img src="https://render.githubusercontent.com/render/math?math=l">-th inner iteration, the equation is now linear in <img src="https://render.githubusercontent.com/render/math?math=du^{k,l+1}"> and <img src="https://render.githubusercontent.com/render/math?math=dv^{k,l+1}">. Equation [\[24\]](#fixedPoint2), along with its non-written companion, form a linear system of equations in <img src="https://render.githubusercontent.com/render/math?math=du^{k,l+1}"> and <img src="https://render.githubusercontent.com/render/math?math=dv^{k,l+1}"> which can be solved by a standard iterative method.
 
 ## Theory: Dense optical flow using TV-L1 regularization
 
-We have already underlined that equation [\[6\]](#normalFlow) is under-determined, being a single equation in two unknowns. In order to solve it, the approach by Horn and Schunck , which has been much popular for a while, consists of placing a smoothness condition enforcing the displacement <img src="https://render.githubusercontent.com/render/math?math=\mathbf{d}(x,y)"> to be regular side by side to equation [\[normalFlow\]](#normalFlow). In particular, the
+We have already underlined that equation [\[6\]](#normalFlow) is under-determined, being a single equation in two unknowns. In order to solve it, the approach by Horn and Schunck , which has been much popular for a while, consists of placing a smoothness condition enforcing the displacement <img src="https://render.githubusercontent.com/render/math?math=\mathbf{d}(x,y)"> to be regular side by side to equation [\[6\]](#normalFlow). In particular, the
 Horn and Schunck’s approach determined <img src="https://render.githubusercontent.com/render/math?math=\mathbf{d}(x,y)"> by the minimization of the following functional:
 
 <p align="center">
-  <img src="equation_25.png" width="300" id="L1Functional1">     [25]
+  <img src="equation_25.png" width="500" id="L1Functional1">     [25]
 </p>
 
 where <img src="https://render.githubusercontent.com/render/math?math=\Omega(x,y)"> represents again a neighborhood of <img src="https://render.githubusercontent.com/render/math?math=(x,y)"> and <img src="https://render.githubusercontent.com/render/math?math=\alpha">, like <img src="https://render.githubusercontent.com/render/math?math=\gamma"> for the Brox *et al.*’s approach, weights both the assumptions.  
-If we replace the first term of [\[L1Functional1\]](#L1Functional1) with <img src="https://render.githubusercontent.com/render/math?math=I(x %2B d_x(x,y),y %2B d_y(x,t),t %2B 1)-I(x,y,t)">, we have the following modified version of the functional to be minimized:
+If we replace the first term of [\[25\]](#L1Functional1) with <img src="https://render.githubusercontent.com/render/math?math=I(x %2B d_x(x,y),y %2B d_y(x,t),t %2B 1)-I(x,y,t)">, we have the following modified version of the functional to be minimized:
 
 <p align="center">
-  <img src="equation_26.png" width="300" id="L1Functional2">     [26]
+  <img src="equation_26.png" width="500" id="L1Functional2">     [26]
 </p>
 
 with
 
 <p align="center">
-  <img src="equation_27.png" width="300" id="xxx">     [27]
+  <img src="equation_27.png" width="500" id="xxx">     [27]
 </p>
 
 
