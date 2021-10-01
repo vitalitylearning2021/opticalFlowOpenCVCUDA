@@ -380,7 +380,7 @@ with
 The term <img src="https://render.githubusercontent.com/render/math?math=I(x %2B d_x(x,y),y %2B d_y(x,y),t %2B 1)"> is non-linear in <img src="https://render.githubusercontent.com/render/math?math=(d_x,d_y)"> and is typically linearized using Taylor expansion leading to
 
 <p align="center">
-  <img src="equation_28.png" width="500" id="rhoFunctionTVL1">     [28]
+  <img src="equation_28.png" width="900" id="rhoFunctionTVL1">     [28]
 </p>
 
 where <img src="https://render.githubusercontent.com/render/math?math=(d_x^0(x,y),d_y^0(x,y))"> is an approximation to <img src="https://render.githubusercontent.com/render/math?math=(d_x(x,y),d_y(x,y))">.  
@@ -394,20 +394,20 @@ As it can be seen, the new functional does not contain squares and, as a matter 
 A way to minimize functional [\[29\]](#L1Functional3) is to introduce the following convex relaxation problem
 
 <p align="center">
-  <img src="equation_30.png" width="500" id="L1FunctionalRelaxation">     [30]
+  <img src="equation_30.png" width="700" id="L1FunctionalRelaxation">     [30]
 </p>
 
 Such functional can be optimized by performing alternate minimizations against <img src="https://render.githubusercontent.com/render/math?math=(d_x,d_y)"> for a fixed <img src="https://render.githubusercontent.com/render/math?math=(v_x,v_y)"> and against <img src="https://render.githubusercontent.com/render/math?math=(v_x,v_y)"> for a fixed <img src="https://render.githubusercontent.com/render/math?math=(d_x,d_y)">. In other words,
 
   - for fixed <img src="https://render.githubusercontent.com/render/math?math=(v_x,v_y)">, 
     <p align="center">
-        <img src="equation_31.png" width="500" id="func1TVL1">     [31]
+        <img src="equation_31.png" width="300" id="func1TVL1">     [31]
     </p>
     is minimized;
 
   - for fixed <img src="https://render.githubusercontent.com/render/math?math=(d_x,d_y)">, 
     <p align="center">
-        <img src="equation_32.png" width="500" id="func1TVL2">     [32]
+        <img src="equation_32.png" width="300" id="func1TVL2">     [32]
     </p>
     is minimized.
 
@@ -424,85 +424,30 @@ Concerning the minimization of functionals [\[31\]](#func1TVL1) and [\[32\]](#fu
         <img src="equation_34.png" width="500" id="xxx">     [34]
     </p>
 
-2.  functional ([\[func1TVL2\]](#func1TVL2)) is minimized using the
-    following iterations
+  - functional [\[32\]](#func1TVL2) is minimized using the following iterations
+    <p align="center">
+        <img src="equation_35.png" width="500" id="xxx">     [35]
+    </p>
     
-    \[\underline{v}^{k+1}=\underline{d}^{k+1}+TH(\underline{d}^{k+1},\underline{d}^0),\]
-    
-    dove \(TH(\cdot,\cdot)\) is a thresholding operator whose details
-    are reported in .
+    where <img src="https://render.githubusercontent.com/render/math?math=TH(\cdot,\cdot)"> is a thresholding operator.
 
-The above alternate minimization proceeds by the *warping* technique. In
-other words, the alternate minimization is repeated a certain number of
-times and, each time it is completed, the value of \(\underline{d}^0\)
-is updated and, consequently, also the values of
-\(I(x+d_x^0(x,y),y+d_y^0(x,y),t+1)\) and
-\(\underline{\nabla}I(x+d_x^0(x,y),y+d_y^0(x,y),t+1)\) are updated. The
-number of warpings is a parameter that assures the stability of the
-method. It affects the running time and establishes a compromise between
-speed and accuracy.  
-The iterations stop when the norm of the difference between
-\((d_x(x,y),d_y(x,y))\) at the current iteration and
-\((d_x(x,y),d_y(x,y))\) at the previous iteration is less than a
-constant \(\epsilon\). \(\epsilon\) is a trade-off between precision and
-running time. A small value yields more accurate solutions at the
-expense of a slower convergence.  
-Functional ([\[L1Functional3\]](#L1Functional3)) can be rewritten by
-adding a third component to the \(\underline{d}=(d_x,d_y)\) vector,
-namely, regarding it as \(\underline{d}=(d_x,d_y,d_z)\) and regarding
-the images as functions of \((x,y,z)\) instead of \((x,y)\) . This
-requires, for the evaluation of the gradient in
-([\[rhoFunctionTVL1\]](#rhoFunctionTVL1)), the definition of the
-derivative of \(I\) with respect to the new coordinate \(z\). Such a
-derivative is conventionally set to \(\gamma\). The added third
-dimension is conceived as a brightness variation term. In this way, an
-extra degree of freedom that allows for brightness changes that are not
-due to image movement is allowed. The inclusion of these brightness
-changes in the smoothness term, namely
-\(|\underline{\nabla}d_x|+|\underline{\nabla}d_y|+|\underline{\nabla}d_z|\),
-penalises high frequency brightness changes between frames.
+The above alternate minimization proceeds by the *warping* technique. In other words, the alternate minimization is repeated a certain number of times and, each time it is completed, the value of <img src="https://render.githubusercontent.com/render/math?math=\mathbf{d}^0"> is updated and, consequently, also the values of <img src="https://render.githubusercontent.com/render/math?math=(I(x %2B d_x^0(x,y),y %2B d_y^0(x,y),t %2B 1)"> and <img src="https://render.githubusercontent.com/render/math?math=\mathbf{\nabla}I(x %2B d_x^0(x,y),y %2B d_y^0(x,y),t %2B 1)"> are updated. The number of warpings is a parameter that assures the stability of the method. It affects the running time and establishes a compromise between speed and accuracy.  
+The iterations stop when the norm of the difference between <img src="https://render.githubusercontent.com/render/math?math=(d_x(x,y),d_y(x,y))"> at the current iteration and
+<img src="https://render.githubusercontent.com/render/math?math=(d_x(x,y),d_y(x,y))"> at the previous iteration is less than a constant <img src="https://render.githubusercontent.com/render/math?math=\epsilon">. <img src="https://render.githubusercontent.com/render/math?math=\epsilon"> is a trade-off between precision and running time. A small value yields more accurate solutions at the expense of a slower convergence.  
+Functional [\[29\]](#L1Functional3) can be rewritten by adding a third component to the <img src="https://render.githubusercontent.com/render/math?math=\mathbf{d}=(d_x,d_y)"> vector, namely, regarding it as <img src="https://render.githubusercontent.com/render/math?math=\mathbf{d}=(d_x,d_y,d_z)"> and regarding the images as functions of <img src="https://render.githubusercontent.com/render/math?math=(x,y,z)"> instead of <img src="https://render.githubusercontent.com/render/math?math=(x,y)">. This requires, for the evaluation of the gradient in [\[28\]](#rhoFunctionTVL1), the definition of the derivative of <img src="https://render.githubusercontent.com/render/math?math=I"> with respect to the new coordinate <img src="https://render.githubusercontent.com/render/math?math=z">. Such a derivative is conventionally set to <img src="https://render.githubusercontent.com/render/math?math=\gamma">. The added third dimension is conceived as a brightness variation term. In this way, an extra degree of freedom that allows for brightness changes that are not due to image movement is allowed. The inclusion of these brightness changes in the smoothness term, namely
+<img src="https://render.githubusercontent.com/render/math?math=|\mathbf{\nabla}d_x|+|\mathbf{\nabla}d_y|+|\mathbf{\nabla}d_z|">, penalises high frequency brightness changes between frames.
 
 ## Theory: Dense and sparse optical flows using Lucas-Kanade’s approach
 
-The Lucas-Kanade algorithm  was originally proposed in 1981 for dense
-processing. However, it can be easily applied in a sparse context since,
-coherently with what above said, it uses only local image information
-through the exploitation of a small window surrounding each point of
-interest. Accordingly, it has become also an important sparse technique.
-In the examples that will follow, we will see Lucas-Kanade’s approach at
-work both for dense and sparse applications.  
-Lucas-Kanade’s approach relies on equation
-([\[normalFlow\]](#normalFlow)). However, as we have already said, being
-dealt with pixelwise, such equation has two unknowns and consequently it
-is not uniquely solvable. For this reason, the approach uses a spatial
-coherence assumption to solve this problem, namely, neighboring points
-in a scene belong to the same surface, have similar motion, and project
-to nearby points on the image plane.  
-In other words, by considering a pixel window around a certain pixel of
-interest, equation ([\[normalFlow\]](#normalFlow)) is transformed to
+The Lucas-Kanade algorithm  was originally proposed in 1981 for dense processing. However, it can be easily applied in a sparse context since, coherently with what above said, it uses only local image information through the exploitation of a small window surrounding each point of interest. Accordingly, it has become also an important sparse technique. In the examples that will follow, we will see Lucas-Kanade’s approach at work both for dense and sparse applications.  
+Lucas-Kanade’s approach relies on equation [\[6\]](#normalFlow). However, as we have already said, being dealt with pixelwise, such equation has two unknowns and consequently it is not uniquely solvable. For this reason, the approach uses a spatial coherence assumption to solve this problem, namely, neighboring points in a scene belong to the same surface, have similar motion, and project to nearby points on the image plane.  
+In other words, by considering a pixel window around a certain pixel of interest, equation [\[6\]](#normalFlow) is transformed to
 
-\[\label{lucasKanade}
-\underbrace{\begin{bmatrix}
-I_x(m_1, n_1) & I_y(m_1, n_1)\\
-I_x(m_2, n_2) & I_y(m_2, n_2)\\
-\ldots & \ldots\\
-I_x(m_{25}, n_{25}) & I_y(m_{25}, n_{25})
-\end{bmatrix}}_{\underline{\underline{A}}}\;
-\underbrace{\begin{bmatrix}
-v_x\\
-v_y
-\end{bmatrix}}_{\underline{v}}\;=-
-\underbrace{\begin{bmatrix}
-I_t(m_1,n_1)\\
-I_t(m_2,n_2)\\
-\ldots\\
-I_t(m_{25}, n_{25})
-\end{bmatrix}}_{\underline{b}},\]
-
-where \(I_x\) and \(I_y\) are the spatial derivatives of \(I\) along and
-\(x\) and \(y\), respectively, \(I_t\) is its temporal derivative and
-\((m_1,n_1),\ldots,(m_{25}, n_{25})\) are the pixels inside the
-\(5\times 5\) window. Equation ([\[lucasKanade\]](#lucasKanade))
+<p align="center">
+    <img src="equation_36.png" width="300" id="lucasKanade">     [36]
+</p>
+    
+where <img src="https://render.githubusercontent.com/render/math?math=I_x"> and <img src="https://render.githubusercontent.com/render/math?math=I_y"> are the spatial derivatives of <img src="https://render.githubusercontent.com/render/math?math=I"> along and <img src="https://render.githubusercontent.com/render/math?math=x"> and <img src="https://render.githubusercontent.com/render/math?math=y">, respectively, <img src="https://render.githubusercontent.com/render/math?math=I_t"> is its temporal derivative and <img src="https://render.githubusercontent.com/render/math?math=(m_1,n_1),\ldots,(m_{25}, n_{25})"> are the pixels inside the <img src="https://render.githubusercontent.com/render/math?math=5\times 5"> window. Equation [\[36\]](#lucasKanade)
 expresses the fact that the \(x\) and \(y\) components of the pixel
 velocity are assumed to be constant within the considered \(5\times 5\)
 window. While equation ([\[normalFlow\]](#normalFlow)) was an
