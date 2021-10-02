@@ -401,13 +401,13 @@ Such functional can be optimized by performing alternate minimizations against <
 
   - for fixed <img src="https://render.githubusercontent.com/render/math?math=(v_x,v_y)">, 
     <p align="center">
-        <img src="equation_31.png" width="300" id="func1TVL1">     [31]
+        <img src="equation_31.png" width="400" id="func1TVL1">     [31]
     </p>
     is minimized;
 
   - for fixed <img src="https://render.githubusercontent.com/render/math?math=(d_x,d_y)">, 
     <p align="center">
-        <img src="equation_32.png" width="300" id="func1TVL2">     [32]
+        <img src="equation_32.png" width="400" id="func1TVL2">     [32]
     </p>
     is minimized.
 
@@ -415,18 +415,18 @@ Concerning the minimization of functionals [\[31\]](#func1TVL1) and [\[32\]](#fu
 
   - functional [\[31\]](#func1TVL1) is minimized by using the following iterations
     <p align="center">
-        <img src="equation_33.png" width="500" id="timeStepTVL1">     [33]
+        <img src="equation_33.png" width="300" id="timeStepTVL1">     [33]
     </p>
     
     where <img src="https://render.githubusercontent.com/render/math?math=\tau"> is the time step, and performing the unknown update
     as
     <p align="center">
-        <img src="equation_34.png" width="500" id="xxx">     [34]
+        <img src="equation_34.png" width="300" id="xxx">     [34]
     </p>
 
   - functional [\[32\]](#func1TVL2) is minimized using the following iterations
     <p align="center">
-        <img src="equation_35.png" width="500" id="xxx">     [35]
+        <img src="equation_35.png" width="300" id="xxx">     [35]
     </p>
     
     where <img src="https://render.githubusercontent.com/render/math?math=TH(\cdot,\cdot)"> is a thresholding operator.
@@ -435,7 +435,7 @@ The above alternate minimization proceeds by the *warping* technique. In other w
 The iterations stop when the norm of the difference between <img src="https://render.githubusercontent.com/render/math?math=(d_x(x,y),d_y(x,y))"> at the current iteration and
 <img src="https://render.githubusercontent.com/render/math?math=(d_x(x,y),d_y(x,y))"> at the previous iteration is less than a constant <img src="https://render.githubusercontent.com/render/math?math=\epsilon">. <img src="https://render.githubusercontent.com/render/math?math=\epsilon"> is a trade-off between precision and running time. A small value yields more accurate solutions at the expense of a slower convergence.  
 Functional [\[29\]](#L1Functional3) can be rewritten by adding a third component to the <img src="https://render.githubusercontent.com/render/math?math=\mathbf{d}=(d_x,d_y)"> vector, namely, regarding it as <img src="https://render.githubusercontent.com/render/math?math=\mathbf{d}=(d_x,d_y,d_z)"> and regarding the images as functions of <img src="https://render.githubusercontent.com/render/math?math=(x,y,z)"> instead of <img src="https://render.githubusercontent.com/render/math?math=(x,y)">. This requires, for the evaluation of the gradient in [\[28\]](#rhoFunctionTVL1), the definition of the derivative of <img src="https://render.githubusercontent.com/render/math?math=I"> with respect to the new coordinate <img src="https://render.githubusercontent.com/render/math?math=z">. Such a derivative is conventionally set to <img src="https://render.githubusercontent.com/render/math?math=\gamma">. The added third dimension is conceived as a brightness variation term. In this way, an extra degree of freedom that allows for brightness changes that are not due to image movement is allowed. The inclusion of these brightness changes in the smoothness term, namely
-<img src="https://render.githubusercontent.com/render/math?math=|\mathbf{\nabla}d_x|+|\mathbf{\nabla}d_y|+|\mathbf{\nabla}d_z|">, penalises high frequency brightness changes between frames.
+<img src="https://render.githubusercontent.com/render/math?math=|\mathbf{\nabla}d_x| %2B |\mathbf{\nabla}d_y| %2B |\mathbf{\nabla}d_z|">, penalises high frequency brightness changes between frames.
 
 ## Theory: Dense and sparse optical flows using Lucas-Kanade’s approach
 
@@ -447,113 +447,56 @@ In other words, by considering a pixel window around a certain pixel of interest
     <img src="equation_36.png" width="300" id="lucasKanade">     [36]
 </p>
     
-where <img src="https://render.githubusercontent.com/render/math?math=I_x"> and <img src="https://render.githubusercontent.com/render/math?math=I_y"> are the spatial derivatives of <img src="https://render.githubusercontent.com/render/math?math=I"> along and <img src="https://render.githubusercontent.com/render/math?math=x"> and <img src="https://render.githubusercontent.com/render/math?math=y">, respectively, <img src="https://render.githubusercontent.com/render/math?math=I_t"> is its temporal derivative and <img src="https://render.githubusercontent.com/render/math?math=(m_1,n_1),\ldots,(m_{25}, n_{25})"> are the pixels inside the <img src="https://render.githubusercontent.com/render/math?math=5\times 5"> window. Equation [\[36\]](#lucasKanade)
-expresses the fact that the \(x\) and \(y\) components of the pixel
-velocity are assumed to be constant within the considered \(5\times 5\)
-window. While equation ([\[normalFlow\]](#normalFlow)) was an
-undetermined system of one equation in two unknowns, now equation
-([\[lucasKanade\]](#lucasKanade)) is, in our example, an overconstrained
-system of in two unknowns. A least-squares solution to it can be
-obtained as the minimum of the functional:
+where <img src="https://render.githubusercontent.com/render/math?math=I_x"> and <img src="https://render.githubusercontent.com/render/math?math=I_y"> are the spatial derivatives of <img src="https://render.githubusercontent.com/render/math?math=I"> along and <img src="https://render.githubusercontent.com/render/math?math=x"> and <img src="https://render.githubusercontent.com/render/math?math=y">, respectively, <img src="https://render.githubusercontent.com/render/math?math=I_t"> is its temporal derivative and <img src="https://render.githubusercontent.com/render/math?math=(m_1,n_1),\ldots,(m_{25}, n_{25})"> are the pixels inside the <img src="https://render.githubusercontent.com/render/math?math=5\times 5"> window. Equation [\[36\]](#lucasKanade) expresses the fact that the <img src="https://render.githubusercontent.com/render/math?math=x"> and <img src="https://render.githubusercontent.com/render/math?math=y"> components of the pixel velocity are assumed to be constant within the considered <img src="https://render.githubusercontent.com/render/math?math=5\times 5"> window. While equation [\[6\]](#normalFlow) was an
+undetermined system of one equation in two unknowns, now equation [\[36\]](#lucasKanade) is, in our example, an overconstrained system of in two unknowns. A least-squares solution to it can be obtained as the minimum of the functional:
 
-\[\label{lucasKanadeFunctional}
-\|\underline{\underline{A}}\;\underline{v}-\underline{b}\|^2.\]
+<p align="center">
+    <img src="equation_37.png" width="300" id="lucasKanadeFunctional">     [37]
+</p>
 
-The solution to ([\[lucasKanadeFunctional\]](#lucasKanadeFunctional))
-can be written as:
+The solution to [\[lucasKanadeFunctional\]](#lucasKanadeFunctional) can be written as:
 
-\[\underline{v}=\left(\underline{\underline{A}}^t\underline{\underline{A}}\right)^{-1}\underline{\underline{A}}^t\;\underline{b}.\]
+<p align="center">
+    <img src="equation_38.png" width="300" id="xxx">     [38]
+</p>
 
-Obviously, to define a meaningful solution,
-\(\left(\underline{\underline{A}}^t\underline{\underline{A}}\right)\)
-must be invertible and this typically occurs at the corners of the
-image. We will discuss below how spotting the image positions where
-\(\left(\underline{\underline{A}}^t\underline{\underline{A}}\right)\)
-exhibits the best properties to be invertible and then where applying
-the Lucas-Kanade algorithm.  
-An issue arising in the previously described approaches, both for dense
-and sparse applications, is the difficulty in following a fast point
-motion from an image to the next. In the following section, we will
-illustrate a strategy, namely, the *pyramids approach*, capable to
-mitigate such a limitation.
+Obviously, to define a meaningful solution, <img src="https://render.githubusercontent.com/render/math?math=\left(\mathbf{A}^t\mathbf{A}\right)"> must be invertible and this typically occurs at the corners of the image. We will discuss below how spotting the image positions where <img src="https://render.githubusercontent.com/render/math?math=\left(\mathbf{A}^t\mathbf{A}\right)"> exhibits the best properties to be invertible and then where applying the Lucas-Kanade algorithm.  
+An issue arising in the previously described approaches, both for dense and sparse applications, is the difficulty in following a fast point motion from an image to the next. In the following section, we will illustrate a strategy, namely, the *pyramids approach*, capable to mitigate such a limitation.
 
 ## The pyramids approach
 
-The up to here recalled schemes make an explicit or implicit use of
-window functions to isolate the neighborhood of the point around which
-we want to compute the displacement. We indeed recall that
-Farneb<span>ä</span>ck’s approach has been presented using a window
-function \(w\) while Brox *et al.*’s approach, the approach using TV-L1
-regularization and the Lucas-Kanade’s method use, as a matter of fact,
-rectangular windows. In principle, the windows should have very small
-support so to favor resolution. Unfortunately, the disadvantage of using
-small local windows in the above-described methods is that large motions
-can move points outside of the local window when passing from an image
-to the next. In such a case, recovering the motion would be impossible.
-This problem led to development of “pyramidal” algorithms . Such
-algorithms perform the tracking starting from the top of the pyramid and
-using a window with large support leading to coarse resolution. Then,
-they improve the resolution by traversing the pyramid to its bottom and
-using even narrower windows. Tracking over image pyramids then allows
-large motions to be caught by local windows.  
+The up to here recalled schemes make an explicit or implicit use of window functions to isolate the neighborhood of the point around which we want to compute the displacement. We indeed recall that Farneb<span>ä</span>ck’s approach has been presented using a window function <img src="https://render.githubusercontent.com/render/math?math=w"> while Brox *et al.*’s approach, the approach using TV-L1 regularization and the Lucas-Kanade’s method use, as a matter of fact, rectangular windows. In principle, the windows should have very small support so to favor resolution. Unfortunately, the disadvantage of using small local windows in the above-described methods is that large motions can move points outside of the local window when passing from an image to the next. In such a case, recovering the motion would be impossible. This problem led to development of “pyramidal” algorithms. Such algorithms perform the tracking starting from the top of the pyramid and using a window with large support leading to coarse resolution. Then,
+they improve the resolution by traversing the pyramid to its bottom and using even narrower windows. Tracking over image pyramids then allows large motions to be caught by local windows.  
 Let us now attempt to better explain the above exposed concepts.  
-An important assumption of the optical flow algorithms we have presented
-is the *temporal persistence* or *small movements* assumption. In other
-words, the temporal increments from frame to frame are small enough that
-the objects do not move much from one frame to the next. Another
-important assumption is the *spatial coherence* one. According to it,
-neighboring points in a scene belong to the same surface, have similar
-motion, and project to nearby points on the image plane.  
-However, sometimes, due to camera limitations, objects move at high
-speed and, to catch them across frames, we need large windows.
-Unfortunately, this may break the spatial coherence assumption.  
-To counteract this issue, the pyramids approach we will now going to
-sketch is used. Using pyramids, a first approximation of large motions
-is estimated by the same involved images, but with reduced resolution.
-This rough estimation is refined, in subsequent steps, by increasing the
-images resolution from coarse to high. This not only improves the
-accuracy, but reduces also the computational complexity .  
-To illustrate the pyramids approach, let \(G(m,n)\) and \(H(m,n)\) be
-two two-dimensional, \(M\times N\) sized grey scaled images defined, for
-simplicity, over a continuous two-dimensional domain of \((m,n)\)
-points, with \(m=0,\ldots,M-1\) and \(n=0,\ldots,N-1\).  
-Let us now consider an image point \((m,n)\) of \(G\). The goal of the
-tracking is to find the location \((m,n)=(m+d_m,n+d_n)\) on \(H\) such
-that \(G(m,n)\) and \(H(m+d_m,n+d_n)\) are “similar”. The vector
-\((d_m,d_n)\) is thus a measure of the velocity of a point at \((m,n)\),
-namely, of the optical flow at \((m,n)\). The notion of similarity is to
-be understood in a two-dimensional neighborhood sense which, in turn,
-requires the introduction of a proper integration window. If \(B_m\) and
-\(B_n\) are two integers defining a window size, then \((d_m,d_n)\) can
-be defined as the vector that minimizes the residual function
+An important assumption of the optical flow algorithms we have presented is the *temporal persistence* or *small movements* assumption. In other words, the temporal increments from frame to frame are small enough that the objects do not move much from one frame to the next. Another important assumption is the *spatial coherence* one. According to it,
+neighboring points in a scene belong to the same surface, have similar motion, and project to nearby points on the image plane. However, sometimes, due to camera limitations, objects move at high speed and, to catch them across frames, we need large windows. Unfortunately, this may break the spatial coherence assumption.  
+To counteract this issue, the pyramids approach we will now going to sketch is used. Using pyramids, a first approximation of large motions is estimated by the same involved images, but with reduced resolution. This rough estimation is refined, in subsequent steps, by increasing the images resolution from coarse to high. This not only improves the
+accuracy, but reduces also the computational complexity.  
+To illustrate the pyramids approach, let <img src="https://render.githubusercontent.com/render/math?math=G(m,n)"> and <img src="https://render.githubusercontent.com/render/math?math=H(m,n)"> be two two-dimensional, <img src="https://render.githubusercontent.com/render/math?math=M\times N"> sized grey scaled images defined, for simplicity, over a continuous two-dimensional domain of <img src="https://render.githubusercontent.com/render/math?math=(m,n)">
+points, with <img src="https://render.githubusercontent.com/render/math?math=m=0,\ldots,M-1"> and <img src="https://render.githubusercontent.com/render/math?math=n=0,\ldots,N-1">.  
+Let us now consider an image point <img src="https://render.githubusercontent.com/render/math?math=(m,n)"> of <img src="https://render.githubusercontent.com/render/math?math=G">. The goal of the tracking is to find the location <img src="https://render.githubusercontent.com/render/math?math=(m,n)=(m+d_m,n+d_n)"> on  <img src="https://render.githubusercontent.com/render/math?math=H"> such that <img src="https://render.githubusercontent.com/render/math?math=G(m,n)"> and <img src="https://render.githubusercontent.com/render/math?math=H(m+d_m,n+d_n)"> are “similar”. The vector <img src="https://render.githubusercontent.com/render/math?math=(d_m,d_n)"> is thus a measure of the velocity of a point at <img src="https://render.githubusercontent.com/render/math?math=(m,n)">, namely, of the optical flow at <img src="https://render.githubusercontent.com/render/math?math=(m,n)">. The notion of similarity is to be understood in a two-dimensional neighborhood sense which, in turn,
+requires the introduction of a proper integration window. If <img src="https://render.githubusercontent.com/render/math?math=B_m"> and <img src="https://render.githubusercontent.com/render/math?math=B_n"> are two integers defining a window size, then <img src="https://render.githubusercontent.com/render/math?math=(d_m,d_n)"> can be defined as the vector that minimizes the residual function
 
-\[\epsilon(d_m,d_n)=\sum_{m^\prime=m-B_m}^{m+B_m}\sum_{n^\prime=n-B_n}^{n+B_n}\left(G(m^\prime,n^\prime)-H(m^\prime+d_m,n^\prime+d_n)\right)^2\]
+<p align="center">
+    <img src="equation_39.png" width="300" id="xxx">     [39]
+</p>
 
-In other words, the similarity at hand is measured using an image
-neighborhood of size \((2B_m+1)\times (2B_n+1)\). Typical values for
-\(B_m\) and \(B_n\) are from \(2\) to \(7\) pixels.  
-Intuitively, and as above underlined, the integration window size,
-defined by \(B_m\) and \(B_n\), should be small not to “smooth out” the
-image details. Opposite to that, it should be large, as above mentioned,
-to handle large motions. The trade-off between small and large window
-sizes can be dealt with by using a pyramidal approach.  
-Let us then now define the pyramid representation of \(G\). Let
-\(G^{(0)}=G\) be the “zero-th” level image, namely, the raw image or the
-highest resolution image. In a word, \(G\) itself. \(G^{(0)}\) of course
-has size \(M^{(0)}\times N^{(0)}=M\times N\). The pyramid technique
-proceeds iteratively: compute \(G^{(1)}\) from \(G^{(0)}\), then compute
-\(G^{(2)}\) from \(G^{(1)}\), etc. Generally speaking, if \(l\) is a
-generic pyramidal level, then \(G^{(l)}\) is the
-\(M^{(l)}\times N^{(l)}\) image at level \(l\) which is obtained by
-\(G^{(l-1)}\) as
+In other words, the similarity at hand is measured using an image neighborhood of size <img src="https://render.githubusercontent.com/render/math?math=(2B_m+1)\times (2B_n+1)">. Typical values for <img src="https://render.githubusercontent.com/render/math?math=B_m"> and <img src="https://render.githubusercontent.com/render/math?math=B_n"> are from <img src="https://render.githubusercontent.com/render/math?math=2"> to <img src="https://render.githubusercontent.com/render/math?math=7"> pixels.  
+Intuitively, and as above underlined, the integration window size, defined by <img src="https://render.githubusercontent.com/render/math?math=B_m"> and <img src="https://render.githubusercontent.com/render/math?math=B_n">, should be small not to “smooth out” the image details. Opposite to that, it should be large, as above mentioned, to handle large motions. The trade-off between small and large window sizes can be dealt with by using a pyramidal approach.  
+Let us then now define the pyramid representation of <img src="https://render.githubusercontent.com/render/math?math=G">. Let <img src="https://render.githubusercontent.com/render/math?math=G^{(0)}=G"> be the “zero-th” level image, namely, the raw image or the highest resolution image. In a word, <img src="https://render.githubusercontent.com/render/math?math=G"> itself. <img src="https://render.githubusercontent.com/render/math?math=G^{(0)}"> of course has size <img src="https://render.githubusercontent.com/render/math?math=M^{(0)}\times N^{(0)}=M\times N">. The pyramid technique proceeds iteratively: compute <img src="https://render.githubusercontent.com/render/math?math=G^{(1)}"> from <img src="https://render.githubusercontent.com/render/math?math=G^{(0)}">, then compute
+<img src="https://render.githubusercontent.com/render/math?math=G^{(2)}"> from <img src="https://render.githubusercontent.com/render/math?math=G^{(1)}">, etc. Generally speaking, if <img src="https://render.githubusercontent.com/render/math?math=1"> is a generic pyramidal level, then <img src="https://render.githubusercontent.com/render/math?math=G^{(1)}"> is the <img src="https://render.githubusercontent.com/render/math?math=M^{(l)}\times N^{(l)}"> image at level <img src="https://render.githubusercontent.com/render/math?math=l"> which is obtained by <img src="https://render.githubusercontent.com/render/math?math=G^{(l-1)}"> as
 
-\[G^{(l)}(m,n)=\frac{1}{4}G^{(l-1)}(2m,2n)+\ldots\]
-\[\frac{1}{8}\left(G^{(l-1)}(2m-1,2n)+G^{(l-1)}(2m+1,2n)+G^{(l-1)}(2m,2n-1)+G^{(l-1)}(2m,2n+1)\right)+\ldots\]
-\[\label{pyramidsEquation}
-\frac{1}{16}\left(G^{(l-1)}(2m-1,2n-1)+G^{(l-1)}(2m+1,2n+1)+G^{(l-1)}(2m-1,2n+1)+G^{(l-1)}(2m+1,2n-1)\right).\]
+<p align="center">
+    <img src="equation_40a.png" width="300" id="xxx">
+</p>
+<p align="center">
+    <img src="equation_40b.png" width="300" id="xxx">
+</p>
+<p align="center">
+    <img src="equation_40.png" width="300" id="pyramidsEquation">     [40]
+</p>
 
-The pyramids approach is illustrated in the next figure:
-[1.10](#pyramidsApproach).
+The pyramids approach is illustrated in the next figure: [10](#pyramidsApproach).
 
 ![The pyramids approach.](Pictures/Chapter04/pyramidsApproach.png)
 
