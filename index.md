@@ -451,13 +451,13 @@ where <img src="https://render.githubusercontent.com/render/math?math=I_x"> and 
 undetermined system of one equation in two unknowns, now equation [\[36\]](#lucasKanade) is, in our example, an overconstrained system of in two unknowns. A least-squares solution to it can be obtained as the minimum of the functional:
 
 <p align="center">
-    <img src="equation_37.png" width="300" id="lucasKanadeFunctional">     [37]
+    <img src="equation_37.png" width="200" id="lucasKanadeFunctional">     [37]
 </p>
 
-The solution to [\[lucasKanadeFunctional\]](#lucasKanadeFunctional) can be written as:
+The solution to [\[37\]](#lucasKanadeFunctional) can be written as:
 
 <p align="center">
-    <img src="equation_38.png" width="300" id="xxx">     [38]
+    <img src="equation_38.png" width="200" id="xxx">     [38]
 </p>
 
 Obviously, to define a meaningful solution, <img src="https://render.githubusercontent.com/render/math?math=\left(\mathbf{A}^t\mathbf{A}\right)"> must be invertible and this typically occurs at the corners of the image. We will discuss below how spotting the image positions where <img src="https://render.githubusercontent.com/render/math?math=\left(\mathbf{A}^t\mathbf{A}\right)"> exhibits the best properties to be invertible and then where applying the Lucas-Kanade algorithm.  
@@ -478,7 +478,7 @@ Let us now consider an image point <img src="https://render.githubusercontent.co
 requires the introduction of a proper integration window. If <img src="https://render.githubusercontent.com/render/math?math=B_m"> and <img src="https://render.githubusercontent.com/render/math?math=B_n"> are two integers defining a window size, then <img src="https://render.githubusercontent.com/render/math?math=(d_m,d_n)"> can be defined as the vector that minimizes the residual function
 
 <p align="center">
-    <img src="equation_39.png" width="300" id="xxx">     [39]
+    <img src="equation_39.png" width="350" id="xxx">     [39]
 </p>
 
 In other words, the similarity at hand is measured using an image neighborhood of size <img src="https://render.githubusercontent.com/render/math?math=(2B_m+1)\times (2B_n+1)">. Typical values for <img src="https://render.githubusercontent.com/render/math?math=B_m"> and <img src="https://render.githubusercontent.com/render/math?math=B_n"> are from <img src="https://render.githubusercontent.com/render/math?math=2"> to <img src="https://render.githubusercontent.com/render/math?math=7"> pixels.  
@@ -490,105 +490,59 @@ Let us then now define the pyramid representation of <img src="https://render.gi
     <img src="equation_40a.png" width="300" id="xxx">
 </p>
 <p align="center">
-    <img src="equation_40b.png" width="300" id="xxx">
+    <img src="equation_40b.png" width="500" id="xxx">
 </p>
 <p align="center">
-    <img src="equation_40.png" width="300" id="pyramidsEquation">     [40]
+    <img src="equation_40.png" width="500" id="pyramidsEquation">     [40]
 </p>
 
 The pyramids approach is illustrated in the next figure: [10](#pyramidsApproach).
 
-![The pyramids approach.](Pictures/Chapter04/pyramidsApproach.png)
+<p align="center">
+  <img src="pyramidsApproach.png" width="400" id="pyramidsApproach">
+  <br>
+     <em>Figure 10. The pyramids approach.</em>
+</p>
 
-Notice that the transformation from \(G^{(l-1)}\) to \(G^{(l)}\) is a
-low-pass filtering which leads to a smoothing of the image at the upper
-level.  
-Notice also that, in equation
-([\[pyramidsEquation\]](#pyramidsEquation)), the image at level \(l\) is
-formed from the image at level \(l-1\) by accessing \(G^{(l-1)}\)
-essentially with the index \((2m,2n)\), apart from \(\pm 1\) shifts.
-Therefore, being \(M^{(l-1)}\times N^{(l-1)}\) the image dimensions of
-\(G^{(l-1)}\), the following conditions must be met:
+Notice that the transformation from <img src="https://render.githubusercontent.com/render/math?math=G^{(l-1)}"> to <img src="https://render.githubusercontent.com/render/math?math=G^{(l)}"> is a low-pass filtering which leads to a smoothing of the image at the upper level.  
+Notice also that, in equation [\[40\]](#pyramidsEquation), the image at level <img src="https://render.githubusercontent.com/render/math?math=l"> is formed from the image at level <img src="https://render.githubusercontent.com/render/math?math=l-1"> by accessing <img src="https://render.githubusercontent.com/render/math?math=G^{(l-1)}"> essentially with the index <img src="https://render.githubusercontent.com/render/math?math=(2m,2n)">, apart from <img src="https://render.githubusercontent.com/render/math?math=\pm 1"> shifts. Therefore, being <img src="https://render.githubusercontent.com/render/math?math=M^{(l-1)}\times N^{(l-1)}"> the image dimensions of <img src="https://render.githubusercontent.com/render/math?math=G^{(l-1)}">, the following conditions must be met:
 
-\[\label{pyramidsConditions}
-\left\{
-                \begin{array}{ll}
-                  0\leq 2m\leq M^{(l-1)}-1\\
-                  0\leq 2n\leq N^{(l-1)}-1
-                \end{array}
-              \right..\]
+<p align="center">
+    <img src="equation_41.png" width="500" id="pyramidsConditions">     [41]
+</p>
 
-However, the \(\pm 1\) requires to break through the actual size of
-\(G^{(l-1)}\), so that proper boundary conditions must be enforced. A
-typical possibility is:
+However, the <img src="https://render.githubusercontent.com/render/math?math=\pm 1"> requires to break through the actual size of <img src="https://render.githubusercontent.com/render/math?math=G^{(l-1)}">, so that proper boundary conditions must be enforced. A typical possibility is:
 
-\[\left\{
-                \begin{array}{ll}
-                  G^{(l)}(-1,n) & = G^{(l)}(0,n)\\
-                  G^{(l)}(m,-1) & = G^{(l)}(m,0)\\
-                  G^{(l)}(M^{(l)},n) & = G^{(l)}(M^{(l)}-1,n)\\
-                  G^{(l)}(m,N^{(l)}) & = G^{(l)}(m,N^{(l)}-1)\\
-                  G^{(l)}(M^{(l)},N^{(l)}) & = G^{(l)}(M^{(l)}-1,N^{(l)}-1)
-                \end{array}
-              \right..\]
+<p align="center">
+    <img src="equation_42.png" width="500" id="xxx">     [42]
+</p>
 
-On substituting the maximum values of the \(m\) and \(n\) coordinates
-for \(G^{(l-1)}\) in equation
-([\[pyramidsConditions\]](#pyramidsConditions)), then we have:
+On substituting the maximum values of the <img src="https://render.githubusercontent.com/render/math?math=m"> and <img src="https://render.githubusercontent.com/render/math?math=n"> coordinates for <img src="https://render.githubusercontent.com/render/math?math=G^{(l-1)}"> in equation [\[41\]](#pyramidsConditions), then we have:
 
-\[\left\{
-                \begin{array}{ll}
-                  M^{(l)}\leq \frac{M^{(l-1)}+1}{2}\\
-                  N^{(l)}\leq \frac{N^{(l-1)}+1}{2}\\
-                \end{array}
-              \right.,\]
+<p align="center">
+    <img src="equation_43.png" width="500" id="xxx">     [43]
+</p>
 
-which constraints the maximum dimensions of \(G^{(l)}\) as a function of
-the maximum dimensions of \(G^{(l-1)}\).  
-The maximum level \(L\) is the pyramid height and is chosen with a
-degree of arbitrarity. Typical values are \(2\), \(3\) and \(4\) and,
-for practical image dimensions, there is no point into having \(L>4\)
-since, rising up the pyramid, the dimensions of the image are halved
-from level to level. Furthermore, since the main reason of using the
-pyramid technique is to be able to handle large pixel movements, and, in
-particular, larger than \((d_m,d_n)\), then \(L\) should also be chosen
-according to the maximum expected image flow. Since our focus will be on
-OpenCV with CUDA implementation below, then we skip further details on
-this point.  
-It is now time to discuss how the pyramid can be used within an optical
-flow algorithm. In particular, we describe the traversal of the pyramid
-from level \(l\) to level \(l-1\). On assuming that the processing at
-level \(l\) has been completed, we have at our disposal an estimate
-\((d_m^{(l)},d_n^{(l)})\) of the optical flow. Such an estimate can be
-used as a starting guess of the optical flow at level \(l-1\). More in
-detail, the starting guess at level \(l-1\) is constructed as
+which constraints the maximum dimensions of <img src="https://render.githubusercontent.com/render/math?math=G^{(l)}"> as a function of the maximum dimensions of <img src="https://render.githubusercontent.com/render/math?math=G^{(l-1)}">.  
+The maximum level <img src="https://render.githubusercontent.com/render/math?math=L"> is the pyramid height and is chosen with a degree of arbitrarity. Typical values are <img src="https://render.githubusercontent.com/render/math?math=2">, <img src="https://render.githubusercontent.com/render/math?math=3"> and <img src="https://render.githubusercontent.com/render/math?math=4"> and, for practical image dimensions, there is no point into having <img src="https://render.githubusercontent.com/render/math?math=L>4"> since, rising up the pyramid, the dimensions of the image are halved from level to level. Furthermore, since the main reason of using the pyramid technique is to be able to handle large pixel movements, and, in particular, larger than <img src="https://render.githubusercontent.com/render/math?math=(d_m,d_n)">, then <img src="https://render.githubusercontent.com/render/math?math=L"> should also be chosen according to the maximum expected image flow. Since our focus will be on OpenCV with CUDA implementation below, then we skip further details on this point.  
+It is now time to discuss how the pyramid can be used within an optical flow algorithm. In particular, we describe the traversal of the pyramid from level <img src="https://render.githubusercontent.com/render/math?math=l"> to level <img src="https://render.githubusercontent.com/render/math?math=l-1">. On assuming that the processing at level <img src="https://render.githubusercontent.com/render/math?math=l"> has been completed, we have at our disposal an estimate <img src="https://render.githubusercontent.com/render/math?math=(d_m^{(l)},d_n^{(l)})"> of the optical flow. Such an estimate can be used as a starting guess of the optical flow at level <img src="https://render.githubusercontent.com/render/math?math=l-1">. More in detail, the starting guess at level <img src="https://render.githubusercontent.com/render/math?math=l-1"> is constructed as
 
-\[\label{pyramidGuess}
-(d_{m_g}^{(l-1)},d_{n_g}^{(l-1)})=2(d_m^{(l)},d_n^{(l)}).\]
+<p align="center">
+    <img src="equation_44.png" width="500" id="pyramidGuess">     [44]
+</p>
 
-In equation ([\[pyramidGuess\]](#pyramidGuess)), we have exploited the
-relation between the image indices of levels \(l-1\) and \(l\), while
-the subscript \(g\) stands for *guess*. The new estimate
-\((d_{m}^{(l-1)},d_{n}^{(l-1)})\) is achieved by minimizing the
-following functional
+In equation [\[44\]](#pyramidGuess), we have exploited the relation between the image indices of levels <img src="https://render.githubusercontent.com/render/math?math=l-1"> and <img src="https://render.githubusercontent.com/render/math?math=l">, while the subscript <img src="https://render.githubusercontent.com/render/math?math=g"> stands for *guess*. The new estimate <img src="https://render.githubusercontent.com/render/math?math=(d_{m}^{(l-1)},d_{n}^{(l-1)})"> is achieved by minimizing the following functional
 
-\[\epsilon(d_{m_\delta}^{(l-1)},d_{n_\delta}^{(l-1)})=\sum_{m^\prime=m-B_m}^{m+B_m}\sum_{n^\prime=n-B_n}^{n+B_n}\left(G^{(l-1)}(m^\prime,n^\prime)-H^{(l-1)}(m^\prime+d_{m_\delta}^{(l-1)}+d_{m_g}^{(l-1)},n^\prime+d_{n_\delta}^{(l-1)}+d_{n_g}^{(l-1)})\right)^2\]
+<p align="center">
+    <img src="equation_45.png" width="500" id="xxx">     [45]
+</p>
 
-against the variable \((d_{m_\delta}^{(l-1)},d_{n_\delta}^{(l-1)})\) for
-a fixed value of \((d_{m_g}^{(l-1)},d_{n_g}^{(l-1)})\). It should be
-noticed that the size \((2B_m+1)\times(2B_n+1)\) is independent on
-\(l\).
+against the variable <img src="https://render.githubusercontent.com/render/math?math=(d_{m_\delta}^{(l-1)},d_{n_\delta}^{(l-1)})"> for a fixed value of <img src="https://render.githubusercontent.com/render/math?math=(d_{m_g}^{(l-1)},d_{n_g}^{(l-1)})">. It should be noticed that the size <img src="https://render.githubusercontent.com/render/math?math=(2B_m %2B 1)\times(2B_n %2B 1)"> is independent on <img src="https://render.githubusercontent.com/render/math?math=l">.
 
 ## Corner finding
 
-As already mentioned, dense optical flow techniques apply to all the
-pixels in an image, but sparse approaches apply only to pixels showing
-specific “features”. For this reason, when applying sparse methods, it
-is necessary in advance to look for specific features or patterns which
-can be easily tracked . But what are these features?  
-In order to understand what are the so-called *good features to track*,
-let us consider figure [1.11](#featureToTrack) in which a large image
-formed by a simple green rectangle is shown.
+As already mentioned, dense optical flow techniques apply to all the pixels in an image, but sparse approaches apply only to pixels showing specific “features”. For this reason, when applying sparse methods, it is necessary in advance to look for specific features or patterns which can be easily tracked . But what are these features?  
+In order to understand what are the so-called *good features to track*, let us consider figure [11](#featureToTrack) in which a large image formed by a simple green rectangle is shown.
 
 ![Illustrating the features to
 track.](Pictures/Chapter04/featureToTrack.png)
