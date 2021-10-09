@@ -618,15 +618,7 @@ where <img src="https://render.githubusercontent.com/render/math?math=\mathbf{u}
 
 According to the geometric interpretation of the SVD, equation [\[53\]](#harrisShiftExpansionFinal) says that:
 
-1.  When \(\sigma_1 \gg 0\) and \(\sigma_2\simeq 0\), then we have a
-    strong variation of the image intensity along \(\underline{u}_1\)
-    and a small variation of the image intensity along
-    \(\underline{u}_2\) within the patch \(W\). This means that \(W\)
-    contains an edge in the direction orthogonal to \(\underline{u}_1\).
-    Similarly, when \(\sigma_1 \simeq 0\) and \(\sigma_2 \gg 0\), then
-    \(W\) contains an edge in the direction orthogonal to
-    \(\underline{u}_2\).
-
+1.  When <img src="https://render.githubusercontent.com/render/math?math=\sigma_1 \gg 0"> and <img src="https://render.githubusercontent.com/render/math?math=\sigma_2\simeq 0">, then we have a strong variation of the image intensity along <img src="https://render.githubusercontent.com/render/math?math=\mathbf{u}_1"> and a small variation of the image intensity along <img src="https://render.githubusercontent.com/render/math?math=\mathbf{u}_2"> within the patch <img src="https://render.githubusercontent.com/render/math?math=W">. This means that <img src="https://render.githubusercontent.com/render/math?math=W"> contains an edge in the direction orthogonal to <img src="https://render.githubusercontent.com/render/math?math=\mathbf{u}_1">. Similarly, when <img src="https://render.githubusercontent.com/render/math?math=\sigma_1 \simeq 0"> and <img src="https://render.githubusercontent.com/render/math?math=\sigma_2 \gg 0">, then <img src="https://render.githubusercontent.com/render/math?math=W"> contains an edge in the direction orthogonal to <img src="https://render.githubusercontent.com/render/math?math=\mathbf{u}_2">.
 2.  When \(\sigma_1 \gg 0\) and \(\sigma_2 \gg 0\), then within the
     patch \(W\) we have a strong variation of the image intensity both
     along \(\underline{u}_1\) and \(\underline{u}_2\). This means that
