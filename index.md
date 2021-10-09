@@ -619,48 +619,34 @@ where <img src="https://render.githubusercontent.com/render/math?math=\mathbf{u}
 According to the geometric interpretation of the SVD, equation [\[53\]](#harrisShiftExpansionFinal) says that:
 
 1.  When <img src="https://render.githubusercontent.com/render/math?math=\sigma_1 \gg 0"> and <img src="https://render.githubusercontent.com/render/math?math=\sigma_2\simeq 0">, then we have a strong variation of the image intensity along <img src="https://render.githubusercontent.com/render/math?math=\mathbf{u}_1"> and a small variation of the image intensity along <img src="https://render.githubusercontent.com/render/math?math=\mathbf{u}_2"> within the patch <img src="https://render.githubusercontent.com/render/math?math=W">. This means that <img src="https://render.githubusercontent.com/render/math?math=W"> contains an edge in the direction orthogonal to <img src="https://render.githubusercontent.com/render/math?math=\mathbf{u}_1">. Similarly, when <img src="https://render.githubusercontent.com/render/math?math=\sigma_1 \simeq 0"> and <img src="https://render.githubusercontent.com/render/math?math=\sigma_2 \gg 0">, then <img src="https://render.githubusercontent.com/render/math?math=W"> contains an edge in the direction orthogonal to <img src="https://render.githubusercontent.com/render/math?math=\mathbf{u}_2">.
-2.  When \(\sigma_1 \gg 0\) and \(\sigma_2 \gg 0\), then within the
-    patch \(W\) we have a strong variation of the image intensity both
-    along \(\underline{u}_1\) and \(\underline{u}_2\). This means that
-    \(W\) contains a corner.
+2.  When <img src="https://render.githubusercontent.com/render/math?math=\sigma_1 \gg 0"> and <img src="https://render.githubusercontent.com/render/math?math=\sigma_2 \gg 0">, then within the patch <img src="https://render.githubusercontent.com/render/math?math=W"> we have a strong variation of the image intensity both along <img src="https://render.githubusercontent.com/render/math?math=\mathbf{u}_1"> and <img src="https://render.githubusercontent.com/render/math?math=\mathbf{u}_2">. This means that <img src="https://render.githubusercontent.com/render/math?math=W"> contains a corner.
+3.  If <img src="https://render.githubusercontent.com/render/math?math=\sigma_1 \simeq 0"> and <img src="https://render.githubusercontent.com/render/math?math=\sigma_2 \simeq 0">, then <img src="https://render.githubusercontent.com/render/math?math=W"> contains neither an edge nor a corner.
 
-3.  If \(\sigma_1 \simeq 0\) and \(\sigma_2 \simeq 0\), then \(W\)
-    contains neither an edge nor a corner.
+The computation of the SVD of <img src="https://render.githubusercontent.com/render/math?math=\mathbf{M}"> should be performed for each patch in which the image is divided. This can be computationally burdened. Therefore, instead of computing the full SVD, the possibility of using a less burdened and faster to be computed indicator is explored. Typically, the following indicator can be used
 
-The computation of the SVD of \(\underline{\underline{M}}\) should be
-performed for each patch in which the image is divided. This can be
-computationally burdened. Therefore, instead of computing the full SVD,
-the possibility of using a less burdened and faster to be computed
-indicator is explored. Typically, the following indicator can be used
+<p align="center">
+    <img src="equation_54.png" width="600" id="harrisParameter">     [54]
+</p>
 
-\[\label{harrisParameter}
-    R=\det{\underline{\underline{M}}}-k\left(\Tr{\underline{\underline{M}}}\right)^2,\]
+where <img src="https://render.githubusercontent.com/render/math?math=\det{\cdot}"> indicates the determinant of a matrix, <img src="https://render.githubusercontent.com/render/math?math=mathrm{Tr}{\cdot}"> is its trace and <img src="https://render.githubusercontent.com/render/math?math=k"> is an empirically determined constant typically belonging to <img src="https://render.githubusercontent.com/render/math?math=[0.04, 0.06]">. The following equalities hold
 
-where \(\det{\cdot}\) indicates the determinant of a matrix,
-\(\Tr{\cdot}\) is its trace and \(k\) is an empirically determined
-constant typically belonging to \([0.04, 0.06]\). The following
-equalities hold
-
-\[\Tr{\underline{\underline{M}}}=\sigma_1+\sigma_2\]
+<p align="center">
+    <img src="equation_55.png" width="600" id="xxx">     [55]
+</p>
 
 and
 
-\[\det{\underline{\underline{M}}}=\sigma_1\sigma_2.\]
+<p align="center">
+    <img src="equation_56.png" width="600" id="xxx">     [56]
+</p>
 
 Accordingly:
 
-1.  If \(|R|\) is small, which occurs when \(\sigma_1\) and \(\sigma_2\)
-    are small, the patch contains neither a corner, nor an edge.
+1.  If <img src="https://render.githubusercontent.com/render/math?math=|R|"> is small, which occurs when <img src="https://render.githubusercontent.com/render/math?math=\sigma_1"> and <img src="https://render.githubusercontent.com/render/math?math=\sigma_2"> are small, the patch contains neither a corner, nor an edge.
+2.  If <img src="https://render.githubusercontent.com/render/math?math=R<0">, which occurs when <img src="https://render.githubusercontent.com/render/math?math=\sigma_1 \gg \sigma_2"> or vice versa, the patch contains an edge.
+3.  if <img src="https://render.githubusercontent.com/render/math?math=R"> is large, which happens when <img src="https://render.githubusercontent.com/render/math?math=\sigma_1"> and <img src="https://render.githubusercontent.com/render/math?math=\sigma_2"> are large and <img src="https://render.githubusercontent.com/render/math?math=\sigma_1\simeq \sigma_2">, the patch contains a corner.
 
-2.  If \(R<0\), which occurs when \(\sigma_1 \gg \sigma_2\) or vice
-    versa, the patch contains an edge.
-
-3.  if \(R\) is large, which happens when \(\sigma_1\) and \(\sigma_2\)
-    are large and \(\sigma_1\simeq \sigma_2\), the patch contains a
-    corner.
-
-The three above possibilities are represented in a nice picture as
-follows:
+The three above possibilities are represented in a nice picture as follows:
 
 ![Illustrating the Harris corner detector.](/Chapter04/harrisCorner.png)
 
