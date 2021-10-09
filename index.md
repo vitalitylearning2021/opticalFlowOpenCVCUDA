@@ -451,13 +451,13 @@ where <img src="https://render.githubusercontent.com/render/math?math=I_x"> and 
 undetermined system of one equation in two unknowns, now equation [\[36\]](#lucasKanade) is, in our example, an overconstrained system of in two unknowns. A least-squares solution to it can be obtained as the minimum of the functional:
 
 <p align="center">
-    <img src="equation_37.png" width="200" id="lucasKanadeFunctional">     [37]
+    <img src="equation_37.png" width="150" id="lucasKanadeFunctional">     [37]
 </p>
 
 The solution to [\[37\]](#lucasKanadeFunctional) can be written as:
 
 <p align="center">
-    <img src="equation_38.png" width="200" id="xxx">     [38]
+    <img src="equation_38.png" width="150" id="xxx">     [38]
 </p>
 
 Obviously, to define a meaningful solution, <img src="https://render.githubusercontent.com/render/math?math=\left(\mathbf{A}^t\mathbf{A}\right)"> must be invertible and this typically occurs at the corners of the image. We will discuss below how spotting the image positions where <img src="https://render.githubusercontent.com/render/math?math=\left(\mathbf{A}^t\mathbf{A}\right)"> exhibits the best properties to be invertible and then where applying the Lucas-Kanade algorithm.  
@@ -478,7 +478,7 @@ Let us now consider an image point <img src="https://render.githubusercontent.co
 requires the introduction of a proper integration window. If <img src="https://render.githubusercontent.com/render/math?math=B_m"> and <img src="https://render.githubusercontent.com/render/math?math=B_n"> are two integers defining a window size, then <img src="https://render.githubusercontent.com/render/math?math=(d_m,d_n)"> can be defined as the vector that minimizes the residual function
 
 <p align="center">
-    <img src="equation_39.png" width="350" id="xxx">     [39]
+    <img src="equation_39.png" width="400" id="xxx">     [39]
 </p>
 
 In other words, the similarity at hand is measured using an image neighborhood of size <img src="https://render.githubusercontent.com/render/math?math=(2B_m+1)\times (2B_n+1)">. Typical values for <img src="https://render.githubusercontent.com/render/math?math=B_m"> and <img src="https://render.githubusercontent.com/render/math?math=B_n"> are from <img src="https://render.githubusercontent.com/render/math?math=2"> to <img src="https://render.githubusercontent.com/render/math?math=7"> pixels.  
@@ -490,13 +490,13 @@ Let us then now define the pyramid representation of <img src="https://render.gi
     <img src="equation_40a.png" width="300" id="xxx">
 </p>
 <p align="center">
-    <img src="equation_40b.png" width="500" id="xxx">
+    <img src="equation_40b.png" width="700" id="xxx">
 </p>
 <p align="center">
-    <img src="equation_40.png" width="500" id="pyramidsEquation">     [40]
+    <img src="equation_40.png" width="700" id="pyramidsEquation">     [40]
 </p>
 
-The pyramids approach is illustrated in the next figure: [10](#pyramidsApproach).
+The pyramids approach is illustrated in the next figure [10](#pyramidsApproach).
 
 <p align="center">
   <img src="pyramidsApproach.png" width="400" id="pyramidsApproach">
@@ -508,19 +508,19 @@ Notice that the transformation from <img src="https://render.githubusercontent.c
 Notice also that, in equation [\[40\]](#pyramidsEquation), the image at level <img src="https://render.githubusercontent.com/render/math?math=l"> is formed from the image at level <img src="https://render.githubusercontent.com/render/math?math=l-1"> by accessing <img src="https://render.githubusercontent.com/render/math?math=G^{(l-1)}"> essentially with the index <img src="https://render.githubusercontent.com/render/math?math=(2m,2n)">, apart from <img src="https://render.githubusercontent.com/render/math?math=\pm 1"> shifts. Therefore, being <img src="https://render.githubusercontent.com/render/math?math=M^{(l-1)}\times N^{(l-1)}"> the image dimensions of <img src="https://render.githubusercontent.com/render/math?math=G^{(l-1)}">, the following conditions must be met:
 
 <p align="center">
-    <img src="equation_41.png" width="500" id="pyramidsConditions">     [41]
+    <img src="equation_41.png" width="200" id="pyramidsConditions">     [41]
 </p>
 
 However, the <img src="https://render.githubusercontent.com/render/math?math=\pm 1"> requires to break through the actual size of <img src="https://render.githubusercontent.com/render/math?math=G^{(l-1)}">, so that proper boundary conditions must be enforced. A typical possibility is:
 
 <p align="center">
-    <img src="equation_42.png" width="500" id="xxx">     [42]
+    <img src="equation_42.png" width="200" id="xxx">     [42]
 </p>
 
 On substituting the maximum values of the <img src="https://render.githubusercontent.com/render/math?math=m"> and <img src="https://render.githubusercontent.com/render/math?math=n"> coordinates for <img src="https://render.githubusercontent.com/render/math?math=G^{(l-1)}"> in equation [\[41\]](#pyramidsConditions), then we have:
 
 <p align="center">
-    <img src="equation_43.png" width="500" id="xxx">     [43]
+    <img src="equation_43.png" width="200" id="xxx">     [43]
 </p>
 
 which constraints the maximum dimensions of <img src="https://render.githubusercontent.com/render/math?math=G^{(l)}"> as a function of the maximum dimensions of <img src="https://render.githubusercontent.com/render/math?math=G^{(l-1)}">.  
@@ -528,13 +528,13 @@ The maximum level <img src="https://render.githubusercontent.com/render/math?mat
 It is now time to discuss how the pyramid can be used within an optical flow algorithm. In particular, we describe the traversal of the pyramid from level <img src="https://render.githubusercontent.com/render/math?math=l"> to level <img src="https://render.githubusercontent.com/render/math?math=l-1">. On assuming that the processing at level <img src="https://render.githubusercontent.com/render/math?math=l"> has been completed, we have at our disposal an estimate <img src="https://render.githubusercontent.com/render/math?math=(d_m^{(l)},d_n^{(l)})"> of the optical flow. Such an estimate can be used as a starting guess of the optical flow at level <img src="https://render.githubusercontent.com/render/math?math=l-1">. More in detail, the starting guess at level <img src="https://render.githubusercontent.com/render/math?math=l-1"> is constructed as
 
 <p align="center">
-    <img src="equation_44.png" width="500" id="pyramidGuess">     [44]
+    <img src="equation_44.png" width="200" id="pyramidGuess">     [44]
 </p>
 
 In equation [\[44\]](#pyramidGuess), we have exploited the relation between the image indices of levels <img src="https://render.githubusercontent.com/render/math?math=l-1"> and <img src="https://render.githubusercontent.com/render/math?math=l">, while the subscript <img src="https://render.githubusercontent.com/render/math?math=g"> stands for *guess*. The new estimate <img src="https://render.githubusercontent.com/render/math?math=(d_{m}^{(l-1)},d_{n}^{(l-1)})"> is achieved by minimizing the following functional
 
 <p align="center">
-    <img src="equation_45.png" width="500" id="xxx">     [45]
+    <img src="equation_45.png" width="600" id="xxx">     [45]
 </p>
 
 against the variable <img src="https://render.githubusercontent.com/render/math?math=(d_{m_\delta}^{(l-1)},d_{n_\delta}^{(l-1)})"> for a fixed value of <img src="https://render.githubusercontent.com/render/math?math=(d_{m_g}^{(l-1)},d_{n_g}^{(l-1)})">. It should be noticed that the size <img src="https://render.githubusercontent.com/render/math?math=(2B_m %2B 1)\times(2B_n %2B 1)"> is independent on <img src="https://render.githubusercontent.com/render/math?math=l">.
@@ -544,120 +544,71 @@ against the variable <img src="https://render.githubusercontent.com/render/math?
 As already mentioned, dense optical flow techniques apply to all the pixels in an image, but sparse approaches apply only to pixels showing specific “features”. For this reason, when applying sparse methods, it is necessary in advance to look for specific features or patterns which can be easily tracked . But what are these features?  
 In order to understand what are the so-called *good features to track*, let us consider figure [11](#featureToTrack) in which a large image formed by a simple green rectangle is shown.
 
-![Illustrating the features to
-track.](Pictures/Chapter04/featureToTrack.png)
+<p align="center">
+  <img src="featureToTrack.png" width="400" id="featureToTrack">
+  <br>
+     <em>Figure 11. Illustrating the features to track.</em>
+</p>
 
-Next to the rectangle, three possible features to track are depicted,
-namely, features \(A\), \(B\) and \(C\).  
-Let us now suppose that we are appointed to spot the position of box
-\(A\) within the left image of figure [1.11](#featureToTrack). Box \(A\)
-represents the first feature whose tracking feasibility we are going to
-investigate. It appears that we would be in a serious trouble in
-spotting the position of box \(A\) since there would be infinite, better
-\(\infty^2\), possible solutions obtainable by moving the grey frame of
-box \(A\) to the left or to the right, up or down within the green patch
-of figure [1.11](#featureToTrack). This occurs because the gray frame of
-box \(A\) would produce “no gradient” when moving within the large green
-patch. Producing no gradient gives then rise to tracking ambiguities.  
-Let us now evaluate the possibility of tracking box \(B\) representing
-an edge. In this case, the range of solutions reduces from \(\infty^2\)
-to \(\infty\) since an ambiguity is obtained only by moving the search
-box to the left or to the right. The blue frame around box \(B\) has
-gradient moving up or down but, this notwithstanding, localization is
-still not uniquely possible.  
-Finally, let us consider the tracking of box \(C\) representing a
-corner. In this case, no ambiguity would appear and we would drop the
-solutions from \(\infty\) to \(1\). Indeed, there is only one position
-for the red frame to exactly represent box \(C\) over the large green
-patch. The red frame would show gradient either moving left-right or
-moving up-down. Corners are thus good features to track since they are
-uniquely spottable within an image.  
-But, how do we find corners in an image? That is, how can we operate the
-so called *feature detection*?  
-Intuitively, following what above illustrated with the aid of figure
-[1.11](#featureToTrack), we should look for the image regions which have
-maximum variation when moved, by a small amount, in all directions
-around.  
-Once spotted the “good” features within the image, the last question to
-answer is: how can we find the same features in the next image? This
-task requires the capability of adequately describing the found features
-so that they can be spotted also in the next image, a step known as
-*feature description*.  
-In the two next subsections, we recall two among the most successful
-corner detectors, namely, Harris and Shi-Tomasi corner detectors.
+Next to the rectangle, three possible features to track are depicted, namely, features <img src="https://render.githubusercontent.com/render/math?math=A">, <img src="https://render.githubusercontent.com/render/math?math=B"> and <img src="https://render.githubusercontent.com/render/math?math=C">.  
+Let us now suppose that we are appointed to spot the position of box <img src="https://render.githubusercontent.com/render/math?math=A"> within the left image of figure [11](#featureToTrack). Box <img src="https://render.githubusercontent.com/render/math?math=A"> represents the first feature whose tracking feasibility we are going to investigate. It appears that we would be in a serious trouble in spotting the position of box <img src="https://render.githubusercontent.com/render/math?math=A"> since there would be infinite, better <img src="https://render.githubusercontent.com/render/math?math=\infty^2">, possible solutions obtainable by moving the grey frame of box <img src="https://render.githubusercontent.com/render/math?math=A"> to the left or to the right, up or down within the green patch of figure [11](#featureToTrack). This occurs because the gray frame of box <img src="https://render.githubusercontent.com/render/math?math=A"> would produce “no gradient” when moving within the large green patch. Producing no gradient gives then rise to tracking ambiguities.  
+Let us now evaluate the possibility of tracking box <img src="https://render.githubusercontent.com/render/math?math=B"> representing an edge. In this case, the range of solutions reduces from <img src="https://render.githubusercontent.com/render/math?math=\infty^2"> to <img src="https://render.githubusercontent.com/render/math?math=\infty">  since an ambiguity is obtained only by moving the search box to the left or to the right. The blue frame around box <img src="https://render.githubusercontent.com/render/math?math=B"> has gradient moving up or down but, this notwithstanding, localization is still not uniquely possible.  
+Finally, let us consider the tracking of box <img src="https://render.githubusercontent.com/render/math?math=C"> representing a corner. In this case, no ambiguity would appear and we would drop the solutions from <img src="https://render.githubusercontent.com/render/math?math=\infty"> to <img src="https://render.githubusercontent.com/render/math?math=1">. Indeed, there is only one position for the red frame to exactly represent box <img src="https://render.githubusercontent.com/render/math?math=B"> over the large green
+patch. The red frame would show gradient either moving left-right or moving up-down. Corners are thus good features to track since they are uniquely spottable within an image. 
+But, how do we find corners in an image? That is, how can we operate the so called *feature detection*?  
+Intuitively, following what above illustrated with the aid of figure [11](#featureToTrack), we should look for the image regions which have maximum variation when moved, by a small amount, in all directions around.  
+Once spotted the “good” features within the image, the last question to answer is: how can we find the same features in the next image? This task requires the capability of adequately describing the found features so that they can be spotted also in the next image, a step known as *feature description*.  
+In the two next subsections, we recall two among the most successful corner detectors, namely, Harris and Shi-Tomasi corner detectors.
 
 ### Harris corner detector
 
-One of the first corner detection algorithms has been Harris corner
-detector developed by Harris and Stephens in 1988 .  
-To illustrate it, let us consider, without loss of generality, a grey
-scale, two-dimensional image \(I\). Moreover, let us suppose to divide
-the image in many small patches. Let us consider one of the various
-patches covering the image, say \(W\), and let us consider also its
-version shifted of an offset \((d_x,d_y)\). Finally, let us consider the
-functional composed by the squared sums of the differences of the two
+One of the first corner detection algorithms has been Harris corner detector developed by Harris and Stephens in 1988.  
+To illustrate it, let us consider, without loss of generality, a grey scale, two-dimensional image <img src="https://render.githubusercontent.com/render/math?math=I">. Moreover, let us suppose to divide the image in many small patches. Let us consider one of the various patches covering the image, say <img src="https://render.githubusercontent.com/render/math?math=W">, and let us consider also its version shifted of an offset <img src="https://render.githubusercontent.com/render/math?math=(d_x,d_y)">. Finally, let us consider the functional composed by the squared sums of the differences of the two
 patches (original and shifted), namely
 
-\[\label{functionalHarris}
-E(d_x,d_y)=\sum_{(x,y)\in W} \left(I(x,y)-I(x+d_x,y+d_y)\right)^2.\]
+<p align="center">
+    <img src="equation_46.png" width="600" id="functionalHarris">     [46]
+</p>
 
-In ([\[functionalHarris\]](#functionalHarris)), the summation terms
-could in principle be weighted by the values of a proper window
-function, but this point has been here skipped for the sake of
-simplicity.  
-For patches where the image is nearly constant, then the quantity
-\(\left(I(x,y)-I(x+d_x,y+d_y)\right)\) is close to vanishing. Opposite
-to that, for patches where the image has significant changes and that
-potentially contain an edge, such difference is larger. Accordingly, and
-following the discussion involving figure [1.11](#featureToTrack), we
-need to search for the patches where \(E(d_x,d_y)\) is large.  
-To this end, on expanding the quantity \(I(x+d_x,y+d_y)\) in a Taylor
-series for a small shift \((d_x,d_y)\), then we have
+In [\[46\]](#functionalHarris), the summation terms could in principle be weighted by the values of a proper window function, but this point has been here skipped for the sake of simplicity.  
+For patches where the image is nearly constant, then the quantity <img src="https://render.githubusercontent.com/render/math?math=\left(I(x,y)-I(x+d_x,y+d_y)\right)"> is close to vanishing. Opposite to that, for patches where the image has significant changes and that potentially contain an edge, such difference is larger. Accordingly, and following the discussion involving figure [11](#featureToTrack), we need to search for the patches where <img src="https://render.githubusercontent.com/render/math?math=E(d_x,d_y)"> is large.  
+To this end, on expanding the quantity <img src="https://render.githubusercontent.com/render/math?math=I(x+d_x,y+d_y)"> in a Taylor series for a small shift <img src="https://render.githubusercontent.com/render/math?math=(d_x,d_y)">, then we have
 
-\[\label{harrisTaylor}
-I(x+d_x,y+d_y)\simeq I(x,y)+I_x(x,y)d_x+I_y(x,y)d_y,\]
+<p align="center">
+    <img src="equation_47.png" width="600" id="harrisTaylor">     [47]
+</p>
 
-where \(I_x\) and \(I_y\) are the partial derivatives of \(I\). On
-substituting equation ([\[harrisTaylor\]](#harrisTaylor)) in
-([\[functionalHarris\]](#functionalHarris)), we finally have
+where <img src="https://render.githubusercontent.com/render/math?math=I_x"> and <img src="https://render.githubusercontent.com/render/math?math=I_y"> are the partial derivatives of <img src="https://render.githubusercontent.com/render/math?math=I">. On substituting equation [\[47\]](#harrisTaylor) in
+[\[46\]](#functionalHarris), we finally have
 
-\[\label{functionalHarris2}
-E(d_x,d_y)\simeq \sum_{(x,y)\in W}\left(I_x(x,y)d_x+I_y(x,y)d_y\right)^.\]
+<p align="center">
+    <img src="equation_48.png" width="600" id="functionalHarris2">     [48]
+</p>
 
-Functional ([\[functionalHarris2\]](#functionalHarris2)) can be
-conveniently rewritten as
+Functional [\[48\]](#functionalHarris2) can be conveniently rewritten as
 
-\[E(d_x,d_y)\simeq \begin{bmatrix}
-d_x & d_y
-\end{bmatrix}\; \underline{\underline{M}}\; \begin{bmatrix}
-d_x \\ d_y
-\end{bmatrix},\]
+<p align="center">
+    <img src="equation_49.png" width="600" id="xxx">     [49]
+</p>
 
 where
 
-\[\label{cornerMatrix}
-\underline{\underline{M}}=\sum_{(x,y)\in W} \begin{bmatrix}
-I_x^2 & I_x I_y\\ I_xI_y & I_y^2
-\end{bmatrix}\;= \; \begin{bmatrix}
-\sum_{(x,y)\in W} I_x^2 & \sum_{(x,y)\in W} I_x I_y\\ \sum_{(x,y)\in W} I_xI_y & \sum_{(x,y)\in W} I_y^2
-\end{bmatrix}.\]
+<p align="center">
+    <img src="equation_50.png" width="600" id="cornerMatrix">     [50]
+</p>
 
-The so-obtained matrix \(\underline{\underline{M}}\) is symmetric and
-positive, semi-definite, so that it can be decomposed by the SVD as
+The so-obtained matrix <img src="https://render.githubusercontent.com/render/math?math=\mathbf{M}"> is symmetric and positive, semi-definite, so that it can be decomposed by the SVD as
 
-\[\underline{\underline{M}}=\underline{\underline{U}}\; \begin{bmatrix}
-\sigma_1 & 0\\ 0 & \sigma_2
-\end{bmatrix} \;\underline{\underline{U}}^t,\]
+<p align="center">
+    <img src="equation_51.png" width="600" id="xxx">     [51]
+</p>
 
-where \(\sigma_1\) and \(\sigma_2\) are singular values. The SVD has
-been already used in the previous chapter to implement face
-recognition.  
-The shift \(\begin{bmatrix}d_x & d_y \end{bmatrix}^t\) can be then
-rewritten by the basis vectors forming the columns of
-\(\underline{\underline{U}}\), namely, as
+where <img src="https://render.githubusercontent.com/render/math?math=\sigma_1"> and <img src="https://render.githubusercontent.com/render/math?math=\sigma_2"> are singular values. The SVD has been already used in [Face recognition using OpenCV and CUDA](https://vitalitylearning2021.github.io/faceRecognitionOpenCVCUDA/) to implement face recognition.  
+The shift <img src="https://render.githubusercontent.com/render/math?math=\begin{bmatrix}d_x & d_y \end{bmatrix}^t"> can be then rewritten by the basis vectors forming the columns of <img src="https://render.githubusercontent.com/render/math?math=\mathbf{U}">, namely, as
 
-\[\label{harrisShiftExpansion}
-\begin{bmatrix}d_x & d_y \end{bmatrix}^t = \underline{\underline{U}}\;\underline{a}=a_1 \underline{u}_1+a_2\underline{u}_2,\]
+<p align="center">
+    <img src="equation_52.png" width="600" id="harrisShiftExpansion">     [52]
+</p>
 
 where \(\underline{u}_1\) and \(\underline{u}_2\) are the columns of
 \(\underline{\underline{U}}\) and \(a_1\) and \(a_2\) are the components
