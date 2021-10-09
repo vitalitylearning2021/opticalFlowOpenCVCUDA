@@ -610,17 +610,13 @@ The shift <img src="https://render.githubusercontent.com/render/math?math=\begin
     <img src="equation_52.png" width="600" id="harrisShiftExpansion">     [52]
 </p>
 
-where \(\underline{u}_1\) and \(\underline{u}_2\) are the columns of
-\(\underline{\underline{U}}\) and \(a_1\) and \(a_2\) are the components
-of \(\begin{bmatrix}d_x & d_y \end{bmatrix}^t\) along the basis offered
-by \(\underline{u}_1\) and \(\underline{u}_2\). Following equation
-([\[harrisShiftExpansion\]](#harrisShiftExpansion)), we have
+where <img src="https://render.githubusercontent.com/render/math?math=\mathbf{u}_1"> and <img src="https://render.githubusercontent.com/render/math?math=\mathbf{u}_2"> are the columns of <img src="https://render.githubusercontent.com/render/math?math=\mathbf{U}"> and <img src="https://render.githubusercontent.com/render/math?math=a_1"> and <img src="https://render.githubusercontent.com/render/math?math=a_2"> are the components of <img src="https://render.githubusercontent.com/render/math?math=\begin{bmatrix}d_x & d_y \end{bmatrix}^t"> along the basis offered by <img src="https://render.githubusercontent.com/render/math?math=\mathbf{u}_1"> and <img src="https://render.githubusercontent.com/render/math?math=\mathbf{u}_2">. Following equation [\[52\]](#harrisShiftExpansion), we have
 
-\[\label{harrisShiftExpansionFinal}
-    E(d_x,d_y)=\sigma_1 a_1^2+\sigma_2 a_2^2.\]
+<p align="center">
+    <img src="equation_53.png" width="600" id="harrisShiftExpansionFinal">     [53]
+</p>
 
-According to the geometric interpretation of the SVD , equation
-([\[harrisShiftExpansionFinal\]](#harrisShiftExpansionFinal)) says that:
+According to the geometric interpretation of the SVD, equation [\[53\]](#harrisShiftExpansionFinal) says that:
 
 1.  When \(\sigma_1 \gg 0\) and \(\sigma_2\simeq 0\), then we have a
     strong variation of the image intensity along \(\underline{u}_1\)
