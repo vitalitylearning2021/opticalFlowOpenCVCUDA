@@ -648,46 +648,34 @@ Accordingly:
 
 The three above possibilities are represented in a nice picture as follows:
 
-![Illustrating the Harris corner detector.](/Chapter04/harrisCorner.png)
+<p align="center">
+  <img src="harrisCorner.png" width="400" id="harrisCorner">
+  <br>
+     <em>Figure 12. Illustrating the Harris corner detector.</em>
+</p>
 
-In figure [1.12](#harrisCorner), the plane of the singular values is
-represented. For what above said, the top-left region spots an edge in
-the direction orthogonal to \(\underline{u}_2\), while the bottom-right
-region an edge in the direction orthogonal to \(\underline{u}_1\). The
-region around the origin is “flat” in the sense that it represents
-neither corners, nor edges. The portion of plane around the bisector
-corresponds to the case when both \(\sigma_1\) and \(\sigma_2\) are
-significant and so the patch has variations both along
-\(\underline{u}_1\) and \(\underline{u}_2\) which corresponds to a
-corner.  
-In next section, we will shortly describe the Shi-Tomasi corner
-detector, namely, another corner detector often used in applications
-and, in particular, in the applications of interest of this chapter.
+In figure [12](#harrisCorner), the plane of the singular values is represented. For what above said, the top-left region spots an edge in the direction orthogonal to <img src="https://render.githubusercontent.com/render/math?math=\mathbf{u}_2">, while the bottom-right region an edge in the direction orthogonal to <img src="https://render.githubusercontent.com/render/math?math=\mathbf{u}_1">. The region around the origin is “flat” in the sense that it represents neither corners, nor edges. The portion of plane around the bisector corresponds to the case when both <img src="https://render.githubusercontent.com/render/math?math=\sigma_1"> and <img src="https://render.githubusercontent.com/render/math?math=\sigma_2"> are significant and so the patch has variations both along <img src="https://render.githubusercontent.com/render/math?math=\mathbf{u}_1"> and <img src="https://render.githubusercontent.com/render/math?math=\mathbf{u}_2"> which corresponds to a corner.  
+In next section, we will shortly describe the Shi-Tomasi corner detector, namely, another corner detector often used in applications and, in particular, in the applications of interest of this chapter.
 
 ### Shi-Tomasi corner detector
 
-Shi and Tomasi corner detector  works along the same line as that for
-Harris corner detector seen above, but uses a modified indicator.
-Instead of exploiting ([\[harrisParameter\]](#harrisParameter)), Shi and
-Tomasi proposed using
+Shi and Tomasi corner detector  works along the same line as that for Harris corner detector seen above, but uses a modified indicator. Instead of exploiting [\[54\]](#harrisParameter), Shi and Tomasi proposed using
 
-\[R=\min(\sigma_1,\sigma_2).\]
+<p align="center">
+    <img src="equation_57.png" width="200" id="xxx">     [57]
+</p>
 
-If \(R\) is greater than a certain threshold, the patch is considered to
-host a corner. As for the Harris corner detector, also Shi and Tomasi
-corner detector can be illustrated by a graph. If we use again the
-\((\sigma_1,\sigma_2)\) plane as we have done for Harris corner
-detector, we get the image in the figure [1.13](#shiTomasiCorner):
+If <img src="https://render.githubusercontent.com/render/math?math=R"> is greater than a certain threshold, the patch is considered to host a corner. As for the Harris corner detector, also Shi and Tomasi corner detector can be illustrated by a graph. If we use again the <img src="https://render.githubusercontent.com/render/math?math=(\sigma_1,\sigma_2)"> plane as we have done for Harris corner detector, we get the image in the figure [13](#shiTomasiCorner):
 
-![Illustrating the Shi and Tomasi corner
-detector.](/Chapter04/shiTomasiCorner.png)
+<p align="center">
+  <img src="shiTomasiCorner.png" width="400" id="shiTomasiCorner">
+  <br>
+     <em>Figure 13. Illustrating the Shi and Tomasi corner
+detector.</em>
+</p>
 
-From the above figure, it can be seen that only when \(\sigma_1\) and
-\(\sigma_2\) are above a minimum value \(\sigma_{\min}\), the patch is
-considered hosting a corner. The corner region is the green region in
-figure [1.13](#shiTomasiCorner).  
-Under certain assumptions, the corner detected by the Shi-Tomasi corner
-detector are more stable for tracking than the Harris one.
+From the above figure, it can be seen that only when <img src="https://render.githubusercontent.com/render/math?math=\sigma_1"> and <img src="https://render.githubusercontent.com/render/math?math=\sigma_2"> are above a minimum value <img src="https://render.githubusercontent.com/render/math?math=\sigma_{\min}">, the patch is considered hosting a corner. The corner region is the green region in figure [13](#shiTomasiCorner).  
+Under certain assumptions, the corner detected by the Shi-Tomasi corner detector are more stable for tracking than the Harris one.
 
 ## Optical flow visualization
 
