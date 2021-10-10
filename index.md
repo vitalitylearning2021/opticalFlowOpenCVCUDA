@@ -631,13 +631,13 @@ The computation of the SVD of <img src="https://render.githubusercontent.com/ren
 where <img src="https://render.githubusercontent.com/render/math?math=\det{\cdot}"> indicates the determinant of a matrix, <img src="https://render.githubusercontent.com/render/math?math=\mathrm{Tr}{\cdot}"> is its trace and <img src="https://render.githubusercontent.com/render/math?math=k"> is an empirically determined constant typically belonging to <img src="https://render.githubusercontent.com/render/math?math=[0.04, 0.06]">. The following equalities hold
 
 <p align="center">
-    <img src="equation_55.png" width="150" id="xxx">     [55]
+    <img src="equation_55.png" width="120" id="xxx">     [55]
 </p>
 
 and
 
 <p align="center">
-    <img src="equation_56.png" width="150" id="xxx">     [56]
+    <img src="equation_56.png" width="120" id="xxx">     [56]
 </p>
 
 Accordingly:
@@ -670,8 +670,7 @@ If <img src="https://render.githubusercontent.com/render/math?math=R"> is greate
 <p align="center">
   <img src="shiTomasiCorner.png" width="400" id="shiTomasiCorner">
   <br>
-     <em>Figure 13. Illustrating the Shi and Tomasi corner
-detector.</em>
+     <em>Figure 13. Illustrating the Shi and Tomasi corner detector.</em>
 </p>
 
 From the above figure, it can be seen that only when <img src="https://render.githubusercontent.com/render/math?math=\sigma_1"> and <img src="https://render.githubusercontent.com/render/math?math=\sigma_2"> are above a minimum value <img src="https://render.githubusercontent.com/render/math?math=\sigma_{\min}">, the patch is considered hosting a corner. The corner region is the green region in figure [13](#shiTomasiCorner).  
@@ -679,63 +678,33 @@ Under certain assumptions, the corner detected by the Shi-Tomasi corner detector
 
 ## Optical flow visualization
 
-Once obtained the optical flow, which is a measure of the displacement
-of image points from an image to the next, it is necessary to proceed to
-its visualization. However, being the displacement a vector quantity,
-its visualization is not straightforward.  
-In the following, we will see two different optical flow visualization
-schemes. The first refers to the dense case and uses a color coding of
-the determined vector quantity. The second regards the sparse case and
-uses a representation by “streamlines”.  
+Once obtained the optical flow, which is a measure of the displacement of image points from an image to the next, it is necessary to proceed to its visualization. However, being the displacement a vector quantity, its visualization is not straightforward.  
+In the following, we will see two different optical flow visualization schemes. The first refers to the dense case and uses a color coding of the determined vector quantity. The second regards the sparse case and uses a representation by “streamlines”.  
 In the next subsection, we examine first the dense case.
 
 ### Color coding
 
-As mentioned above, in the dense optical flow techniques, the result is
-a pixel-wise map of image velocity. The problem here is visualizing the
-result of the processing, namely, a two-dimensional map of a
-two-dimensional vector.  
-A way to pursue this end is coding the two-dimensional vector with a
-color map in the Hue-Saturation-Value (HSV) format. While, in the
-Red-Green-Blue (RGB) format, each color is obtained as a combination of
-red, blue and green, the HSV format aims at representing the colors
-using the same attributes by which human vision perceives the chromatic
-properties of objects. In particular, HSV uses a cylindrical geometry in
-which the value is the vertical axis and represents the mixture of
-paints with different quantities of black or white paint; the hue is the
-angular dimension, starting with the red, passing through the green and
-the blue and then wrapping back to red; the saturation is the radial
-dimension and accounts for various tints of brightly colored paint. Hue,
-value and saturation are illustrated in next figure [1.14](#HSV).
+As mentioned above, in the dense optical flow techniques, the result is a pixel-wise map of image velocity. The problem here is visualizing the result of the processing, namely, a two-dimensional map of a two-dimensional vector.  
+A way to pursue this end is coding the two-dimensional vector with a color map in the Hue-Saturation-Value (HSV) format. While, in the Red-Green-Blue (RGB) format, each color is obtained as a combination of red, blue and green, the HSV format aims at representing the colors using the same attributes by which human vision perceives the chromatic
+properties of objects. In particular, HSV uses a cylindrical geometry in which the value is the vertical axis and represents the mixture of paints with different quantities of black or white paint; the hue is the angular dimension, starting with the red, passing through the green and the blue and then wrapping back to red; the saturation is the radial dimension and accounts for various tints of brightly colored paint. Hue, value and saturation are illustrated in next figure [14](#HSV).
 
-![Illustrating the HSV color coding  
-([https://commons.wikimedia.org/wiki/File:HSVcolorsolidcylinder.png](https://commons.wikimedia.org/wiki/File:HSV_color_solid_cylinder.png)).](Pictures/Chapter04/HSV.jpg)
+<p align="center">
+  <img src="HSV.jpg" width="400" id="HSV">
+  <br>
+     <em>Figure 14. Illustrating the HSV color coding.</em>
+</p>
 
-Indeed, a visible light source does not typically emit purely
-monochromatic light, but light having a certain bandwidth corresponding
-to a certain range of wavelengths. Such a concept is illustrated in Fig.
-[1.15](#saturationPlot).
+Indeed, a visible light source does not typically emit purely monochromatic light, but light having a certain bandwidth corresponding to a certain range of wavelengths. Such a concept is illustrated in Fig. [15](#saturationPlot).
 
-![Three different spectra to illustrate color
-coding.](Pictures/Chapter04/saturationPlot.jpg)
+<p align="center">
+  <img src="saturationPlot.jpg" width="400" id="saturationPlot">
+  <br>
+     <em>Figure 15. Three different spectra to illustrate color
+coding.</em>
+</p>
 
-The above figure shows three possible spectra, all of them centered
-around the \(500nm\) wavelength. However, the three spectra have
-different distributions: spectrum \(A\) is much concentrated around
-\(500nm\), spectrum \(B\) is less concentrated around \(500nm\) and
-spectrum \(C\) is widespread.  
-In the HSV language, *hue* is represented by the frequency, and so by
-the color, around which the spectrum is centered. Opposite to that,
-*saturation* is represented by the bandwidth. Spectrum \(A\) of Fig.
-[1.15](#saturationPlot) has a high saturation level and the
-corresponding light appears mostly “pure”. Opposite to that, spectra
-\(B\) and \(C\) correspond to lower saturation levels and so their
-lights appear less pure. High saturation levels make the color appear
-purer, while lower saturation levels make the color appear more gray.
-The last parameter, the *value*, corresponds to color brightness. Higher
-values make the color appear whiter, while lower values make the color
-appear blacker. MS paint color picker illustrated in the below figure
-offers a good test bench to better understand HSV color coding.
+The above figure shows three possible spectra, all of them centered around the <img src="https://render.githubusercontent.com/render/math?math=500nm"> wavelength. However, the three spectra have different distributions: spectrum <img src="https://render.githubusercontent.com/render/math?math=A"> is much concentrated around <img src="https://render.githubusercontent.com/render/math?math=500nm">, spectrum <img src="https://render.githubusercontent.com/render/math?math=B"> is less concentrated around <img src="https://render.githubusercontent.com/render/math?math=500nm"> and spectrum <img src="https://render.githubusercontent.com/render/math?math=A"> is widespread.  
+In the HSV language, *hue* is represented by the frequency, and so by the color, around which the spectrum is centered. Opposite to that, *saturation* is represented by the bandwidth. Spectrum <img src="https://render.githubusercontent.com/render/math?math=A"> of Fig. [15](#saturationPlot) has a high saturation level and the corresponding light appears mostly “pure”. Opposite to that, spectra <img src="https://render.githubusercontent.com/render/math?math=B"> and <img src="https://render.githubusercontent.com/render/math?math=C"> correspond to lower saturation levels and so their lights appear less pure. High saturation levels make the color appear purer, while lower saturation levels make the color appear more gray. The last parameter, the *value*, corresponds to color brightness. Higher values make the color appear whiter, while lower values make the color appear blacker. MS paint color picker illustrated in the below figure offers a good test bench to better understand HSV color coding.
 
 ![MS Paint color picker.](Pictures/Chapter04/colorPicker.png)
 
