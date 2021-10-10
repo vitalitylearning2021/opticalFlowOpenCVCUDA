@@ -631,13 +631,13 @@ The computation of the SVD of <img src="https://render.githubusercontent.com/ren
 where <img src="https://render.githubusercontent.com/render/math?math=\det{\cdot}"> indicates the determinant of a matrix, <img src="https://render.githubusercontent.com/render/math?math=\mathrm{Tr}{\cdot}"> is its trace and <img src="https://render.githubusercontent.com/render/math?math=k"> is an empirically determined constant typically belonging to <img src="https://render.githubusercontent.com/render/math?math=[0.04, 0.06]">. The following equalities hold
 
 <p align="center">
-    <img src="equation_55.png" width="200" id="xxx">     [55]
+    <img src="equation_55.png" width="150" id="xxx">     [55]
 </p>
 
 and
 
 <p align="center">
-    <img src="equation_56.png" width="200" id="xxx">     [56]
+    <img src="equation_56.png" width="150" id="xxx">     [56]
 </p>
 
 Accordingly:
@@ -662,7 +662,7 @@ In next section, we will shortly describe the Shi-Tomasi corner detector, namely
 Shi and Tomasi corner detector  works along the same line as that for Harris corner detector seen above, but uses a modified indicator. Instead of exploiting [\[54\]](#harrisParameter), Shi and Tomasi proposed using
 
 <p align="center">
-    <img src="equation_57.png" width="200" id="xxx">     [57]
+    <img src="equation_57.png" width="150" id="xxx">     [57]
 </p>
 
 If <img src="https://render.githubusercontent.com/render/math?math=R"> is greater than a certain threshold, the patch is considered to host a corner. As for the Harris corner detector, also Shi and Tomasi corner detector can be illustrated by a graph. If we use again the <img src="https://render.githubusercontent.com/render/math?math=(\sigma_1,\sigma_2)"> plane as we have done for Harris corner detector, we get the image in the figure [13](#shiTomasiCorner):
