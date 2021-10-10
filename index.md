@@ -604,7 +604,7 @@ The so-obtained matrix <img src="https://render.githubusercontent.com/render/mat
 </p>
 
 where <img src="https://render.githubusercontent.com/render/math?math=\sigma_1"> and <img src="https://render.githubusercontent.com/render/math?math=\sigma_2"> are singular values. The SVD has been already used in [Face recognition using OpenCV and CUDA](https://vitalitylearning2021.github.io/faceRecognitionOpenCVCUDA/) to implement face recognition.  
-The shift <img src="https://render.githubusercontent.com/render/math?math=[d_x & d_y]^t"> can be then rewritten by the basis vectors forming the columns of <img src="https://render.githubusercontent.com/render/math?math=\mathbf{U}">, namely, as
+The shift <img src="https://render.githubusercontent.com/render/math?math=[d_x d_y]^t"> can be then rewritten by the basis vectors forming the columns of <img src="https://render.githubusercontent.com/render/math?math=\mathbf{U}">, namely, as
 
 <p align="center">
     <img src="equation_52.png" width="300" id="harrisShiftExpansion">     [52]
