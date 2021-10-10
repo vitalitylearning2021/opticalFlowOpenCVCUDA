@@ -600,7 +600,7 @@ where
 The so-obtained matrix <img src="https://render.githubusercontent.com/render/math?math=\mathbf{M}"> is symmetric and positive, semi-definite, so that it can be decomposed by the SVD as
 
 <p align="center">
-    <img src="equation_51.png" width="250" id="xxx">     [51]
+    <img src="equation_51.png" width="200" id="xxx">     [51]
 </p>
 
 where <img src="https://render.githubusercontent.com/render/math?math=\sigma_1"> and <img src="https://render.githubusercontent.com/render/math?math=\sigma_2"> are singular values. The SVD has been already used in [Face recognition using OpenCV and CUDA](https://vitalitylearning2021.github.io/faceRecognitionOpenCVCUDA/) to implement face recognition.  
@@ -613,7 +613,7 @@ The shift <img src="https://render.githubusercontent.com/render/math?math=[d_x d
 where <img src="https://render.githubusercontent.com/render/math?math=\mathbf{u}_1"> and <img src="https://render.githubusercontent.com/render/math?math=\mathbf{u}_2"> are the columns of <img src="https://render.githubusercontent.com/render/math?math=\mathbf{U}"> and <img src="https://render.githubusercontent.com/render/math?math=a_1"> and <img src="https://render.githubusercontent.com/render/math?math=a_2"> are the components of <img src="https://render.githubusercontent.com/render/math?math=\mathbf{d}"> along the basis offered by <img src="https://render.githubusercontent.com/render/math?math=\mathbf{u}_1"> and <img src="https://render.githubusercontent.com/render/math?math=\mathbf{u}_2">. Following equation [\[52\]](#harrisShiftExpansion), we have
 
 <p align="center">
-    <img src="equation_53.png" width="300" id="harrisShiftExpansionFinal">     [53]
+    <img src="equation_53.png" width="200" id="harrisShiftExpansionFinal">     [53]
 </p>
 
 According to the geometric interpretation of the SVD, equation [\[53\]](#harrisShiftExpansionFinal) says that:
@@ -625,19 +625,19 @@ According to the geometric interpretation of the SVD, equation [\[53\]](#harrisS
 The computation of the SVD of <img src="https://render.githubusercontent.com/render/math?math=\mathbf{M}"> should be performed for each patch in which the image is divided. This can be computationally burdened. Therefore, instead of computing the full SVD, the possibility of using a less burdened and faster to be computed indicator is explored. Typically, the following indicator can be used
 
 <p align="center">
-    <img src="equation_54.png" width="300" id="harrisParameter">     [54]
+    <img src="equation_54.png" width="200" id="harrisParameter">     [54]
 </p>
 
 where <img src="https://render.githubusercontent.com/render/math?math=\det{\cdot}"> indicates the determinant of a matrix, <img src="https://render.githubusercontent.com/render/math?math=\mathrm{Tr}{\cdot}"> is its trace and <img src="https://render.githubusercontent.com/render/math?math=k"> is an empirically determined constant typically belonging to <img src="https://render.githubusercontent.com/render/math?math=[0.04, 0.06]">. The following equalities hold
 
 <p align="center">
-    <img src="equation_55.png" width="300" id="xxx">     [55]
+    <img src="equation_55.png" width="200" id="xxx">     [55]
 </p>
 
 and
 
 <p align="center">
-    <img src="equation_56.png" width="300" id="xxx">     [56]
+    <img src="equation_56.png" width="200" id="xxx">     [56]
 </p>
 
 Accordingly:
