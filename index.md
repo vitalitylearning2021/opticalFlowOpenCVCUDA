@@ -706,11 +706,15 @@ coding.</em>
 The above figure shows three possible spectra, all of them centered around the <img src="https://render.githubusercontent.com/render/math?math=500nm"> wavelength. However, the three spectra have different distributions: spectrum <img src="https://render.githubusercontent.com/render/math?math=A"> is much concentrated around <img src="https://render.githubusercontent.com/render/math?math=500nm">, spectrum <img src="https://render.githubusercontent.com/render/math?math=B"> is less concentrated around <img src="https://render.githubusercontent.com/render/math?math=500nm"> and spectrum <img src="https://render.githubusercontent.com/render/math?math=A"> is widespread.  
 In the HSV language, *hue* is represented by the frequency, and so by the color, around which the spectrum is centered. Opposite to that, *saturation* is represented by the bandwidth. Spectrum <img src="https://render.githubusercontent.com/render/math?math=A"> of Fig. [15](#saturationPlot) has a high saturation level and the corresponding light appears mostly “pure”. Opposite to that, spectra <img src="https://render.githubusercontent.com/render/math?math=B"> and <img src="https://render.githubusercontent.com/render/math?math=C"> correspond to lower saturation levels and so their lights appear less pure. High saturation levels make the color appear purer, while lower saturation levels make the color appear more gray. The last parameter, the *value*, corresponds to color brightness. Higher values make the color appear whiter, while lower values make the color appear blacker. MS paint color picker illustrated in the below figure offers a good test bench to better understand HSV color coding.
 
+<p align="center">
+  <img src="colorPicker.png" width="400" id="colorPicker">
+  <br>
+     <em>Figure 16. MS Paint color picker.</em>
+</p>
+
 ![MS Paint color picker.](Pictures/Chapter04/colorPicker.png)
 
-As it can be seen from Fig. [1.16](#colorPicker), MS Paint enables
-representing a color either by using classical RGB (Red - Green - Blue)
-coding, or HSV.  
+As it can be seen from Fig. [16](#colorPicker), MS Paint enables representing a color either by using classical RGB (Red - Green - Blue) coding, or HSV.  
 The color wheel is constructed by associating the hue to the angular
 coordinate of a polar system and the saturation to the radial
 coordinate. Concerning the angular coordinate, the full circle is
