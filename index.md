@@ -712,8 +712,6 @@ In the HSV language, *hue* is represented by the frequency, and so by the color,
      <em>Figure 16. MS Paint color picker.</em>
 </p>
 
-![MS Paint color picker.](Pictures/Chapter04/colorPicker.png)
-
 As it can be seen from Fig. [16](#colorPicker), MS Paint enables representing a color either by using classical RGB (Red - Green - Blue) coding, or HSV.  
 The color wheel is constructed by associating the hue to the angular coordinate of a polar system and the saturation to the radial coordinate. Concerning the angular coordinate, the full circle is partitioned in a certain number of sectors associated to a certain number of color transitions. In the following, we will deal with the
 Middlebury color coding based on the way the human eye perceives the different color shades. In particular, the color transitions are \(6\): red-yellow (RY), yellow-green (YG), green-cyan (GC), cyan-blue (CB), blue-magenta (BM), magenta-red (MR). However, it should be noticed that such color transitions do not contain the same number of shades. This is illustrated in table [1](#colorShades) which reports the color transitions along with the corresponding number of shades in the Middlebury approach.
