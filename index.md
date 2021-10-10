@@ -514,7 +514,7 @@ Notice also that, in equation [\[40\]](#pyramidsEquation), the image at level <i
 However, the <img src="https://render.githubusercontent.com/render/math?math=\pm 1"> requires to break through the actual size of <img src="https://render.githubusercontent.com/render/math?math=G^{(l-1)}">, so that proper boundary conditions must be enforced. A typical possibility is:
 
 <p align="center">
-    <img src="equation_42.png" width="200" id="xxx">     [42]
+    <img src="equation_42.png" width="300" id="xxx">     [42]
 </p>
 
 On substituting the maximum values of the <img src="https://render.githubusercontent.com/render/math?math=m"> and <img src="https://render.githubusercontent.com/render/math?math=n"> coordinates for <img src="https://render.githubusercontent.com/render/math?math=G^{(l-1)}"> in equation [\[41\]](#pyramidsConditions), then we have:
@@ -567,7 +567,7 @@ To illustrate it, let us consider, without loss of generality, a grey scale, two
 patches (original and shifted), namely
 
 <p align="center">
-    <img src="equation_46.png" width="600" id="functionalHarris">     [46]
+    <img src="equation_46.png" width="300" id="functionalHarris">     [46]
 </p>
 
 In [\[46\]](#functionalHarris), the summation terms could in principle be weighted by the values of a proper window function, but this point has been here skipped for the sake of simplicity.  
@@ -575,45 +575,45 @@ For patches where the image is nearly constant, then the quantity <img src="http
 To this end, on expanding the quantity <img src="https://render.githubusercontent.com/render/math?math=I(x+d_x,y+d_y)"> in a Taylor series for a small shift <img src="https://render.githubusercontent.com/render/math?math=(d_x,d_y)">, then we have
 
 <p align="center">
-    <img src="equation_47.png" width="600" id="harrisTaylor">     [47]
+    <img src="equation_47.png" width="300" id="harrisTaylor">     [47]
 </p>
 
 where <img src="https://render.githubusercontent.com/render/math?math=I_x"> and <img src="https://render.githubusercontent.com/render/math?math=I_y"> are the partial derivatives of <img src="https://render.githubusercontent.com/render/math?math=I">. On substituting equation [\[47\]](#harrisTaylor) in
 [\[46\]](#functionalHarris), we finally have
 
 <p align="center">
-    <img src="equation_48.png" width="600" id="functionalHarris2">     [48]
+    <img src="equation_48.png" width="300" id="functionalHarris2">     [48]
 </p>
 
 Functional [\[48\]](#functionalHarris2) can be conveniently rewritten as
 
 <p align="center">
-    <img src="equation_49.png" width="600" id="xxx">     [49]
+    <img src="equation_49.png" width="300" id="xxx">     [49]
 </p>
 
 where
 
 <p align="center">
-    <img src="equation_50.png" width="600" id="cornerMatrix">     [50]
+    <img src="equation_50.png" width="300" id="cornerMatrix">     [50]
 </p>
 
 The so-obtained matrix <img src="https://render.githubusercontent.com/render/math?math=\mathbf{M}"> is symmetric and positive, semi-definite, so that it can be decomposed by the SVD as
 
 <p align="center">
-    <img src="equation_51.png" width="600" id="xxx">     [51]
+    <img src="equation_51.png" width="300" id="xxx">     [51]
 </p>
 
 where <img src="https://render.githubusercontent.com/render/math?math=\sigma_1"> and <img src="https://render.githubusercontent.com/render/math?math=\sigma_2"> are singular values. The SVD has been already used in [Face recognition using OpenCV and CUDA](https://vitalitylearning2021.github.io/faceRecognitionOpenCVCUDA/) to implement face recognition.  
 The shift <img src="https://render.githubusercontent.com/render/math?math=\begin{bmatrix}d_x & d_y \end{bmatrix}^t"> can be then rewritten by the basis vectors forming the columns of <img src="https://render.githubusercontent.com/render/math?math=\mathbf{U}">, namely, as
 
 <p align="center">
-    <img src="equation_52.png" width="600" id="harrisShiftExpansion">     [52]
+    <img src="equation_52.png" width="300" id="harrisShiftExpansion">     [52]
 </p>
 
 where <img src="https://render.githubusercontent.com/render/math?math=\mathbf{u}_1"> and <img src="https://render.githubusercontent.com/render/math?math=\mathbf{u}_2"> are the columns of <img src="https://render.githubusercontent.com/render/math?math=\mathbf{U}"> and <img src="https://render.githubusercontent.com/render/math?math=a_1"> and <img src="https://render.githubusercontent.com/render/math?math=a_2"> are the components of <img src="https://render.githubusercontent.com/render/math?math=\begin{bmatrix}d_x & d_y \end{bmatrix}^t"> along the basis offered by <img src="https://render.githubusercontent.com/render/math?math=\mathbf{u}_1"> and <img src="https://render.githubusercontent.com/render/math?math=\mathbf{u}_2">. Following equation [\[52\]](#harrisShiftExpansion), we have
 
 <p align="center">
-    <img src="equation_53.png" width="600" id="harrisShiftExpansionFinal">     [53]
+    <img src="equation_53.png" width="300" id="harrisShiftExpansionFinal">     [53]
 </p>
 
 According to the geometric interpretation of the SVD, equation [\[53\]](#harrisShiftExpansionFinal) says that:
@@ -625,19 +625,19 @@ According to the geometric interpretation of the SVD, equation [\[53\]](#harrisS
 The computation of the SVD of <img src="https://render.githubusercontent.com/render/math?math=\mathbf{M}"> should be performed for each patch in which the image is divided. This can be computationally burdened. Therefore, instead of computing the full SVD, the possibility of using a less burdened and faster to be computed indicator is explored. Typically, the following indicator can be used
 
 <p align="center">
-    <img src="equation_54.png" width="600" id="harrisParameter">     [54]
+    <img src="equation_54.png" width="300" id="harrisParameter">     [54]
 </p>
 
 where <img src="https://render.githubusercontent.com/render/math?math=\det{\cdot}"> indicates the determinant of a matrix, <img src="https://render.githubusercontent.com/render/math?math=mathrm{Tr}{\cdot}"> is its trace and <img src="https://render.githubusercontent.com/render/math?math=k"> is an empirically determined constant typically belonging to <img src="https://render.githubusercontent.com/render/math?math=[0.04, 0.06]">. The following equalities hold
 
 <p align="center">
-    <img src="equation_55.png" width="600" id="xxx">     [55]
+    <img src="equation_55.png" width="300" id="xxx">     [55]
 </p>
 
 and
 
 <p align="center">
-    <img src="equation_56.png" width="600" id="xxx">     [56]
+    <img src="equation_56.png" width="300" id="xxx">     [56]
 </p>
 
 Accordingly:
