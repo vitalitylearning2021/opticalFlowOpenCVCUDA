@@ -226,6 +226,8 @@ Below, as dense methods, we will consider the Farneb<span>ä</span>ck’s approa
 scheme with pyramids.  
 In next section, we start recalling dense optical using Farneb<span>ä</span>ck’s approach.
 
+<p align="center" id="functionalFarneback" >
+</p>
 ## Theory: Dense optical flow using Farneb<span>ä</span>ck’s approach
 
 The idea behind Farneb<span>ä</span>ck’s approach  is to approximate an image in a neighborhood of each pixel having indices <img src="https://render.githubusercontent.com/render/math?math=(m,n)"> with a quadratic polynomial. In other words,
@@ -830,60 +832,25 @@ Performed such preparatory operations, it is time to proceed to the actual optic
 ### Practice: Dense optical flow using Farneb<span>ä</span>ck’s approach
 
 The first considered method is Farneb<span>ä</span>ck’s approach.  
-The first operation is that of defining an object of the
-`cuda::FarnebackOpticalFlow` class. This occurs using the
-`cuda::FarnebackOpticalFlow::create()` function whose syntax is
+The first operation is that of defining an object of the `cuda::FarnebackOpticalFlow` class. This occurs using the `cuda::FarnebackOpticalFlow::create()` function whose syntax is
 
 ``` c++
 cuda::FarnebackOpticalFlow::create (int numLevels=5, double pyrScale=0.5, bool fastPyramids=false, int winSize=13, int numIters=10, int polyN=5, double polySigma=1.1, int flags=0)
 ```
 
-In the following, we report the detailed description of its input
-parameters, also according to what illustrated in section
-[1.5](#farnebackSection). In the presented algorith, the window \(w\) in
-([\[functionalFarneback\]](#functionalFarneback)) is assumed to be a box
-filter or a Gaussian bell.
+In the following, we report the detailed description of its input parameters, also according to what illustrated in section [5](#farnebackSection). In the presented algorith, the window <img src="https://render.githubusercontent.com/render/math?math=w"> in [\[functionalFarneback\]](#functionalFarneback) is assumed to be a box filter or a Gaussian bell.
 
-1.  `numLevels` is the number of pyramid layers including the initial
-    image; `numLevels=1` means that the pyramids approach is dismissed;
-
-2.  `pyrScale` is the pyramid scale factor belonging to \((0,1)\);
-    instead of using the standard downsampling factor of \(0.5\) on each
-    level which makes each next layer twice smaller than the previous
-    one, an arbitrary factor is used;
-
-3.  `fastPyramids` skips too small pyramid levels by cropping the
-    pyramid levels which are smaller than `32 x 32` ;
-
-4.  `winSize` is the averaging window size, namely, the support of the
-    window \(w\) used in functional
-    ([\[functionalFarneback\]](#functionalFarneback));
-
-5.  `numIters` is the number of iterations the algorithm uses to
-    minimize functional
-    ([\[functionalFarneback\]](#functionalFarneback)) at each pyramid
-    level;
-
-6.  `polyN` is the size of the pixel neighborhood used to find the
-    polynomial expansion
-    ([\[farnebackApproximation\]](#farnebackApproximation)) in each
-    pixel; with larger `polyN`, the image will be approximated with
-    smoother surfaces, resulting in a more robust algorithm, but with
-    more blurred motion field; typically, `polyN=5` or `polyN=7`;
-
-7.  `polySigma` is standard deviation of the Gaussian window in case a
-    Gaussian window \(w\) is used in
-    ([\[functionalFarneback\]](#functionalFarneback)); for `polyN=5`, a
-    good value is `polySigma=1.1`; for `polyN=7`, a good value is
-    `polySigma=1.5`;
-
+1.  `numLevels` is the number of pyramid layers including the initial image; `numLevels=1` means that the pyramids approach is dismissed;
+2.  `pyrScale` is the pyramid scale factor belonging to <img src="https://render.githubusercontent.com/render/math?math=(0,1)">; instead of using the standard downsampling factor of <img src="https://render.githubusercontent.com/render/math?math=0.5"> on each level which makes each next layer twice smaller than the previous one, an arbitrary factor is used;
+3.  `fastPyramids` skips too small pyramid levels by cropping the pyramid levels which are smaller than `32 x 32` ;
+4.  `winSize` is the averaging window size, namely, the support of the window <img src="https://render.githubusercontent.com/render/math?math=w"> used in functional
+    [\[13\]](#functionalFarneback);
+5.  `numIters` is the number of iterations the algorithm uses to minimize functional [\[13\]](#functionalFarneback) at each pyramid level;
+6.  `polyN` is the size of the pixel neighborhood used to find the polynomial expansion [\[7\]](#farnebackApproximation) in each pixel; with larger `polyN`, the image will be approximated with smoother surfaces, resulting in a more robust algorithm, but with more blurred motion field; typically, `polyN=5` or `polyN=7`;
+7.  `polySigma` is standard deviation of the Gaussian window in case a Gaussian window <img src="https://render.githubusercontent.com/render/math?math=w"> is used in [\[13\]](#functionalFarneback); for `polyN=5`, a good value is `polySigma=1.1`; for `polyN=7`, a good value is `polySigma=1.5`;
 8.  `flags` can be a combination of the following:
-    `OPTFLOW_USE_INITIAL_FLOW = 4` to use the input flow as an initial
-    flow approximation; `OPTFLOW_FARNEBACK_GAUSSIAN = 256` to use a
-    Gaussian window \(w\) instead of a box filter; usually, this option
-    leads to better accuracy than a box filter, at the cost of lower
-    speed; normally, `winSize` for a Gaussian window should be set to a
-    larger value to achieve the same level of robustness.
+    `OPTFLOW_USE_INITIAL_FLOW = 4` to use the input flow as an initial flow approximation; 
+    `OPTFLOW_FARNEBACK_GAUSSIAN = 256` to use a Gaussian window <img src="https://render.githubusercontent.com/render/math?math=w"> instead of a box filter; usually, this option leads to better accuracy than a box filter, at the cost of lower speed; normally, `winSize` for a Gaussian window should be set to a larger value to achieve the same level of robustness.
 
 Once the object of the class `cuda::FarnebackOpticalFlow` has been
 created, it is necessary to work out the optical flow calculations. This
