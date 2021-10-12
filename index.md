@@ -716,51 +716,40 @@ As it can be seen from Fig. [16](#colorPicker), MS Paint enables representing a 
 The color wheel is constructed by associating the hue to the angular coordinate of a polar system and the saturation to the radial coordinate. Concerning the angular coordinate, the full circle is partitioned in a certain number of sectors associated to a certain number of color transitions. In the following, we will deal with the
 Middlebury color coding based on the way the human eye perceives the different color shades. In particular, the color transitions are \(6\): red-yellow (RY), yellow-green (YG), green-cyan (GC), cyan-blue (CB), blue-magenta (BM), magenta-red (MR). However, it should be noticed that such color transitions do not contain the same number of shades. This is illustrated in table [1](#colorShades) which reports the color transitions along with the corresponding number of shades in the Middlebury approach.
 
-<div id="colorShades">
-
-| Color transition | Number of shades |
-| :--------------: | :--------------: |
-|        RY        |      \(15\)      |
-|        YG        |      \(6\)       |
-|        GC        |      \(4\)       |
-|        CB        |      \(11\)      |
-|        BM        |      \(13\)      |
-|        MR        |      \(6\)       |
-
-Middlebury color
-transitions.<span id="colorShades" label="colorShades">\[colorShades\]</span>
-
-</div>
+<p align="center">
+  <img src="Table_1.png" width="400" id="colorShades">
+  <br>
+     <em>Table 1. Middlebury color transitions.</em>
+</p>
 
 We will resume table [1](#colorShades) when we will discuss the implementations below.
 
-![Color wheel.](Pictures/Chapter04/colorWheel.jpg)
+<p align="center">
+  <img src="colorWheel.jpg" width="400" id="xxx">
+  <br>
+     <em>Figure 17. Color wheel.</em>
+</p>
 
-It is now time to practice the theory, both for the dense and for the
-sparse optical flow cases. In next section, we will start practicing the
-dense case.
+It is now time to practice the theory, both for the dense and for the sparse optical flow cases. In next section, we will start practicing the dense case.
 
 ## Practice: dense optical flow
 
-We turn now to the presentation of the code for the computation of dense
-optical flow.  
-The first step is to choose two test image for the optical flow
-computation. The images that we will here consider for either dense or
-sparse optical flows have been drawn from the [Reinhard Klette’s
-page](https://ccv.wordpress.fos.auckland.ac.nz/data/stereo-pairs/) and
-are shown in the next two figures:
+We turn now to the presentation of the code for the computation of dense optical flow.  
+The first step is to choose two test image for the optical flow computation. The images that we will here consider for either dense or sparse optical flows have been drawn from the [Reinhard Klette’s page](https://ccv.wordpress.fos.auckland.ac.nz/data/stereo-pairs/) and are shown in the next two figures:
 
-![First image for dense optical flow calculation
-(<https://ccv.wordpress.fos.auckland.ac.nz/data/stereo-pairs/>).](Pictures/Chapter04/firstImage.jpg)
+<p align="center">
+  <img src="firstImage.jpg" width="400" id="firstImage">
+  <br>
+     <em>Figure 18. First image for dense optical flow calculation.</em>
+</p>
 
-![Second image for dense optical flow calculation
-(<https://ccv.wordpress.fos.auckland.ac.nz/data/stereo-pairs/>).](Pictures/Chapter04/secondImage.jpg)
+<p align="center">
+  <img src="secondImage.jpg" width="400" id="secondImage">
+  <br>
+     <em>Figure 19. Second image for dense optical flow calculation.</em>
+</p>
 
-As it can be seen from figures [1.18](#firstImage) and
-[1.19](#secondImage), the two images are very similar since they have
-been acquired at two very close instants of time. Accordingly, although
-they aim at representing movements across the scene, the movement itself
-is not really visible to the naked eye. The snipped defining the names
+As it can be seen from figures [18](#firstImage) and [19](#secondImage), the two images are very similar since they have been acquired at two very close instants of time. Accordingly, although they aim at representing movements across the scene, the movement itself is not really visible to the naked eye. The snipped defining the names
 of the two images is the following:
 
 ``` c++
@@ -768,26 +757,21 @@ string filename1 = "./rect_0384_c1.tif";
 string filename2 = "./rect_0385_c1.tif";
 ```
 
-As first operation, the two images are loaded and stored in a `Mat`
-matrix, in grey scale format:
+As first operation, the two images are loaded and stored in a `Mat` matrix, in grey scale format:
 
 ``` c++
 Mat im0 = imread(filename1, IMREAD_GRAYSCALE);
 Mat im1 = imread(filename2, IMREAD_GRAYSCALE);
 ```
 
-Once loaded the images, the success of the loading operation is checked.
-In particular, it is verified that the two images have been successfully
-opened, namely, they are not empty and are of the same size. This occurs
-by the snippet:
+Once loaded the images, the success of the loading operation is checked. In particular, it is verified that the two images have been successfully opened, namely, they are not empty and are of the same size. This occurs by the snippet:
 
 ``` c++
 const int fileCheckInt = fileCheck(im0, im1, filename1, filename2);
 if (fileCheckInt == -1) return -1;
 ```
 
-stopping the execution in case of any issue and exploiting the function
-`fileCheck()` below reported:
+stopping the execution in case of any issue and exploiting the function `fileCheck()` below reported:
 
 ``` c++
 int fileCheck(Mat &im0, Mat &im1, string &filename1, string &filename2) {
@@ -805,20 +789,19 @@ int fileCheck(Mat &im0, Mat &im1, string &filename1, string &filename2) {
         return -1; }
 }
 ```
+<p align="center" id="xxx" >
+     <em>Listing 1. The `fileCheck()` function.</em>
+</p>
 
-Once verified that the loading has been successful, the images are
-transferred from host to device:
+Once verified that the loading has been successful, the images are transferred from host to device:
 
 ``` c++
 GpuMat d_im0(im0);
 GpuMat d_im1(im1);
 ```
 
-and the `d_opticalFlow` GPU matrix is defined. Matrix `d_opticalFlow` is
-responsible to store the result of the optical flow calculation and has
-the same dimensions of the loaded test images.  
-Later on, the color wheel is computed. This occurs thanks to the
-following function:
+and the `d_opticalFlow` GPU matrix is defined. Matrix `d_opticalFlow` is responsible to store the result of the optical flow calculation and has the same dimensions of the loaded test images.  
+Later on, the color wheel is computed. This occurs thanks to the following function:
 
 ``` c++
 void computeColorWheel() {
@@ -837,11 +820,12 @@ void computeColorWheel() {
     for (int i = 0; i < MR; ++i, ++k) colorWheel[k] = 
         Vec3i(255, 0, 255 - 255 * i / MR); }
 ```
+<p align="center" id="xxx" >
+     <em>Listing 2. The `computeColorWheel()` function.</em>
+</p>
 
-The `computeColorWheel()` function defines the colour shades in the
-different transitions described by table [1.1](#colorShades).  
-Performed such preparatory operations, it is time to proceed to the
-actual optical flow computation by using the above described approaches.
+The `computeColorWheel()` function defines the colour shades in the different transitions described by table [1](#colorShades).  
+Performed such preparatory operations, it is time to proceed to the actual optical flow computation by using the above described approaches.
 
 ### Practice: Dense optical flow using Farneb<span>ä</span>ck’s approach
 
