@@ -852,18 +852,14 @@ In the following, we report the detailed description of its input parameters, al
     `OPTFLOW_USE_INITIAL_FLOW = 4` to use the input flow as an initial flow approximation; 
     `OPTFLOW_FARNEBACK_GAUSSIAN = 256` to use a Gaussian window <img src="https://render.githubusercontent.com/render/math?math=w"> instead of a box filter; usually, this option leads to better accuracy than a box filter, at the cost of lower speed; normally, `winSize` for a Gaussian window should be set to a larger value to achieve the same level of robustness.
 
-Once the object of the class `cuda::FarnebackOpticalFlow` has been
-created, it is necessary to work out the optical flow calculations. This
-is performed by using the following snippet:
+Once the object of the class `cuda::FarnebackOpticalFlow` has been created, it is necessary to work out the optical flow calculations. This is performed by using the following snippet:
 
 ``` c++
 farn->calc(d_im0, d_im1, d_opticalFlow);
 ```
 
-The output matrix, namely, the `d_opticalFlow` GPU matrix, is a `float`,
-two-channels matrix.  
-Finally, it is necessary to visualize the optical flow. This occurs by
-exploiting the `computeFlowAndShow()` function reported in the following
+The output matrix, namely, the `d_opticalFlow` GPU matrix, is a `float`, two-channels matrix. 
+Finally, it is necessary to visualize the optical flow. This occurs by exploiting the `computeFlowAndShow()` function reported in the following
 
 ``` c++
 static void computeFlowAndShow(const char *name, const GpuMat &d_opticalFlow) {
@@ -880,21 +876,17 @@ static void computeFlowAndShow(const char *name, const GpuMat &d_opticalFlow) {
 
     imshow(name, out); }
 ```
+<p align="center" id="xxx" >
+     <em>Listing 3. The `computeFlowAndShow()` function.</em>
+</p>
 
-The first operation executed by `computeFlowAndShow()` is splitting the
-two-channels matrix `d_opticalFlow` into the `planes` two matrices
-`GpuMat` array. This is possible thanks to
+The first operation executed by `computeFlowAndShow()` is splitting the two-channels matrix `d_opticalFlow` into the `planes` two matrices `GpuMat` array. This is possible thanks to
 
 ``` c++
 cuda::split(d_opticalFlow, planes);
 ```
 
-Later on, `planes[0]` and `planes[1]` are transferred to the two CPU
-`Mat` matrices `opticalFlowx` and `opticalFlowy`. Indeed, for the sake
-of simplicity, the association between optical flow and colours occurs
-on the host. The `computeFlowAndShow()` function, in turn, recalls the
-`colorOpticalFlow()` function. Such a function is reported in the code
-snippet below:
+Later on, `planes[0]` and `planes[1]` are transferred to the two CPU `Mat` matrices `opticalFlowx` and `opticalFlowy`. Indeed, for the sake of simplicity, the association between optical flow and colours occurs on the host. The `computeFlowAndShow()` function, in turn, recalls the `colorOpticalFlow()` function. Such a function is reported in the code snippet below:
 
 ``` c++
 static void colorOpticalFlow(const Mat_<float> &h_dx, const Mat_<float> &h_dy, Mat &h_coloredFlow, float maxmotion) {
@@ -910,16 +902,11 @@ static void colorOpticalFlow(const Mat_<float> &h_dx, const Mat_<float> &h_dy, M
             // --- In the flow is valid, returns the color associated to the displacement
             if (isFlowValid(u)) h_coloredFlow.at<Vec3b>(y, x) = returnCOLOR(u.x / maxmotion, u.y / maxmotion); }}}
 ```
+<p align="center" id="xxx" >
+     <em>Listing 4. The `colorOpticalFlow()` function.</em>
+</p>
 
-It is appointed to define and initialize to zero the three-channels,
-`unsigned` matrix `h_coloredFlow`. Subsequently, each point of
-`h_coloredFlow` is coloured as a function of the two optical flow
-components `h_dx` and `h_dy`, after having performed a check, using the
-`isFlowValid` function, that the optical flow is valid. The optical flow
-is considered to be valid only if it is not `NaN` and if its components
-are not exceedingly large. The `colorOpticalFlow()` function colours the
-optical flow by exploiting the `returnCOLOR()` function reported in the
-following:
+It is appointed to define and initialize to zero the three-channels, `unsigned` matrix `h_coloredFlow`. Subsequently, each point of `h_coloredFlow` is coloured as a function of the two optical flow components `h_dx` and `h_dy`, after having performed a check, using the `isFlowValid` function, that the optical flow is valid. The optical flow is considered to be valid only if it is not `NaN` and if its components are not exceedingly large. The `colorOpticalFlow()` function colours the optical flow by exploiting the `returnCOLOR()` function reported in the following:
 
 ``` c++
 static Vec3b returnCOLOR(float ux, float uy) {
@@ -963,35 +950,26 @@ static Vec3b returnCOLOR(float ux, float uy) {
 
     return displacementColor; }
 ```
+<p align="center" id="xxx" >
+     <em>Listing 5. The `returnCOLOR()` function.</em>
+</p>
 
-The `returnCOLOR()` function first converts the Cartesian components of
-the optica flow in polar ones, namely, `rad` and `angleNormalized`,
-where `angleNormalized` has been normalized to \(\pi\). Through
-`shadingPosition`, the colour wheel shading corresponding to the optical
-flow angle is evaluated. Later on, `shade0` and `shade1` compute the
-boundaries of the shading interval, while `f` computes the offset with
-respect to the left border of the shading interval itself. For each
-shading interval boundary, the corresponding colour, in RGB format, is
-computed leading to `col0` and `col1`. Finally, the value of `f` is used
-to perform a linear interpolation between `col0` and `col1`.  
-The result of the whole processing can be appreciated from the following
-figure:
+The `returnCOLOR()` function first converts the Cartesian components of the optica flow in polar ones, namely, `rad` and `angleNormalized`, where `angleNormalized` has been normalized to <img src="https://render.githubusercontent.com/render/math?math=\pi">. Through `shadingPosition`, the colour wheel shading corresponding to the optical flow angle is evaluated. Later on, `shade0` and `shade1` compute the boundaries of the shading interval, while `f` computes the offset with respect to the left border of the shading interval itself. For each shading interval boundary, the corresponding colour, in RGB format, is computed leading to `col0` and `col1`. Finally, the value of `f` is used to perform a linear interpolation between `col0` and `col1`.  
+The result of the whole processing can be appreciated from the following figure:
 
-![Result of the Farneb<span>ä</span>ck’s optical flow
-calculations.](Pictures/Chapter04/Farneback.JPG)
+<p align="center">
+  <img src="Farneback.JPG" width="400" id="Farneback">
+  <br>
+     <em>Figure 20. Result of the Farneb<span>ä</span>ck’s optical flow
+calculations.</em>
+</p>
 
-As it can be seen from figure [1.20](#Farneback), the coloured image
-regions are those relative to the pedestrian and to the moving cars.
-Such regions are differently coloured, being the corresponding scene
-movements different.  
+As it can be seen from figure [20](#Farneback), the coloured image regions are those relative to the pedestrian and to the moving cars. Such regions are differently coloured, being the corresponding scene movements different.
 Let us now turn to the use of the Brox *et al.*’s approach.
 
 ### Practice: Dense optical flow using Brox *et al.*’s approach
 
-Also in the case of the Brox *et al.*’s approach, the first operation is
-defining an object of the `cuda::BroxOpticalFlow` class. This takes
-place by using the `cuda::BroxOpticalFlow::create()` function whose
-prototype is:
+Also in the case of the Brox *et al.*’s approach, the first operation is defining an object of the `cuda::BroxOpticalFlow` class. This takes place by using the `cuda::BroxOpticalFlow::create()` function whose prototype is:
 
 ``` c++
 cuda::BroxOpticalFlow::create(double alpha=0.197, double gamma=50.0,
@@ -999,29 +977,16 @@ cuda::BroxOpticalFlow::create(double alpha=0.197, double gamma=50.0,
     int outer_iterations=150, int solver_iterations=10)
 ```
 
-To reach a better understanding of such a function also in connection to
-what illustrated in section [1.6](#broxSection), in the following we
-report the detailed description of its input parameters:
+To reach a better understanding of such a function also in connection to what illustrated in section [6](#broxSection), in the following we report the detailed description of its input parameters:
 
-1.  `alpha` is the regularization parameter in equation
-    ([\[broxTwoTerms\]](#broxTwoTerms));
-
-2.  `gamma` is the gradient constancy importance in equation
-    ([\[broxFunctional1\]](#broxFunctional1));
-
-3.  `scale_factor` is the same as `pyrScale` for
-    Farneb<span>ä</span>ck’s approach;
-
-4.  `inner_iterations` is the number of inner loop iterations
-    ([\[fixedPoint\]](#fixedPoint));
-
+1.  `alpha` is the regularization parameter in equation [\[18\]](#broxTwoTerms);
+2.  `gamma` is the gradient constancy importance in equation [\[16\]](#broxFunctional1);
+3.  `scale_factor` is the same as `pyrScale` for Farneb<span>ä</span>ck’s approach;
+4.  `inner_iterations` is the number of inner loop iterations [\[21\]](#fixedPoint);
 5.  `outer_iterations` is the number of pyramid levels;
+6.  `solver_iterations` is number of linear system solver iterations.
 
-6.  `solver_iterations` is number of linear system solver iterations
-
-Once defined the object of the `cuda::BroxOpticalFlow` class, the two
-images are first amplitude scaled so that their respective possible
-maxima are \(1\):
+Once defined the object of the `cuda::BroxOpticalFlow` class, the two images are first amplitude scaled so that their respective possible maxima are <img src="https://render.githubusercontent.com/render/math?math=1">:
 
 ``` c++
 GpuMat d_im0Scaled;
