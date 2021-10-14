@@ -960,8 +960,7 @@ The result of the whole processing can be appreciated from the following figure:
 <p align="center">
   <img src="Farneback.JPG" width="400" id="Farneback">
   <br>
-     <em>Figure 20. Result of the Farneb<span>ä</span>ck’s optical flow
-calculations.</em>
+     <em>Figure 20. Result of the Farneb<span>ä</span>ck’s optical flow calculations.</em>
 </p>
 
 As it can be seen from figure [20](#Farneback), the coloured image regions are those relative to the pedestrian and to the moving cars. Such regions are differently coloured, being the corresponding scene movements different.
@@ -1002,60 +1001,37 @@ Subsequently, the very calculation of the optical flow occurs:
 brox->calc(d_im0Scaled, d_im1Scaled, d_opticalFlow);
 ```
 
-Finally, ths optical flow is visualized. The result of the processing
-according to Brox *et al.* is illustrated in the following figure:
+Finally, the optical flow is visualized. The result of the processing according to Brox *et al.* is illustrated in the following figure:
 
-![Result of the Brox *et al.*’s optical flow
-calculations.](Pictures/Chapter04/Brox.JPG)
+<p align="center">
+  <img src="Brox.JPG" width="400" id="Brox">
+  <br>
+     <em>Figure 21. Result of the Brox *et al.*’s optical flow calculations.</em>
+</p>
 
-As it can be seen from figure [1.21](#Brox), once again, the coloured
-image regions are those relative to the pedestrian and the moving
-cars.  
-The next step for us is to experimenting dense optical flow using TV-L1
-regularization.
+As it can be seen from figure [21](#Brox), once again, the coloured image regions are those relative to the pedestrian and the moving cars.  
+The next step for us is to experimenting dense optical flow using TV-L1 regularization.
 
 ### Practice: Dense optical flow using TV-L1 regularization
 
-In a way totally analogous to the above examined techniques, the first
-step is using the `cuda::OpticalFlowDual_TVL1::create` function whose
-prototype is:
+In a way totally analogous to the above examined techniques, the first step is using the `cuda::OpticalFlowDual_TVL1::create` function whose prototype is:
 
 ``` c++
 cv::cuda::OpticalFlowDual_TVL1::create(double tau = 0.25, double lambda = 0.15, double theta = 0.3, int nscales = 5, int warps = 5, double epsilon = 0.01, int iterations = 300, double scaleStep = 0.8, double gamma = 0.0, bool  useInitialFlow = false)  
 ```
 
-In the following, we report the detailed meaning of the input parameters
-of such a function:
+In the following, we report the detailed meaning of the input parameters of such a function:
 
-1.  `tau` is the time step in equation
-    ([\[timeStepTVL1\]](#timeStepTVL1));
-
-2.  `lambda` is the weight in functional
-    ([\[L1Functional3\]](#L1Functional3));
-
-3.  `theta` is the convex relaxation parameter in
-    ([\[L1FunctionalRelaxation\]](#L1FunctionalRelaxation));
-
+1.  `tau` is the time step in equation [\[33\]](#timeStepTVL1);
+2.  `lambda` is the weight in functional [\[29\]](#L1Functional3);
+3.  `theta` is the convex relaxation parameter in [\[30\]](#L1FunctionalRelaxation);
 4.  `nscales` is the number of pyramid levels;
-
-5.  `warps` is the number of times that
-    \(I(x+d_x^0(x,y),y+d_y^0(x,y),t+1)\) and
-    \(\underline{\nabla}I(x+d_x^0(x,y),y+d_y^0(x,y),t+1)\) are computed
-    per scale;
-
+5.  `warps` is the number of times that <img src="https://render.githubusercontent.com/render/math?math=I(x+d_x^0(x,y),y+d_y^0(x,y),t+1)"> and <img src="https://render.githubusercontent.com/render/math?math=\underline{\nabla}I(x+d_x^0(x,y),y+d_y^0(x,y),t+1)"> are computed per scale;
 6.  `epsilon` stopping criterion threshold;
-
-7.  `iterations` is the maximum number of iterations used for solving
-    the convex relaxation problem at each pyramids scale and for each
-    warping;
-
+7.  `iterations` is the maximum number of iterations used for solving the convex relaxation problem at each pyramids scale and for each warping;
 8.  `scaleStep` is the pyramids scale as before;
-
-9.  `gamma` is the coefficient for additional, three-dimensional
-    illumination variation term;
-
-10. `useInitialFlow` establishes whether an initial flow guess should be
-    used or not.
+9.  `gamma` is the coefficient for additional, three-dimensional illumination variation term;
+10. `useInitialFlow` establishes whether an initial flow guess should be used or not.
 
 The actual computation is performed by the snippet
 
@@ -1063,7 +1039,7 @@ The actual computation is performed by the snippet
 tvl1->calc(d_im0, d_im1, d_opticalFlow);
 ```
 
-The result is illustrated in the next figure [1.22](#TV-L1).
+The result is illustrated in the next figure [22](#TV-L1).
 
 ![Result of the TV-L1 optical flow
 calculations.](Pictures/Chapter04/TVL1.JPG)
