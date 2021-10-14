@@ -562,6 +562,8 @@ Intuitively, following what above illustrated with the aid of figure [11](#featu
 Once spotted the “good” features within the image, the last question to answer is: how can we find the same features in the next image? This task requires the capability of adequately describing the found features so that they can be spotted also in the next image, a step known as *feature description*.  
 In the two next subsections, we recall two among the most successful corner detectors, namely, Harris and Shi-Tomasi corner detectors.
 
+<p align="center" id="Harris" >
+</p>
 ### Harris corner detector
 
 One of the first corner detection algorithms has been Harris corner detector developed by Harris and Stephens in 1988.  
@@ -1171,36 +1173,22 @@ In next subsection, we will first consider the case of static images.
 
 ### Sparse optical flow on static images
 
-Let us immediately get to the heart of the problem and illustrate the
-sparse optical flow code.  
-We will assume to operate on the same two test images used for the dense
-case, so that the image loading does not need further commenting. We
-just need to report that the two images are stored in the `im0` and
-`im1` matrices.  
-The first image is cast into grey scale and stored in the `im0Gray`
-matrix. Indeed, the first step of the approach is that of determining
-the good features to track and the relative CUDA-accelerated, OpenCV
-routine requires grey scale images as inputs. The casting is worked out
-using the function `cv::cvtColor()` as
+Let us immediately get to the heart of the problem and illustrate the sparse optical flow code.  
+We will assume to operate on the same two test images used for the dense case, so that the image loading does not need further commenting. We just need to report that the two images are stored in the `im0` and `im1` matrices.  
+The first image is cast into grey scale and stored in the `im0Gray` matrix. Indeed, the first step of the approach is that of determining the good features to track and the relative CUDA-accelerated, OpenCV routine requires grey scale images as inputs. The casting is worked out using the function `cv::cvtColor()` as
 
 ``` c++
 cv::cvtColor(im0, im0Gray, COLOR_BGR2GRAY);
 ```
 
-As mentioned, the next step is that of determining the good features to
-track. To this end, the first grey scale image is moved to the GPU by:
+As mentioned, the next step is that of determining the good features to track. To this end, the first grey scale image is moved to the GPU by:
 
 ``` c++
 GpuMat d_im0Gray(im0Gray);
 ```
 
-The `d_previousPoints` `GpuMat` matrix is then declared. Such a matrix
-will have the task of hosting the positions of the good features to
-track in the first image. The name *previous* is related to the fact
-that `d_previousPoints` hosts the mentioned positions with respect to
-the first image and that these positions will be then tracked in the
-second image. We will also deal, later on, with a `d_nextPoints`
-`GpuMat`.  
+The `d_previousPoints` `GpuMat` matrix is then declared. Such a matrix will have the task of hosting the positions of the good features to track in the first image. The name *previous* is related to the fact that `d_previousPoints` hosts the mentioned positions with respect to the first image and that these positions will be then tracked in the
+second image. We will also deal, later on, with a `d_nextPoints` `GpuMat`.  
 The good features to track are determined using the function:
 
 ``` c++
@@ -1217,46 +1205,21 @@ Ptr<CornersDetector> cv::cuda::createGoodFeaturesToTrackDetector
 
 The input parameters of such a routine have the following meaning:
 
-1.  `srcType` is the input source type; only `CV_8UC1` and `CV_32FC1`
-    are currently supported;
+1.  `srcType` is the input source type; only `CV_8UC1` and `CV_32FC1` are currently supported;
+2.  `maxCorners` is the maximum number of good features to track; if more than `maxCorners` points are found, the strongest of them are returned;
+3.  `qualityLevel` characterizes the minimal accepted quality of image corners; this parameter is multiplied by the minimum eigenvalue of matrix [\[50\]](#cornerMatrix) calculated across the image and the corners with the quality measure less than the product are rejected;
+4.  `minDistance` is the minimum possible Euclidean distance between the returned corners;
+5.  `blockSize` is the size of <img src="https://render.githubusercontent.com/render/math?math=W"> in the subsection on [Harris corner detector](#Harris);
+6.  `useHarrisDetector` parameter indicating whether to use Harris or     Shi-Tomasi detectors;
+7.  `harrisK` is the parameter <img src="https://render.githubusercontent.com/render/math?math=k"> in equation [\[harrisParameter\]](#harrisParameter).
 
-2.  `maxCorners` is the maximum number of good features to track; if
-    more than `maxCorners` points are found, the strongest of them are
-    returned;
-
-3.  `qualityLevel` characterizes the minimal accepted quality of image
-    corners; this parameter is multiplied by the minimum eigenvalue of
-    matrix ([\[cornerMatrix\]](#cornerMatrix)) calculated across the
-    image and the corners with the quality measure less than the product
-    are rejected;
-
-4.  `minDistance` is the minimum possible Euclidean distance between the
-    returned corners;
-
-5.  `blockSize` is the size of \(W\) in subsection [1.10.1](#Harris);
-
-6.  `useHarrisDetector` parameter indicating whether to use Harris or
-    Shi-Tomasi detectors;
-
-7.  `harrisK` is the parameter \(k\) in equation
-    ([\[harrisParameter\]](#harrisParameter)).
-
-Once created an object of the class `CornersDetector` with the just
-mentioned function, the actual computation is performed by:
+Once created an object of the class `CornersDetector` with the just mentioned function, the actual computation is performed by:
 
 ``` c++
 detector->detect(d_im0Gray, d_previousPoints);
 ```
 
-After having computed and stored the points associated to the ai good
-features to track in `d_previousPoints`, it is necessary to proceed to
-the calculation of the optical flow associated to those points. This is
-worked out by defining an object of the class
-`cuda::SparsePyrLKOpticalFlow` using the
-`cuda::SparsePyrLKOpticalFlow::create` function whose prototype is the
-same of that for the already examined
-`cuda::DensePyrLKOpticalFlow::create` function. The calculation is then
-realized by the `SparseOpticalFlow::calc` function whose prototype is
+After having computed and stored the points associated to the good features to track in `d_previousPoints`, it is necessary to proceed to the calculation of the optical flow associated to those points. This is worked out by defining an object of the class `cuda::SparsePyrLKOpticalFlow` using the `cuda::SparsePyrLKOpticalFlow::create` function whose prototype is the same of that for the already examined `cuda::DensePyrLKOpticalFlow::create` function. The calculation is then realized by the `SparseOpticalFlow::calc` function whose prototype is
 
 ``` c++
 SparseOpticalFlow::calc(InputArray prevImg, InputArray nextImg, InputArray prevPts, InputOutputArray nextPts, OutputArray status, OutputArray err = cv::noArray())
