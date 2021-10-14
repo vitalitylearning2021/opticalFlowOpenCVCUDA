@@ -1073,11 +1073,13 @@ lk->calc(d_im0, d_im1, d_opticalFlow);
 
 the result in figure [24](#LK) is obtained
 
-![Result of the Lucas-Kanade’s dense optical flow
-calculations.](Pictures/Chapter04/LK.JPG)
+<p align="center">
+  <img src="LK.JPG" width="400" id="LK">
+  <br>
+     <em>Figure 23. Result of the Lucas-Kanade’s dense optical flow calculations.</em>
+</p>
 
-Next Listing reports the `main()` function containing all the
-illustrated approaches:
+Next Listing reports the `main()` function containing all the illustrated approaches:
 
 ``` c++
 int main() {
@@ -1156,19 +1158,15 @@ int main() {
     return 0;
 }
 ```
+<p align="center" id="xxx" >
+     <em>Listing 6. The `main()` function invoking dense optical flow functions.</em>
+</p>
 
-This was the last example of using OpenCV with CUDA to solve the dense
-optical flow problem. In next section, we will describe the considered
-algorithm to solve sparse optical flow using the CUDA-accelerated,
-OpenCV library.
+This was the last example of using OpenCV with CUDA to solve the dense optical flow problem. In next section, we will describe the considered algorithm to solve sparse optical flow using the CUDA-accelerated, OpenCV library.
 
 ## Practice: sparse optical flow
 
-In this section, we will illustrate how, from a practical point of view,
-sparse optical flow in OpenCV with CUDA is performed. We will consider
-two cases, namely, the case when the optical flow is computed on the two
-test images previously considered for the dense application and the case
-when optical flow involves a sequence of video images.  
+In this section, we will illustrate how, from a practical point of view, sparse optical flow in OpenCV with CUDA is performed. We will consider two cases, namely, the case when the optical flow is computed on the two test images previously considered for the dense application and the case when optical flow involves a sequence of video images.  
 In next subsection, we will first consider the case of static images.
 
 ### Sparse optical flow on static images
