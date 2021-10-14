@@ -1041,19 +1041,18 @@ tvl1->calc(d_im0, d_im1, d_opticalFlow);
 
 The result is illustrated in the next figure [22](#TV-L1).
 
-![Result of the TV-L1 optical flow
-calculations.](Pictures/Chapter04/TVL1.JPG)
+<p align="center">
+  <img src="TVL1.JPG" width="400" id="TV-L1">
+  <br>
+     <em>Figure 22. Result of the TV-L1 optical flow calculations.</em>
+</p>
 
-Considerations totally analogous to the previous cases can be performed
-also for the current approach.  
-In next section, we will deal with the last method considered for dense
-optical flow in this chapter, namely, Lucas-Kanade’s approach.
+Considerations totally analogous to the previous cases can be performed also for the current approach.  
+In next section, we will deal with the last method considered for dense optical flow in this chapter, namely, Lucas-Kanade’s approach.
 
 ### Practice: Dense optical flow using Lucas-Kanade’s approach
 
-In a way totally analogous to the previous cases, the definition of an
-object of the `cuda::DensePyrLKOpticalFlow` class is performed by the
-`cuda::DensePyrLKOpticalFlow::create()` function whose prototype is:
+In a way totally analogous to the previous cases, the definition of an object of the `cuda::DensePyrLKOpticalFlow` class is performed by the `cuda::DensePyrLKOpticalFlow::create()` function whose prototype is:
 
 ``` c++
 cuda::DensePyrLKOpticalFlow::create(Size winSize = Size(13, 13), int maxLevel = 3, int iters = 30, bool useInitialFlow = false)
@@ -1061,16 +1060,10 @@ cuda::DensePyrLKOpticalFlow::create(Size winSize = Size(13, 13), int maxLevel = 
 
 The input parameters of such a function have the following meaning:
 
-1.  `winSize` is the size of the pixel window around the pixel of
-    interest;
-
-2.  `maxLevel` is the number of used pyramid levels; \(0\) means no
-    pyramids;
-
-3.  `iters` is the number of iterations according to the scheme in ;
-
-4.  `useInitialFlow` establishes whether an initial flow guess should be
-    used or not.
+1.  `winSize` is the size of the pixel window around the pixel of interest;
+2.  `maxLevel` is the number of used pyramid levels; <img src="https://render.githubusercontent.com/render/math?math=0"> means no pyramids;
+3.  `iters` is the number of iterations;
+4.  `useInitialFlow` establishes whether an initial flow guess should be used or not.
 
 Following the calculations performed invoking
 
@@ -1078,7 +1071,7 @@ Following the calculations performed invoking
 lk->calc(d_im0, d_im1, d_opticalFlow);
 ```
 
-the result in figure [1.24](#LK) is obtained
+the result in figure [24](#LK) is obtained
 
 ![Result of the Lucas-Kanade’s dense optical flow
 calculations.](Pictures/Chapter04/LK.JPG)
