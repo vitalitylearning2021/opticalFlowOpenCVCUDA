@@ -1380,39 +1380,31 @@ int main() {
 
 The result of the processing on the considered images is illustrated in the following figure:
 
-![Result of the Lucas-Kanade’s sparse optical flow calculations on
-static images.](Pictures/Chapter04/sparseOpticalFlowPractice.JPG)
+<p align="center">
+  <img src="LK.JPG" width="400" id="xxx">
+  <br>
+     <em>Figure 24. Result of the Lucas-Kanade’s sparse optical flow calculations on static images.</em>
+</p>
 
-As it can be seen, the blue arrows indicate the movements of both the
-pedestrian and the cars. In particular, they indicate that the
-pedestrian and the car on the left move left, while the car on the right
-moves right.  
-In the following subsection, the sparse optical flow problem on video
-images will be considered.
+As it can be seen, the blue arrows indicate the movements of both the pedestrian and the cars. In particular, they indicate that the pedestrian and the car on the left move left, while the car on the right moves right.  
+In the following subsection, the sparse optical flow problem on video images will be considered.
 
 ### Sparse optical flow on video images
 
-We will here shortly describe the approach followed to compute the
-sparse optical flow for video images, being that very similar to the one
-already used for static images.  
-The marked different with respect to the case examined in the foregoing
-section is the use of the `VideoCapture` overloaded function. The
-prototype of interest is the following:
+We will here shortly describe the approach followed to compute the sparse optical flow for video images, being that very similar to the one already used for static images.  
+The marked different with respect to the case examined in the foregoing section is the use of the `VideoCapture` overloaded function. The prototype of interest is the following:
 
 ``` c++
 cv::VideoCapture::VideoCapture(const String &filename)  
 ```
 
-Such a function opens a video file for video capturing. The first video
-image is then stored as first image using the following command:
+Such a function opens a video file for video capturing. The first video image is then stored as first image using the following command:
 
 ``` c++
 cap >> im0;
 ```
 
-The image in `im0` residing on the host is then copied to the device in
-a `GpuMat` matrix `d_frame0`, scaled by `cuda::resize` and cast to grey
-scale using `cuda::cvtColor`, namely:
+The image in `im0` residing on the host is then copied to the device in a `GpuMat` matrix `d_frame0`, scaled by `cuda::resize` and cast to grey scale using `cuda::cvtColor`, namely:
 
 ``` c++
 d_frame0.upload(im0);
@@ -1427,12 +1419,7 @@ cuda::CornersDetector
 cuda::SparsePyrLKOpticalFlow
 ```
 
-classes are created. Moreover, an endless loop in which each new loaded
-video image is stored in the “second” image `im1` is operated. `im1` is
-then copied to the GPU in `d_frame1`, scaled and cast to grey scale. The
-process then proceeds as in the foregoing case. At the end of each loop
-cycle, `im1` is stored as “old” image in `im0`. The following Listing
-reports the `main()` function of the approach:
+classes are created. Moreover, an endless loop in which each new loaded video image is stored in the “second” image `im1` is operated. `im1` is then copied to the GPU in `d_frame1`, scaled and cast to grey scale. The process then proceeds as in the foregoing case. At the end of each loop cycle, `im1` is stored as “old” image in `im0`. The following Listing reports the `main()` function of the approach:
 
 ``` c++
 void main() {
@@ -1518,6 +1505,9 @@ void main() {
 
         if (waitKey(10) > 0) break; } }
 ```
+<p align="center" id="xxx" >
+     <em>Listing 10. The sparse Lucas-Kanade's approach for video images.</em>
+</p>
 
 The algorithm has been evaluated against a motorway traffic video
 downloadable at
