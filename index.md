@@ -1228,37 +1228,20 @@ SparseOpticalFlow::calc(InputArray prevImg, InputArray nextImg, InputArray prevP
 The meaning of its input parameters is illustrated in the following:
 
 1.  `prevImg` is the first input image;
-
 2.  `nextImg` is the second input image;
+3.  `prevPts` is the input vector of 2D points for which the flow is needed; in our case, it is the input vector of the points containing the good features to track;
+4.  `nextPts` is the output vector of 2D points containing the computed new positions in the second image;
+5.  `status` is the output status vector containing a `1` if the flow for the corresponding features has been found, otherwise a `0`;
+6.  `err` is an optional output vector containing error response for each point (inverse confidence); the error is a measure of the similarity of the pixel values corresponding to the tracked features in the first image and the pixel values corresponding to the calculated optical flow in the second image.
 
-3.  `prevPts` is the input vector of 2D points for which the flow is
-    needed; in our case, it is the input vector of the points containing
-    the good features to track;
-
-4.  `nextPts` is the output vector of 2D points containing the computed
-    new positions in the second image;
-
-5.  `status` is the output status vector containing a `1` if the flow
-    for the corresponding features has been found, otherwise a `0`;
-
-6.  `err` is an optional output vector containing error response for
-    each point (inverse confidence); the error is a measure of the
-    similarity of the pixel values corresponding to the tracked features
-    in the first image and the pixel values corresponding to the
-    calculated optical flow in the second image.
-
-The invokation of the `cuda::SparsePyrLKOpticalFlow::create` function is
-the following:
+The invokation of the `cuda::SparsePyrLKOpticalFlow::create` function is the following:
 
 ``` c++
 d_pyrLK_sparse->calc(d_frame0, d_frame1, d_previousPoints, d_nextPoints, d_status);
 ```
 
-where `d_frame1`, `d_nextPoints` and `d_status` are `GpuMat` GPU
-matrices. In particular, `d_frame1` is the GPU copy of the second image
-`im1`.  
-Once performed the computation, the results are copied from device to
-host using the `device2Host` overloaded function reported below:
+where `d_frame1`, `d_nextPoints` and `d_status` are `GpuMat` GPU matrices. In particular, `d_frame1` is the GPU copy of the second image `im1`.  
+Once performed the computation, the results are copied from device to host using the `device2Host` overloaded function reported below:
 
 ``` c++
 static void device2Host(const GpuMat &d_A, vector<Point2f> &h_A) {
@@ -1271,9 +1254,11 @@ static void device2Host(const GpuMat &d_A, vector<uchar> &h_A) {
     Mat mat(1, d_A.cols, CV_8UC1, (void *)&h_A[0]);
     d_A.download(mat); }
 ```
+<p align="center" id="xxx" >
+     <em>Listing 7. The overloaded `device2Host()` function to copy the results of the optical flow computation from device to host.</em>
+</p>
 
-Finally, the results are visualized. This occurs thanks to the
-`drawFlow()` function here reported:
+Finally, the results are visualized. This occurs thanks to the `drawFlow()` function here reported:
 
 ``` c++
 static void drawFlow(Mat &frame, const vector<Point2f> &previousPoints, const vector<Point2f> &nextPoints, const vector<uchar> &status, Scalar line_color = Scalar(0, 0, 255)) {
@@ -1316,17 +1301,11 @@ static void drawFlow(Mat &frame, const vector<Point2f> &previousPoints, const ve
             p.y = (int)(q.y + 9 * sin(angle - CV_PI / 4));
             line(frame, p, q, line_color, line_thickness); } } }
 ```
+<p align="center" id="drawFlow" >
+     <em>Listing 8. The `drawFlow()` function to visualize the arrows depicting the optical flow.</em>
+</p>
 
-As it can be seen from Listing [\[drawFlow\]](#drawFlow), if the flow
-for the corresponding features has been found (`status[i]==1`), the
-`drawFlow()` function browses the good points to track evaluating their
-positions in the first (`p`) and second (`q`) images. From such
-information, the array joining them is computed, possibly magnifying it
-if exceedingly short. The possibly magnified line joining `p` and `q` is
-superimposed to the current image and drawn using the `line()` function.
-It should be noticed that a solitary call to `line()` enables to draw
-only a single line between `p` and `q`, so that other two invokations
-are necessary to trace the array tips.  
+As it can be seen from Listing [\[8\]](#drawFlow), if the flow for the corresponding features has been found (`status[i]==1`), the `drawFlow()` function browses the good points to track evaluating their positions in the first (`p`) and second (`q`) images. From such information, the array joining them is computed, possibly magnifying it if exceedingly short. The possibly magnified line joining `p` and `q` is superimposed to the current image and drawn using the `line()` function. It should be noticed that a solitary call to `line()` enables to draw only a single line between `p` and `q`, so that other two invokations are necessary to trace the array tips.  
 The following Listing displays the `main()` function of the approach
 
 ``` c++
@@ -1395,9 +1374,11 @@ int main() {
 
     return 0; }
 ```
+<p align="center" id="drawFlow" >
+     <em>Listing 9. The sparse Lucas-Kanade's approach for static images.</em>
+</p>
 
-The result of the processing on the considered images is illustrated in
-the following figure:
+The result of the processing on the considered images is illustrated in the following figure:
 
 ![Result of the Lucas-Kanade’s sparse optical flow calculations on
 static images.](Pictures/Chapter04/sparseOpticalFlowPractice.JPG)
