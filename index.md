@@ -1509,14 +1509,13 @@ void main() {
      <em>Listing 10. The sparse Lucas-Kanade's approach for video images.</em>
 </p>
 
-The algorithm has been evaluated against a motorway traffic video
-downloadable at
-[pixabay](https://pixabay.com/videos/car-traffic-daytime-driving-on-road-16849/).
+The algorithm has been evaluated against a motorway traffic video downloadable at [pixabay](https://pixabay.com/videos/car-traffic-daytime-driving-on-road-16849/).
 A frame of the processing results is reported in the below figure:
 
-![Result of the Lucas-Kanade’s sparse optical flow calculations on video
-images.](Pictures/Chapter04/LKVideo.jpg)
+<p align="center">
+  <img src="LKVideo.JPG" width="400" id="xxx">
+  <br>
+     <em>Figure 25. Result of the Lucas-Kanade’s sparse optical flow calculations on video images.</em>
+</p>
 
-As it can be seen from the above image, all the good features to track
-depart from the cars. Moreover, the arrows point in the correct
-direction of travel and their lengths is proportional to the car speeds.
+As it can be seen from the above image, all the good features to track depart from the cars. Moreover, the arrows point in the correct direction of travel and their lengths is proportional to the car speeds.
