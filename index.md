@@ -226,7 +226,7 @@ Below, as dense methods, we will consider the Farneb<span>ä</span>ck’s approa
 scheme with pyramids.  
 In next section, we start recalling dense optical using Farneb<span>ä</span>ck’s approach.
 
-<p align="center" id="functionalFarneback" >
+<p align="center" id="farnebackSection" >
 </p>
 ## Theory: Dense optical flow using Farneb<span>ä</span>ck’s approach
 
@@ -325,7 +325,7 @@ where <img src="https://render.githubusercontent.com/render/math?math=\alpha"> i
 The minimizer of [\[18\]](#L1Functional3) must satisfy the following Euler-Lagrange equations 
 
 <p align="center">
-  <img src="equation_19.png" width="700" id="eulerLagrange">     [19]
+  <img src="equation_19.png" width="700" id="broxTwoTerms">     [19]
 </p>
 
 with reflecting boundary conditions, where
@@ -428,7 +428,7 @@ Concerning the minimization of functionals [\[31\]](#func1TVL1) and [\[32\]](#fu
 
   - functional [\[32\]](#func1TVL2) is minimized using the following iterations
     <p align="center">
-        <img src="equation_35.png" width="300" id="xxx">     [35]
+        <img src="equation_35.png" width="250" id="xxx">     [35]
     </p>
     
     where <img src="https://render.githubusercontent.com/render/math?math=TH(\cdot,\cdot)"> is a thresholding operator.
@@ -453,7 +453,7 @@ where <img src="https://render.githubusercontent.com/render/math?math=I_x"> and 
 undetermined system of one equation in two unknowns, now equation [\[36\]](#lucasKanade) is, in our example, an overconstrained system of in two unknowns. A least-squares solution to it can be obtained as the minimum of the functional:
 
 <p align="center">
-    <img src="equation_37.png" width="150" id="lucasKanadeFunctional">     [37]
+    <img src="equation_37.png" width="100" id="lucasKanadeFunctional">     [37]
 </p>
 
 The solution to [\[37\]](#lucasKanadeFunctional) can be written as:
@@ -840,7 +840,7 @@ The first operation is that of defining an object of the `cuda::FarnebackOptical
 cuda::FarnebackOpticalFlow::create (int numLevels=5, double pyrScale=0.5, bool fastPyramids=false, int winSize=13, int numIters=10, int polyN=5, double polySigma=1.1, int flags=0)
 ```
 
-In the following, we report the detailed description of its input parameters, also according to what illustrated in section [5](#farnebackSection). In the presented algorith, the window <img src="https://render.githubusercontent.com/render/math?math=w"> in [\[functionalFarneback\]](#functionalFarneback) is assumed to be a box filter or a Gaussian bell.
+In the following, we report the detailed description of its input parameters, also according to what illustrated in section [5](#farnebackSection). In the presented algorith, the window <img src="https://render.githubusercontent.com/render/math?math=w"> in [\[13\]](#functionalFarneback) is assumed to be a box filter or a Gaussian bell.
 
 1.  `numLevels` is the number of pyramid layers including the initial image; `numLevels=1` means that the pyramids approach is dismissed;
 2.  `pyrScale` is the pyramid scale factor belonging to <img src="https://render.githubusercontent.com/render/math?math=(0,1)">; instead of using the standard downsampling factor of <img src="https://render.githubusercontent.com/render/math?math=0.5"> on each level which makes each next layer twice smaller than the previous one, an arbitrary factor is used;
@@ -1073,7 +1073,7 @@ Following the calculations performed invoking
 lk->calc(d_im0, d_im1, d_opticalFlow);
 ```
 
-the result in figure [24](#LK) is obtained
+the result in figure [23](#LK) is obtained
 
 <p align="center">
   <img src="LK.JPG" width="400" id="LK">
@@ -1211,7 +1211,7 @@ The input parameters of such a routine have the following meaning:
 4.  `minDistance` is the minimum possible Euclidean distance between the returned corners;
 5.  `blockSize` is the size of <img src="https://render.githubusercontent.com/render/math?math=W"> in the subsection on [Harris corner detector](#Harris);
 6.  `useHarrisDetector` parameter indicating whether to use Harris or     Shi-Tomasi detectors;
-7.  `harrisK` is the parameter <img src="https://render.githubusercontent.com/render/math?math=k"> in equation [\[harrisParameter\]](#harrisParameter).
+7.  `harrisK` is the parameter <img src="https://render.githubusercontent.com/render/math?math=k"> in equation [\[54\]](#harrisParameter).
 
 Once created an object of the class `CornersDetector` with the just mentioned function, the actual computation is performed by:
 
