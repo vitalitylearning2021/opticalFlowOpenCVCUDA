@@ -26,7 +26,7 @@ In the present project, we will deal with:
 
 In the present project, the key elements of optical flow techniques needed for a conscious use of CUDA-accelerated OpenCV routines will be given. No particular prerequisite is necessary.  
 In the next section, we introduce the concepts of optical flow and motion fields.  
-The optical flow concept will be qualitatively illustrated starting from its introduction in the field of experimental psychology. Later on, the motion field concept will be quantitatively described as the projection of the three-dimensional velocity field in the image plane. Finally, the relation between optical flow and motion fields will be discussed by highlighting how quantitatively optical flow is an approximation of motion fields
+The optical flow concept will be qualitatively illustrated starting from its introduction in the field of experimental psychology. Later on, the motion field concept will be quantitatively described as the projection of the three-dimensional velocity field in the image plane. Finally, the relation between optical flow and motion fields will be discussed by highlighting how quantitatively optical flow is an approximation of motion fields.
 
 ## Optical flow and motion fields
 
